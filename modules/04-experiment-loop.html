@@ -1,0 +1,475 @@
+<section class="module" id="module-4" style="background: var(--color-bg);">
+  <div class="module-content">
+
+    <!-- ── MODULE HEADER ─────────────────────────────────────── -->
+    <header class="module-header animate-in">
+      <span class="module-number">04</span>
+      <h1 class="module-title">实验循环与扩展：从零跑起来</h1>
+      <p class="module-subtitle">你的工作不再是跑实验。你的工作是写好实验指令，然后去睡觉。</p>
+    </header>
+
+    <!-- ══════════════════════════════════════════════════════════
+         SCREEN 1 · 快速上手 — 从安装到第一次实验
+         ══════════════════════════════════════════════════════ -->
+    <div class="screen animate-in">
+      <h2 class="screen-heading">快速上手：五步从零到第一次实验</h2>
+
+      <div class="callout callout-accent">
+        <span class="callout-icon">🚀</span>
+        <div class="callout-content">
+          <span class="callout-title">部署一个无人值守的研究团队</span>
+          <p>
+            把 autoresearch 想象成你雇了一支研究团队。你是
+            <strong>PI（首席研究员）</strong>，
+            <span class="term" data-definition="program.md：人类编写的研究指令文件，定义 AI 代理的目标、约束和循环规则。相当于 PI 给研究团队写的研究方案，AI 代理严格遵照执行。">program.md</span>
+            是你写给团队的研究方案。安排好一切后，你下班回家——团队彻夜工作，早上汇报结果。
+          </p>
+        </div>
+      </div>
+
+      <div class="step-cards stagger-children">
+
+        <div class="step-card animate-in">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <div class="step-title">安装 uv</div>
+            <div class="step-desc">
+              <span class="term" data-definition="uv：Astral 开发的 Python 包管理器，用 Rust 编写，比 pip 快 10–100 倍。autoresearch 使用 uv 管理依赖环境，确保可复现性。">uv</span>
+              是比 pip 快 10–100x 的 Python 包管理器。先安装它，再同步依赖：
+              <pre class="code-block">curl -LsSf https://astral.sh/uv/install.sh | sh
+uv sync</pre>
+              这一步只需做一次。
+            </div>
+          </div>
+        </div>
+
+        <div class="step-card animate-in">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <div class="step-title">准备数据</div>
+            <div class="step-desc">
+              下载 climbmix 数据集分片，训练
+              <span class="term" data-definition="BPE（Byte Pair Encoding）：字节对编码，一种子词分词算法。把高频字符组合合并为单个 token，平衡词表大小与序列长度。autoresearch 在 prepare.py 中用 BPE 训练专用分词器。">BPE</span>
+              分词器——约 2 分钟，只需做一次：
+              <pre class="code-block">uv run prepare.py</pre>
+              完成后本地会有数据分片文件和分词器。
+            </div>
+          </div>
+        </div>
+
+        <div class="step-card animate-in">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <div class="step-title">手动跑一次</div>
+            <div class="step-desc">
+              跑一次完整训练，验证环境正常。大约 5 分钟后你会看到
+              <span class="term" data-definition="val_bpb（Validation Bits Per Byte）：验证集每字节比特数，衡量语言模型质量，越低越好。与词表大小无关，可跨架构直接比较，是 autoresearch 判断实验成功的唯一指标。">val_bpb</span>
+              输出：
+              <pre class="code-block">uv run train.py</pre>
+              这个数值就是你的 baseline，后续所有改进都以它为参照。
+            </div>
+          </div>
+        </div>
+
+        <div class="step-card animate-in">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <div class="step-title">启动 AI 代理</div>
+            <div class="step-desc">
+              在这个 repo 里打开 Claude 或 Codex CLI，发送启动提示词：
+              <pre class="code-block">"看一下 program.md，开始新实验！先做 setup。"</pre>
+              代理会读取
+              <span class="term" data-definition="program.md：人类编写的研究指令文件，定义 AI 代理的目标、约束和循环规则，不由 AI 修改。">program.md</span>，
+              查看 git 状态，然后开始第一轮实验循环。
+            </div>
+          </div>
+        </div>
+
+        <div class="step-card animate-in">
+          <div class="step-number">5</div>
+          <div class="step-content">
+            <div class="step-title">去睡觉</div>
+            <div class="step-desc">
+              AI 代理会自主循环，彻夜运行。早上检查
+              <code>results.tsv</code>，你会看到完整的实验日志——哪些 keep、哪些 discard、哪些 crash。
+              每次实验约 5 分钟，8 小时 ≈ 96 次实验。
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /screen 1 -->
+
+    <!-- ══════════════════════════════════════════════════════════
+         SCREEN 2 · 实验循环的 9 个步骤（Group Chat）
+         ══════════════════════════════════════════════════════ -->
+    <div class="screen animate-in">
+      <h2 class="screen-heading">一次完整实验循环：逐步拆解</h2>
+      <p>点击"下一条"观察 AI 代理完成一次完整实验的每一个动作。</p>
+
+      <div class="chat-container" id="chat-module4">
+
+        <div class="chat-bubble" data-actor="actor-1" data-index="0">
+          <span class="chat-actor">AI 代理</span>
+          <div class="chat-text">
+            第 7 次实验。想法：把
+            <span class="term" data-definition="warmdown（学习率衰减阶段）：训练后期将学习率逐步降至接近零的阶段。WARMDOWN_RATIO 控制衰减阶段占总训练时间的比例。更长的衰减期让模型在后期更稳定收敛。">WARMDOWN_RATIO</span>
+            从 0.5 改为 0.3，让模型在后期有更长的稳定期。理论：缩短衰减阶段，模型有更多步数在中等学习率下学习，而不是过早进入低学习率区间。
+          </div>
+        </div>
+
+        <div class="chat-bubble" data-actor="actor-1" data-index="1">
+          <span class="chat-actor">AI 代理</span>
+          <div class="chat-text">
+            修改 <code>train.py</code> 第 462 行：<code>WARMDOWN_RATIO = 0.3</code>（原为 0.5）。
+            <pre class="code-block">git commit -m "exp7: shorter warmdown ratio 0.5->0.3"</pre>
+            提交成功。SHA: <code>a3f9c1e</code>
+          </div>
+        </div>
+
+        <div class="chat-bubble" data-actor="actor-5" data-index="2">
+          <span class="chat-actor">GPU</span>
+          <div class="chat-text">
+            <pre class="code-block">uv run train.py > run.log 2>&amp;1</pre>
+            训练中… 已训练 150 秒 / 300 秒，当前 step 458。
+            <span class="term" data-definition="gradient accumulation（梯度累积）：将多个小 batch 的梯度累加后再更新参数，等效于大 batch 训练但不需要额外显存。">梯度累积</span>
+            正常，显存峰值 45.1 GB。
+          </div>
+        </div>
+
+        <div class="chat-bubble" data-actor="actor-5" data-index="3">
+          <span class="chat-actor">GPU</span>
+          <div class="chat-text">
+            训练完成！5 分钟时间到，自动停止。
+            <pre class="code-block">grep "^val_bpb:\|^peak_vram_mb:" run.log
+val_bpb:      0.994812
+peak_vram_mb: 45060.2</pre>
+          </div>
+        </div>
+
+        <div class="chat-bubble" data-actor="actor-2" data-index="4">
+          <span class="chat-actor">结果分析</span>
+          <div class="chat-text">
+            对比当前 baseline（上次 keep 的结果）：
+            <br><strong>0.997900 → 0.994812</strong>
+            <br>改善：0.003088（↓ 0.31%）。<strong>改善！判断：keep ✓</strong>
+          </div>
+        </div>
+
+        <div class="chat-bubble" data-actor="actor-1" data-index="5">
+          <span class="chat-actor">AI 代理</span>
+          <div class="chat-text">
+            保留这次提交（不执行 git reset）。记录到 <code>results.tsv</code>：
+            <pre class="code-block">a3f9c1e	0.994812	44.0	keep	shorter warmdown ratio 0.5->0.3</pre>
+            注：results.tsv 用 <strong>Tab</strong> 分隔，不是逗号，不 commit 到 git。
+          </div>
+        </div>
+
+        <div class="chat-bubble" data-actor="actor-1" data-index="6">
+          <span class="chat-actor">AI 代理</span>
+          <div class="chat-text">
+            第 8 次实验。基于这个改进，继续深入。新想法：尝试 <code>WARMDOWN_RATIO = 0.2</code>——如果 0.3 比 0.5 更好，也许更短的衰减期会继续改善。开始修改…
+          </div>
+        </div>
+
+      </div>
+
+      <div class="chat-controls">
+        <button class="btn btn-primary" onclick="chatStep('chat-module4')">下一条</button>
+        <button class="btn" onclick="chatPlay('chat-module4')">自动播放</button>
+        <button class="btn" onclick="chatReset('chat-module4')">重置</button>
+      </div>
+
+      <div class="callout callout-info" style="margin-top: 1.5rem;">
+        <span class="callout-icon">🔴</span>
+        <div class="callout-content">
+          <span class="callout-title">如果崩溃怎么办？</span>
+          <p>
+            如果 <code>uv run train.py</code> 崩溃（比如 OOM 显存溢出），代理会运行：
+            <code>tail -n 50 run.log</code> 读取错误信息，然后在 results.tsv 记录
+            <code>status=crash</code>，执行 <code>git reset</code> 回到上个好状态，换一个更保守的想法重新实验。
+          </p>
+        </div>
+      </div>
+    </div><!-- /screen 2 -->
+
+    <!-- ══════════════════════════════════════════════════════════
+         SCREEN 3 · 如何写出好的 program.md
+         ══════════════════════════════════════════════════════ -->
+    <div class="screen animate-in">
+      <h2 class="screen-heading">如何写出好的 program.md？</h2>
+
+      <div class="callout callout-info">
+        <span class="callout-icon">📝</span>
+        <div class="callout-content">
+          <span class="callout-title">program.md 是你作为研究 PI 最重要的产出</span>
+          <p>
+            它不只是指令——它是你对 AI 研究能力的编程。写得越好，AI 代理的实验就越有方向感，越少在低价值尝试上浪费预算。
+          </p>
+        </div>
+      </div>
+
+      <div class="translation-block animate-in">
+        <!-- LEFT: 代码对比 -->
+        <div class="translation-code">
+          <span class="translation-label">program.md 写法对比</span>
+<span class="code-line"><span class="code-comment">❌  差的 program.md：</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="code-string">"试各种改进，找到</span></span>
+<span class="code-line"><span class="code-string"> 最好的 val_bpb"</span></span>
+<span class="code-line"></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="code-comment">✓  好的 program.md：</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="code-string">"优先探索：</span></span>
+<span class="code-line"><span class="code-string"> 1. 优化器超参调优</span></span>
+<span class="code-line"><span class="code-string">    (LR, betas, warmdown)</span></span>
+<span class="code-line"><span class="code-string"> 2. 架构变体（GQA 比例）</span></span>
+<span class="code-line"><span class="code-string"> 3. 注意力模式（SSSL vs SSL）</span></span>
+<span class="code-line"><span class="code-string"> 如果连续 3 次 discard，</span></span>
+<span class="code-line"><span class="code-string"> 尝试方向性重置。"</span></span>
+        </div>
+
+        <!-- RIGHT: 解释 -->
+        <div class="translation-english">
+          <span class="translation-label">为什么这样写？</span>
+          <div class="translation-lines">
+            <div class="tl">
+              <strong>差的写法：</strong>太模糊，AI 会随机游走，浪费大量实验预算在低价值尝试上，就像告诉一个新人"去把这个项目做好"。
+            </div>
+            <div class="tl">
+              <strong>好的写法：</strong>给出优先级和搜索空间的结构，相当于一个资深研究员告诉新人"从这里开始，按这个顺序探索"。
+            </div>
+            <div class="tl">
+              <strong>编码领域知识：</strong>例如"Muon 对学习率敏感，先在 0.02–0.06 范围内扫描"——这是你作为人类的核心价值。
+            </div>
+            <div class="tl">
+              <strong>简洁性准则：</strong>Karpathy 特意加入了"代码越简单越好"的要求，防止 AI 为了追求 val_bpb 而引入过于复杂的 trick。
+            </div>
+            <div class="tl">
+              <strong>NEVER STOP 规则：</strong>确保代理彻夜不停，就算在困难的搜索空间里也坚持迭代，不会等待人类指示。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout callout-accent" style="margin-top: 1.5rem;">
+        <span class="callout-icon">🔄</span>
+        <div class="callout-content">
+          <span class="callout-title">program.md 本身也是可迭代的</span>
+          <p>
+            你观察 AI 的研究行为，发现它在走弯路——比如总是调同一个参数——然后在 program.md 里加入约束或新方向。下次重启，它就会更聪明。
+            <strong>这是人类研究能力的编码化。</strong>
+          </p>
+        </div>
+      </div>
+    </div><!-- /screen 3 -->
+
+    <!-- ══════════════════════════════════════════════════════════
+         SCREEN 4 · 小硬件怎么跑 + 更大图景
+         ══════════════════════════════════════════════════════ -->
+    <div class="screen animate-in">
+      <h2 class="screen-heading">小硬件怎么跑？+ 更大的图景</h2>
+
+      <div class="callout callout-accent">
+        <span class="callout-icon">💻</span>
+        <div class="callout-content">
+          <span class="callout-title">在 MacBook / 小 GPU 上跑 autoresearch</span>
+          <p>
+            官方版需要 H100（80GB 显存）。但社区已有 macOS / AMD / Windows fork。在非 H100 机器上，关键调整：
+          </p>
+          <ul style="margin: 0.75rem 0 0 0; padding-left: 1.5rem; line-height: 2;">
+            <li><strong>DEPTH</strong>：从 8 降到 4——更浅的模型，显存大幅减少</li>
+            <li><strong>TOTAL_BATCH_SIZE</strong>：从 2<sup>19</sup> 降到 2<sup>14</sup>（约 16K），降低每步
+              <span class="term" data-definition="gradient accumulation（梯度累积）：将多个小 batch 的梯度累加后再更新参数，等效于大 batch 训练但不需要额外显存。">梯度累积</span>
+              开销
+            </li>
+            <li><strong>WINDOW_PATTERN</strong>：改为 <code>'L'</code>（去掉短窗口 SSSL），在
+              <span class="term" data-definition="MPS（Metal Performance Shaders）：Apple Silicon GPU 的计算框架，等效于 CUDA 在 Nvidia GPU 上的角色，PyTorch 通过 mps 后端支持它。">MPS</span>
+              / CPU 上更高效
+            </li>
+            <li><strong>替换数据集</strong>：考虑用 TinyStories 替代 climbmix，数据量小很多，小模型也能看到合理结果</li>
+            <li><strong>社区 fork</strong>：macOS 参考 <code>miolini/autoresearch-macos</code>，AMD 参考 <code>andyluo7/autoresearch</code></li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="screen-title" style="margin-top: 2rem;">更大的图景</h3>
+      <p>autoresearch 只有三个文件、一块 GPU、一晚上——但它指向的是 AI 辅助科研的根本转变。</p>
+
+      <div class="pattern-grid stagger-children">
+
+        <div class="pattern-card animate-in">
+          <div class="pattern-icon" style="background: var(--color-accent-light); color: var(--color-accent);">👤</div>
+          <div class="pattern-title">人类角色的转变</div>
+          <p class="pattern-desc">
+            从"手动调参者"→"研究指令的作者"。核心能力变成：读懂结果、形成假设、把领域知识编码进 program.md。
+            Karpathy 的原话："肉体计算机做前沿 AI 研究的时代，已经过去了。"
+          </p>
+        </div>
+
+        <div class="pattern-card animate-in">
+          <div class="pattern-icon" style="background: #EDE8F8; color: #6D4FC2;">🔬</div>
+          <div class="pattern-title">AI 研究的边界</div>
+          <p class="pattern-desc">
+            autoresearch 只优化一个指标（
+            <span class="term" data-definition="val_bpb（Validation Bits Per Byte）：验证集每字节比特数，越低越好，是 autoresearch 的唯一优化目标。">val_bpb</span>
+            ）。真正的研究突破还需要人类提出正确问题、设计正确评估标准——这是目前 AI 无法替代的部分。
+          </p>
+        </div>
+
+        <div class="pattern-card animate-in">
+          <div class="pattern-icon" style="background: var(--color-info-light); color: var(--color-info);">♻️</div>
+          <div class="pattern-title">可复制的框架</div>
+          <p class="pattern-desc">
+            这个三文件架构可以被复制到任何领域：量化交易策略迭代、药物分子优化、程序合成。
+            <strong>固定评估 + 可改目标 + 人写指令 = 普适模式。</strong>
+          </p>
+        </div>
+
+      </div>
+    </div><!-- /screen 4 -->
+
+    <!-- ══════════════════════════════════════════════════════════
+         SCREEN 5 · 最终测验
+         ══════════════════════════════════════════════════════ -->
+    <div class="screen animate-in">
+      <h2 class="screen-heading">最终测验：巩固所学</h2>
+      <p>三道题检验对整个模块的理解。每题选最佳答案后点"检查答案"。</p>
+
+      <div class="quiz-container" id="quiz-module4">
+
+        <!-- ── Q1 ── -->
+        <div class="quiz-question-block"
+             data-correct="B"
+             data-explanation-right="results.tsv 记录所有实验（含 discard 的），但 git 只保留 keep 的提交。两个维度独立：tsv 是完整实验日志（每次 keep/discard/crash 都有记录），git 是干净的改进历史（只有被证明有效的修改）。两者共同构成完整的实验记账系统。"
+             data-explanation-wrong="tsv 文件很小，git 完全可以处理；也不是因为要隐藏结果。关键在于：tsv 和 git 分别追踪不同维度的信息——一个追踪所有尝试，一个追踪所有改进。">
+          <p class="quiz-question">Q1. 为什么 <code>results.tsv</code> 不被 git 追踪（不 commit）？</p>
+          <div class="quiz-options">
+            <button class="quiz-option" data-value="A" onclick="selectOption(this)">
+              <span class="quiz-option-radio"></span>
+              A. 因为 tsv 文件太大，git 无法处理
+            </button>
+            <button class="quiz-option" data-value="B" onclick="selectOption(this)">
+              <span class="quiz-option-radio"></span>
+              B. results.tsv 记录所有实验（含 discard 的），git 只保留 keep 的提交——两个维度独立，tsv 是完整实验日志，git 是干净的改进历史
+            </button>
+            <button class="quiz-option" data-value="C" onclick="selectOption(this)">
+              <span class="quiz-option-radio"></span>
+              C. 避免暴露实验结果给其他人
+            </button>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+
+        <!-- ── Q2 ── -->
+        <div class="quiz-question-block"
+             data-correct="B"
+             data-explanation-right="program.md 的核心规则是 NEVER STOP——人类可能在睡觉。连续 discard 时，代理应该继续思考新方向，尝试更不同的改动（换架构、换优化器方向），只有在万不得已时才考虑 git rewind 到更早状态。"
+             data-explanation-wrong="停下来等人类指示违反了 NEVER STOP 规则；修改 prepare.py 也是被禁止的——prepare.py 只读，是系统诚信的保障，修改它相当于作弊。">
+          <p class="quiz-question">Q2. AI 代理连续 5 次实验都是 discard（
+            <span class="term" data-definition="val_bpb（Validation Bits Per Byte）：验证集每字节比特数，越低越好。discard 意味着本次实验的 val_bpb 没有改善，代理会执行 git reset 回到上个好状态。">val_bpb</span>
+            没有改善）。根据 program.md 的规则，它应该怎么做？</p>
+          <div class="quiz-options">
+            <button class="quiz-option" data-value="A" onclick="selectOption(this)">
+              <span class="quiz-option-radio"></span>
+              A. 停下来等待人类指示
+            </button>
+            <button class="quiz-option" data-value="B" onclick="selectOption(this)">
+              <span class="quiz-option-radio"></span>
+              B. 继续思考新方向，尝试更不同的改动（如换架构、换优化器方向），只有万不得已时才考虑 git rewind
+            </button>
+            <button class="quiz-option" data-value="C" onclick="selectOption(this)">
+              <span class="quiz-option-radio"></span>
+              C. 修改 prepare.py 降低 EVAL_TOKENS，使指标更容易改善
+            </button>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+
+        <!-- ── Q3 ── -->
+        <div class="quiz-question-block"
+             data-correct="B"
+             data-explanation-right="修改 program.md 是正确做法。加入"每 5 次实验至少尝试 1 次架构改变"这样的规则，相当于把你的观察（AI 只调学习率）编码成约束，下次代理就会有更宽的探索范围。这正是 PI 的职责——迭代研究指令，不断提升代理的智能。"
+             data-explanation-wrong="重新启动代理不会改变它的探索策略，它下次还会做同样的事；把 MATRIX_LR 写死会减少实验空间，而不是拓展搜索范围——这是错误方向。">
+          <p class="quiz-question">Q3. 你发现 AI 代理总是在改 MATRIX_LR（学习率），很少探索架构改变。你应该怎么解决？</p>
+          <div class="quiz-options">
+            <button class="quiz-option" data-value="A" onclick="selectOption(this)">
+              <span class="quiz-option-radio"></span>
+              A. 重新启动代理，它下次会自动探索架构
+            </button>
+            <button class="quiz-option" data-value="B" onclick="selectOption(this)">
+              <span class="quiz-option-radio"></span>
+              B. 修改 program.md，明确加入"每 5 次实验至少尝试 1 次架构改变（如 DEPTH、n_kv_head、WINDOW_PATTERN）"的研究规则
+            </button>
+            <button class="quiz-option" data-value="C" onclick="selectOption(this)">
+              <span class="quiz-option-radio"></span>
+              C. 修改 train.py，把 MATRIX_LR 的值写死，防止代理继续修改
+            </button>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+
+        <!-- Buttons -->
+        <div>
+          <button class="quiz-check-btn" onclick="checkQuiz('quiz-module4')">检查答案</button>
+          <button class="quiz-reset-btn" onclick="resetQuiz('quiz-module4')">重置</button>
+        </div>
+
+      </div>
+    </div><!-- /screen 5 -->
+
+    <!-- ══════════════════════════════════════════════════════════
+         CLOSING · 延伸阅读与链接
+         ══════════════════════════════════════════════════════ -->
+    <div class="screen animate-in" style="text-align: center;">
+      <h2 class="screen-heading">你已完成全部 4 个模块 🎉</h2>
+      <p style="max-width: 600px; margin: 0 auto 2rem;">
+        autoresearch 是一个只有三个文件的项目，却展示了 AI 辅助科研的完整闭环。
+        现在，去克隆它，写你自己的 program.md，然后去睡觉。
+      </p>
+
+      <div class="pattern-grid stagger-children" style="max-width: 700px; margin: 0 auto 2rem;">
+
+        <div class="pattern-card animate-in" style="text-align: left;">
+          <div class="pattern-icon" style="background: #1B1F23; color: #fff; font-size: 1.4rem;">🐙</div>
+          <div class="pattern-title">官方仓库</div>
+          <p class="pattern-desc">
+            <a href="https://github.com/karpathy/autoresearch"
+               target="_blank" rel="noopener"
+               style="color: var(--color-accent); word-break: break-all;">
+              github.com/karpathy/autoresearch
+            </a>
+            <br>需要 H100 GPU。包含 train.py、prepare.py、program.md。
+          </p>
+        </div>
+
+        <div class="pattern-card animate-in" style="text-align: left;">
+          <div class="pattern-icon" style="background: #1B1F23; color: #fff; font-size: 1.4rem;">🍎</div>
+          <div class="pattern-title">社区 Fork</div>
+          <p class="pattern-desc">
+            <strong>macOS</strong>：<code>miolini/autoresearch-macos</code>（Apple Silicon，
+            <span class="term" data-definition="MPS（Metal Performance Shaders）：Apple Silicon GPU 的计算框架，PyTorch 通过 mps 后端支持它，使 M1/M2/M3/M4 芯片可以加速深度学习训练。">MPS</span>
+            后端）
+            <br><strong>AMD</strong>：<code>andyluo7/autoresearch</code>（ROCm 支持）
+            <br>均可在非 H100 机器上运行较小规模的实验。
+          </p>
+        </div>
+
+      </div>
+
+      <div class="callout callout-accent" style="max-width: 640px; margin: 0 auto; text-align: left;">
+        <span class="callout-icon">💬</span>
+        <div class="callout-content">
+          <span class="callout-title">Karpathy 的话</span>
+          <p>
+            "One day, frontier AI research used to be done by meat computers… That era is long gone."
+            <br><br>
+            <em>曾经，前沿 AI 研究由肉体计算机完成……那个时代早已过去。</em>
+          </p>
+        </div>
+      </div>
+    </div><!-- /closing -->
+
+  </div><!-- /module-content -->
+</section>
