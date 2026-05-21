@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>自主 AI 研究：autoresearch 深度解析</title>
+  <title>Autonomous AI Research: A Deep Dive into autoresearch</title>
 
-  <!-- 字体：国内镜像 loli.net -->
+  <!-- Fonts: loli.net mirror -->
   <link rel="preconnect" href="https://fonts.loli.net">
   <link rel="preconnect" href="https://gstatic.loli.net" crossorigin>
   <link href="https://fonts.loli.net/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400;1,9..40,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="styles.css">
 
-  <!-- 紫色 accent — AI 研究感 -->
+  <!-- Purple accent — AI research feel -->
   <style>
     :root {
       --color-accent:       #6D4FC2;
@@ -29,12 +29,12 @@
   <nav class="nav" id="nav">
     <div class="progress-bar" id="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
     <div class="nav-inner">
-      <span class="nav-title">自主 AI 研究</span>
+      <span class="nav-title">Autonomous AI Research</span>
       <div class="nav-dots" id="nav-dots" role="tablist">
-        <button class="nav-dot" data-target="module-1" data-tooltip="大局观：AI 当研究员" role="tab" aria-label="第一章：大局观"></button>
-        <button class="nav-dot" data-target="module-2" data-tooltip="三文件架构" role="tab" aria-label="第二章：三文件架构"></button>
-        <button class="nav-dot" data-target="module-3" data-tooltip="现代 GPT 解剖" role="tab" aria-label="第三章：现代 GPT 解剖"></button>
-        <button class="nav-dot" data-target="module-4" data-tooltip="实验循环与扩展" role="tab" aria-label="第四章：实验循环与扩展"></button>
+        <button class="nav-dot" data-target="module-1" data-tooltip="The Big Picture: AI as Researcher" role="tab" aria-label="Chapter 1: The Big Picture"></button>
+        <button class="nav-dot" data-target="module-2" data-tooltip="Three-File Architecture" role="tab" aria-label="Chapter 2: Three-File Architecture"></button>
+        <button class="nav-dot" data-target="module-3" data-tooltip="Anatomy of a Modern GPT" role="tab" aria-label="Chapter 3: Anatomy of a Modern GPT"></button>
+        <button class="nav-dot" data-target="module-4" data-tooltip="Experiment Loop and Scaling Out" role="tab" aria-label="Chapter 4: Experiment Loop and Scaling Out"></button>
       </div>
     </div>
   </nav>
@@ -47,46 +47,46 @@
     <!-- ── MODULE HEADER ─────────────────────────────────────── -->
     <header class="module-header animate-in">
       <span class="module-number">01</span>
-      <h1 class="module-title">大局观：AI 当研究员</h1>
-      <p class="module-subtitle">了解 autoresearch 做什么、为什么能工作，以及 Karpathy 如何用最小设计实现自主科研循环。</p>
+      <h1 class="module-title">The Big Picture: AI as Researcher</h1>
+      <p class="module-subtitle">What autoresearch does, why it works, and how Karpathy implemented an autonomous research loop with a minimal design.</p>
     </header>
 
     <!-- ══════════════════════════════════════════════════════════
-         SCREEN 1 · 开场钩子 + 大局介绍
+         SCREEN 1 · Opening hook + big-picture intro
          ══════════════════════════════════════════════════════ -->
     <div class="screen animate-in">
-      <h2 class="screen-heading">一觉醒来，AI 跑完了 100 次实验</h2>
+      <h2 class="screen-heading">You wake up. The AI has run 100 experiments overnight.</h2>
 
       <div class="callout callout-accent">
         <span class="callout-icon">🌙</span>
         <div class="callout-content">
-          <span class="callout-title">开场场景</span>
+          <span class="callout-title">Opening scene</span>
           <p>
-            晚上 10 点你启动一个 <term class="term" data-definition="AI 代理（AI Agent）：一个能自主规划、执行、反馈并循环迭代的 AI 程序，不需要人类每步介入。">AI 代理</term>。
-            早上 8 点醒来，它完成了 100 次实验，模型的语言建模损失比昨晚低了 3%。
-            没有人熬夜。没有人手动调参。这就是 <strong>autoresearch</strong>。
+            10 PM, you launch an <term class="term" data-definition="AI agent: An AI program that can autonomously plan, execute, get feedback, and iterate — no human in the loop step by step.">AI agent</term>.
+            8 AM, you wake up. It has completed 100 experiments, and the model's language-modeling loss is 3% lower than the night before.
+            Nobody stayed up. Nobody hand-tuned parameters. This is <strong>autoresearch</strong>.
           </p>
         </div>
       </div>
 
       <p>
-        <strong>autoresearch</strong> 是 Karpathy 在 2026 年 3 月发布的一个实验项目。
-        它的核心想法极其简单：把一个真实的
-        <span class="term" data-definition="LLM（Large Language Model）：大语言模型，如 GPT、Claude 等，基于 Transformer 架构，在大量文本上训练而来。">LLM</span>
-        训练流程交给
-        <span class="term" data-definition="AI 代理（AI Agent）：能自主规划、执行、反馈并循环迭代的 AI 程序，不需要人类每步介入。">AI 代理</span>，
-        让它自主迭代——修改训练代码、跑实验、看结果、决定保留还是丢弃——循环往复，彻夜不停。
+        <strong>autoresearch</strong> is an experimental project Karpathy released in March 2026.
+        The core idea is extremely simple: hand a real
+        <span class="term" data-definition="LLM (Large Language Model): A large language model like GPT, Claude, etc., based on the Transformer architecture and trained on massive text corpora.">LLM</span>
+        training pipeline over to an
+        <span class="term" data-definition="AI agent: An AI program that can autonomously plan, execute, get feedback, and iterate — no human in the loop step by step.">AI agent</span>
+        and let it iterate by itself — modify the training code, run experiments, look at results, decide to keep or discard — round and round, all night.
       </p>
 
       <div class="pattern-cards stagger-children">
 
         <div class="pattern-card animate-in">
           <div class="pattern-icon" style="background: var(--color-accent-light); color: var(--color-accent);">🤖</div>
-          <div class="pattern-title">AI 代理</div>
+          <div class="pattern-title">AI agent</div>
           <p class="pattern-desc">
-            由 Claude 或 Codex 驱动。读取人类指令，提出实验想法，修改
-            <span class="term" data-definition="train.py：autoresearch 的核心训练脚本。AI 代理唯一被允许修改的文件，包含模型架构、优化器设置、超参数等。">train.py</span>，
-            评估结果，决定下一步。
+            Powered by Claude or Codex. Reads human instructions, proposes experiment ideas, modifies
+            <span class="term" data-definition="train.py: The core training script in autoresearch. The only file the AI agent is allowed to modify; contains model architecture, optimizer setup, hyperparameters, etc.">train.py</span>,
+            evaluates results, decides what to do next.
           </p>
         </div>
 
@@ -94,9 +94,9 @@
           <div class="pattern-icon" style="background: #EDE8F8; color: #6D4FC2;">📄</div>
           <div class="pattern-title">train.py</div>
           <p class="pattern-desc">
-            实验的"靶子"。它包含
-            <span class="term" data-definition="Transformer：主流深度学习架构，用于构建 GPT 等大语言模型，基于自注意力机制处理序列数据。">Transformer</span>
-            架构定义、优化器、超参数。AI 代理的每次实验都体现在对这个文件的修改上。
+            The "target" of each experiment. It contains the
+            <span class="term" data-definition="Transformer: The dominant deep-learning architecture, used to build GPT and other LLMs, based on self-attention over sequence data.">Transformer</span>
+            architecture, optimizer, and hyperparameters. Every experiment shows up as a diff on this file.
           </p>
         </div>
 
@@ -104,10 +104,10 @@
           <div class="pattern-icon" style="background: var(--color-info-light); color: var(--color-info);">📝</div>
           <div class="pattern-title">program.md</div>
           <p class="pattern-desc">
-            人类的指挥棒。你在这里写下研究目标、哪些东西不能改、实验循环的规则。
-            AI 代理会严格遵照
-            <span class="term" data-definition="program.md：人类编写的研究指令文件。定义 AI 代理的目标、约束条件和实验循环规则，不由 AI 修改。">program.md</span>
-            行事。
+            The human's baton. Here is where you write down the research goals, what cannot be changed, and the rules of the experiment loop.
+            The AI agent follows
+            <span class="term" data-definition="program.md: The human-authored research instruction file. Defines the AI agent's goals, constraints, and experiment-loop rules. Not modified by the AI.">program.md</span>
+            strictly.
           </p>
         </div>
 
@@ -115,31 +115,31 @@
     </div><!-- /screen 1 -->
 
     <!-- ══════════════════════════════════════════════════════════
-         SCREEN 2 · 数据流动画
+         SCREEN 2 · Data flow animation
          ══════════════════════════════════════════════════════ -->
     <div class="screen animate-in">
-      <h2 class="screen-heading">实验循环：六步走完一轮</h2>
-      <p>点击"下一步"逐步观察 autoresearch 的完整实验循环。</p>
+      <h2 class="screen-heading">The experiment loop: six steps per round</h2>
+      <p>Click "Next" to walk through autoresearch's full experiment loop step by step.</p>
 
       <div class="flow-animation" id="flow-module1"
            data-steps='[
-             {"highlight":"actor-1","label":"人类写好 program.md：定义研究目标、实验边界、循环规则。AI 代理会严格按照这份文件行事。"},
-             {"packet":true,"from":"actor-1","to":"actor-2","label":"AI 代理读取 program.md，结合当前 val_bpb 结果，制定下一个实验想法。"},
-             {"highlight":"actor-3","label":"AI 代理修改 train.py：可能改模型深度、注意力头数、优化器类型、学习率等超参数。"},
-             {"packet":true,"from":"actor-3","to":"actor-4","label":"执行 uv run train.py：固定跑 5 分钟，GPU 计算 val_bpb。时间到，强制停止。"},
-             {"highlight":"actor-5","label":"val_bpb 更低？用 git commit 保留这次修改（keep）。否则 git reset 丢弃，恢复上个好状态（discard）。"},
-             {"packet":true,"from":"actor-5","to":"actor-2","label":"循环继续。AI 代理永不停止，直到人类中断进程。你醒来时已有 ~100 次实验完成。"}
+             {"highlight":"actor-1","label":"Human writes program.md: defines research goals, experiment boundaries, loop rules. The AI agent follows this file strictly."},
+             {"packet":true,"from":"actor-1","to":"actor-2","label":"AI agent reads program.md, looks at the current val_bpb result, and forms the next experiment idea."},
+             {"highlight":"actor-3","label":"AI agent modifies train.py: may change model depth, number of attention heads, optimizer type, learning rate, or other hyperparameters."},
+             {"packet":true,"from":"actor-3","to":"actor-4","label":"Runs uv run train.py: trains for a fixed 5 minutes on the GPU, computes val_bpb. Time is up, training stops."},
+             {"highlight":"actor-5","label":"val_bpb lower? git commit to keep the change (keep). Otherwise git reset to discard and restore the last good state (discard)."},
+             {"packet":true,"from":"actor-5","to":"actor-2","label":"Loop continues. The AI agent never stops, until the human interrupts. You wake up to ~100 completed experiments."}
            ]'>
 
         <!-- Actors row -->
         <div class="flow-actors">
           <div class="flow-actor" id="flow-actor-1">
             <div class="flow-actor-icon">👤</div>
-            <span>人类</span>
+            <span>Human</span>
           </div>
           <div class="flow-actor" id="flow-actor-2">
             <div class="flow-actor-icon">🤖</div>
-            <span>AI 代理</span>
+            <span>AI agent</span>
           </div>
           <div class="flow-actor" id="flow-actor-3">
             <div class="flow-actor-icon">📄</div>
@@ -151,7 +151,7 @@
           </div>
           <div class="flow-actor" id="flow-actor-5">
             <div class="flow-actor-icon">⚖️</div>
-            <span>结果判断</span>
+            <span>Verdict</span>
           </div>
         </div>
 
@@ -159,12 +159,12 @@
         <div class="flow-packet"></div>
 
         <!-- Step label -->
-        <div class="flow-step-label">点击"下一步"开始</div>
+        <div class="flow-step-label">Click "Next" to begin</div>
 
         <!-- Controls -->
         <div class="flow-controls">
-          <button class="btn btn-primary flow-next-btn">下一步</button>
-          <button class="btn flow-reset-btn">重置</button>
+          <button class="btn btn-primary flow-next-btn">Next</button>
+          <button class="btn flow-reset-btn">Reset</button>
           <span class="flow-progress"></span>
         </div>
 
@@ -172,35 +172,35 @@
     </div><!-- /screen 2 -->
 
     <!-- ══════════════════════════════════════════════════════════
-         SCREEN 3 · 固定 5 分钟的天才设计
+         SCREEN 3 · Why "fixed 5 minutes" is genius
          ══════════════════════════════════════════════════════ -->
     <div class="screen animate-in">
-      <h2 class="screen-heading">为什么"固定 5 分钟"是天才设计？</h2>
+      <h2 class="screen-heading">Why is "fixed 5 minutes" a genius design choice?</h2>
 
       <div class="callout callout-accent">
         <span class="callout-icon">⏱️</span>
         <div class="callout-content">
-          <span class="callout-title">时间预算而非步数预算</span>
+          <span class="callout-title">Time budget, not step budget</span>
           <p>
-            不管你把模型改大还是改小，batch size 加倍还是减半，每次实验都精确跑 5 分钟。
-            这让不同架构的实验<strong>直接可比</strong>，不需要手动对齐训练步数。
-            大模型每步慢，但 5 分钟内它仍然和小模型站在同一起跑线上竞争。
+            Whether you make the model bigger or smaller, double the batch size or halve it, every experiment runs for exactly 5 minutes.
+            This makes experiments across different architectures <strong>directly comparable</strong>, with no need to manually align training step counts.
+            Big models train slower per step, but within 5 minutes they still compete on the same starting line as small ones.
           </p>
         </div>
       </div>
 
       <p>
-        每次实验结束后，autoresearch 输出一份结构化的指标报告。
-        关键指标是
-        <span class="term" data-definition="val_bpb（Validation Bits Per Byte）：验证集每字节比特数，衡量语言模型质量，越低越好。与词表大小无关，可跨架构直接比较。">val_bpb</span>（验证集每字节比特数），它与
-        <span class="term" data-definition="BPE（Byte Pair Encoding）：字节对编码，一种常用的分词算法，将文本切割成 token。词表大小影响其他指标，但不影响 val_bpb。">BPE</span>
-        词表大小无关，可以跨架构直接比较。
+        After every experiment, autoresearch emits a structured metrics report.
+        The key number is
+        <span class="term" data-definition="val_bpb (Validation Bits Per Byte): Bits per byte on the validation set — measures language-model quality, lower is better. Independent of vocabulary size, so it can be compared across architectures.">val_bpb</span> (validation bits per byte), which is independent of
+        <span class="term" data-definition="BPE (Byte Pair Encoding): A common subword tokenization algorithm that splits text into tokens. Vocabulary size affects other metrics but not val_bpb.">BPE</span>
+        vocabulary size and can be compared directly across architectures.
       </p>
 
       <div class="translation-block animate-in">
-        <!-- LEFT: 结果输出示例 -->
+        <!-- LEFT: example output -->
         <div class="translation-code">
-          <span class="translation-label">结果输出示例</span>
+          <span class="translation-label">Example output</span>
 <span class="code-line"><span class="code-operator">---</span></span>
 <span class="code-line"><span class="code-property">val_bpb</span><span class="code-operator">:</span>          <span class="code-number">0.997900</span></span>
 <span class="code-line"><span class="code-property">training_seconds</span><span class="code-operator">:</span> <span class="code-number">300.1</span></span>
@@ -213,28 +213,28 @@
 <span class="code-line"><span class="code-property">depth</span><span class="code-operator">:</span>            <span class="code-number">8</span></span>
         </div>
 
-        <!-- RIGHT: 中文解释 -->
+        <!-- RIGHT: line-by-line explanation -->
         <div class="translation-english">
-          <span class="translation-label">中文解释</span>
+          <span class="translation-label">Line-by-line</span>
           <div class="translation-lines">
             <div class="tl">
-              <strong>val_bpb</strong>：
-              <span class="term" data-definition="验证集每字节比特数，衡量语言模型质量，越低越好，不受词表大小影响。">验证集每字节比特数，越低越好，不受词表大小影响</span>
+              <strong>val_bpb</strong>:
+              <span class="term" data-definition="Validation bits per byte — measures language-model quality, lower is better, unaffected by vocabulary size.">validation bits per byte, lower is better, unaffected by vocabulary size</span>
             </div>
-            <div class="tl"><strong>training_seconds</strong>：实际训练时长，固定约 300 秒（5 分钟）</div>
-            <div class="tl"><strong>total_seconds</strong>：含数据加载等额外开销的总耗时</div>
+            <div class="tl"><strong>training_seconds</strong>: actual training time, fixed at ~300s (5 minutes)</div>
+            <div class="tl"><strong>total_seconds</strong>: total time including data loading and overhead</div>
             <div class="tl">
-              <strong>peak_vram_mb</strong>：
-              <span class="term" data-definition="GPU（图形处理单元）：用于并行计算的芯片，深度学习训练的主要算力来源。">GPU</span>
-              显存峰值用量，单位为 MB
+              <strong>peak_vram_mb</strong>: peak
+              <span class="term" data-definition="GPU (Graphics Processing Unit): A chip for parallel compute; the main source of compute for deep-learning training.">GPU</span>
+              memory usage in MB
             </div>
-            <div class="tl"><strong>mfu_percent</strong>：模型 FLOPs 利用率，衡量 GPU 算力的实际使用效率</div>
-            <div class="tl"><strong>total_tokens_M</strong>：本次训练消耗的 token 总量（百万）</div>
-            <div class="tl"><strong>num_params_M</strong>：模型参数量（百万）</div>
+            <div class="tl"><strong>mfu_percent</strong>: model FLOPs utilization, measures how efficiently the GPU's compute is actually used</div>
+            <div class="tl"><strong>total_tokens_M</strong>: total tokens consumed by this training run (in millions)</div>
+            <div class="tl"><strong>num_params_M</strong>: model parameter count (in millions)</div>
             <div class="tl">
-              <strong>depth</strong>：
-              <span class="term" data-definition="Transformer：主流深度学习架构，用于构建 GPT 等大语言模型，基于自注意力机制处理序列数据。">Transformer</span>
-              层数，越深模型表达能力越强，但也越慢
+              <strong>depth</strong>:
+              <span class="term" data-definition="Transformer: The dominant deep-learning architecture, used to build GPT and other LLMs, based on self-attention over sequence data.">Transformer</span>
+              layer count — deeper means more expressive power, but slower
             </div>
           </div>
         </div>
@@ -243,47 +243,47 @@
       <div class="callout callout-info">
         <span class="callout-icon">💡</span>
         <div class="callout-content">
-          <span class="callout-title">结果如何记录？</span>
+          <span class="callout-title">How are results recorded?</span>
           <p>
-            每次实验都追加一行到 <code>results.tsv</code>，列包括：
-            <strong>commit</strong>（git commit hash）、
-            <strong>val_bpb</strong>、
-            <strong>memory_gb</strong>、
-            <strong>status</strong>（keep / discard / crash）、
-            <strong>description</strong>（AI 代理对本次改动的描述）。
-            你醒来就能看到完整的实验日志。
+            Every experiment appends a row to <code>results.tsv</code>, with columns:
+            <strong>commit</strong> (git commit hash),
+            <strong>val_bpb</strong>,
+            <strong>memory_gb</strong>,
+            <strong>status</strong> (keep / discard / crash),
+            <strong>description</strong> (the AI agent's description of the change).
+            By morning you have a full experiment log.
           </p>
         </div>
       </div>
     </div><!-- /screen 3 -->
 
     <!-- ══════════════════════════════════════════════════════════
-         SCREEN 4 · 测验
+         SCREEN 4 · Quiz
          ══════════════════════════════════════════════════════ -->
     <div class="screen animate-in">
-      <h2 class="screen-heading">小测验：检验你的理解</h2>
-      <p>三道题，每题选一个最佳答案，然后点"检查答案"。</p>
+      <h2 class="screen-heading">Quick quiz: check your understanding</h2>
+      <p>Three questions. Pick the best answer for each, then click "Check answers".</p>
 
       <div class="quiz-container" id="quiz-module1">
 
         <!-- ── Q1 ── -->
         <div class="quiz-question-block"
              data-correct="B"
-             data-explanation-right="固定时间让所有架构在相同的时间窗口内竞争，大模型慢但机会均等，实验结果可以直接比较，不需要手动对齐步数。"
-             data-explanation-wrong="固定步数时，大模型每步更慢、小模型每步更快，相同步数下实际训练时长差异巨大，结果不具可比性。固定时间才能让不同架构站在同一起跑线。">
-          <p class="quiz-question">Q1. 为什么 autoresearch 用"固定时间预算"而不是"固定训练步数"？</p>
+             data-explanation-right="A fixed time budget lets every architecture compete within the same time window — big models are slower but get an equal shot, and results are directly comparable, with no need to align step counts."
+             data-explanation-wrong="With a fixed step count, big models are slower per step and small ones are faster, so equal steps means very different actual training times — results are not comparable. Only a fixed time budget puts different architectures on the same starting line.">
+          <p class="quiz-question">Q1. Why does autoresearch use a "fixed time budget" instead of a "fixed step count"?</p>
           <div class="quiz-options">
             <button class="quiz-option" data-value="A" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              A. 固定步数更公平，因为每步消耗的 token 量相同
+              A. Fixed step count is fairer because each step processes the same number of tokens
             </button>
             <button class="quiz-option" data-value="B" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              B. 固定时间让不同架构的实验在相同条件下竞争，结果可直接比较
+              B. Fixed time lets different architectures compete under the same conditions, and results can be compared directly
             </button>
             <button class="quiz-option" data-value="C" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              C. GPU 训练无法精确控制步数，只能按时间停止
+              C. GPU training cannot control step count precisely, so it can only stop on time
             </button>
           </div>
           <div class="quiz-feedback"></div>
@@ -292,21 +292,21 @@
         <!-- ── Q2 ── -->
         <div class="quiz-question-block"
              data-correct="C"
-             data-explanation-right="train.py 包含模型架构定义、优化器、超参数——这些正是实验想要改变的变量。AI 代理通过修改 train.py 来做不同的实验。"
-             data-explanation-wrong="prepare.py 是只读的，包含固定的数据加载和评估逻辑，AI 代理不会碰它；program.md 是人类写的研究指令，同样不由 AI 修改。AI 代理唯一被允许改动的文件是 train.py。">
-          <p class="quiz-question">Q2. AI 代理在 autoresearch 循环中修改哪个文件？</p>
+             data-explanation-right="train.py contains the model architecture, optimizer, and hyperparameters — exactly the variables the experiment wants to vary. The AI agent runs different experiments by modifying train.py."
+             data-explanation-wrong="prepare.py is read-only — it holds the fixed data-loading and evaluation logic, the AI agent never touches it. program.md is the human-authored research instruction file, also off-limits for the AI. The only file the AI agent is allowed to modify is train.py.">
+          <p class="quiz-question">Q2. Which file does the AI agent modify in the autoresearch loop?</p>
           <div class="quiz-options">
             <button class="quiz-option" data-value="A" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              A. <span class="term" data-definition="prepare.py：autoresearch 中固定不变的数据准备脚本，包含数据加载和固定评估逻辑，AI 代理不允许修改。">prepare.py</span>
+              A. <span class="term" data-definition="prepare.py: The fixed data-preparation script in autoresearch. Contains data loading and the fixed evaluation logic; the AI agent is not allowed to modify it.">prepare.py</span>
             </button>
             <button class="quiz-option" data-value="B" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              B. <span class="term" data-definition="program.md：人类编写的研究指令文件，定义 AI 代理的目标和约束，不由 AI 修改。">program.md</span>
+              B. <span class="term" data-definition="program.md: The human-authored research instruction file. Defines the AI agent's goals and constraints; not modified by the AI.">program.md</span>
             </button>
             <button class="quiz-option" data-value="C" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              C. <span class="term" data-definition="train.py：autoresearch 的核心训练脚本，AI 代理唯一被允许修改的文件，包含模型架构、优化器、超参数。">train.py</span>
+              C. <span class="term" data-definition="train.py: The core training script in autoresearch. The only file the AI agent is allowed to modify; contains model architecture, optimizer, and hyperparameters.">train.py</span>
             </button>
           </div>
           <div class="quiz-feedback"></div>
@@ -315,21 +315,21 @@
         <!-- ── Q3 ── -->
         <div class="quiz-question-block"
              data-correct="B"
-             data-explanation-right="val_bpb 升高意味着模型质量变差了。正确做法是 git reset 丢弃这次改动，回到上一个好的状态，然后换一个新想法继续实验。"
-             data-explanation-wrong="val_bpb 越低越好。从 0.998 升到 1.005 是变差了，不应该保留；也不应该继续等待，因为固定 5 分钟的训练已经结束，结果是确定的，继续等没有意义。">
-          <p class="quiz-question">Q3. 一个实验的 <span class="term" data-definition="val_bpb（Validation Bits Per Byte）：验证集每字节比特数，越低越好，是 autoresearch 判断实验是否成功的唯一指标。">val_bpb</span> 从 0.998 升高到 1.005。AI 代理应该怎么做？</p>
+             data-explanation-right="A higher val_bpb means the model got worse. The right move is to git reset the change, return to the last good state, and try a new idea."
+             data-explanation-wrong="Lower val_bpb is better. Going from 0.998 to 1.005 is a regression and should not be kept. Waiting longer also doesn't help, because the fixed-5-minute training run has already ended — the result is final and won't change.">
+          <p class="quiz-question">Q3. An experiment's <span class="term" data-definition="val_bpb (Validation Bits Per Byte): Bits per byte on the validation set; lower is better. The single metric autoresearch uses to decide whether an experiment succeeded.">val_bpb</span> goes up from 0.998 to 1.005. What should the AI agent do?</p>
           <div class="quiz-options">
             <button class="quiz-option" data-value="A" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              A. 保留这次修改，继续下一个实验
+              A. Keep the change and move on to the next experiment
             </button>
             <button class="quiz-option" data-value="B" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              B. 丢弃（git reset），回到上个好的状态，换个想法继续
+              B. Discard (git reset), return to the last good state, and try a different idea
             </button>
             <button class="quiz-option" data-value="C" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              C. 继续跑更多实验，等待结果稳定后再判断
+              C. Run more experiments and wait for results to stabilize before deciding
             </button>
           </div>
           <div class="quiz-feedback"></div>
@@ -337,8 +337,8 @@
 
         <!-- Buttons -->
         <div>
-          <button class="quiz-check-btn" onclick="checkQuiz('quiz-module1')">检查答案</button>
-          <button class="quiz-reset-btn" onclick="resetQuiz('quiz-module1')">重置</button>
+          <button class="quiz-check-btn" onclick="checkQuiz('quiz-module1')">Check answers</button>
+          <button class="quiz-reset-btn" onclick="resetQuiz('quiz-module1')">Reset</button>
         </div>
 
       </div>
@@ -349,19 +349,19 @@
 <section class="module" id="module-2" style="background: var(--color-bg);">
   <div class="module-content">
 
-    <!-- ── 模块头 ─────────────────────────────────────────────── -->
+    <!-- ── Module header ────────────────────────────────────────── -->
     <header class="module-header animate-in">
       <span class="module-number">02</span>
-      <h2 class="module-title">三文件架构</h2>
-      <p class="module-subtitle">边界即设计——这个 repo 只有三个关键文件。但这三个文件的边界划分，决定了整个系统的运作方式。</p>
+      <h2 class="module-title">Three-File Architecture</h2>
+      <p class="module-subtitle">Boundaries are the design — this repo has only three key files. But the way the boundaries between them are drawn determines how the entire system works.</p>
     </header>
 
     <!-- ══════════════════════════════════════════════════════════
-         Screen 1 · 三文件架构总览
+         Screen 1 · Three-file overview
     ═══════════════════════════════════════════════════════════ -->
     <div class="screen">
-      <h3 class="screen-heading animate-in">三文件，三种角色</h3>
-      <p class="animate-in">把这个系统想象成一场<strong>标准化科学实验</strong>：实验设备必须统一（不能私自修改仪器刻度）；实验变量是你真正要调的；实验方案是研究员在实验前写下的研究计划。</p>
+      <h3 class="screen-heading animate-in">Three files, three roles</h3>
+      <p class="animate-in">Think of this system as a <strong>standardized scientific experiment</strong>: the lab equipment must stay uniform (no privately fiddling with the instrument's dial); the experimental variables are the things you actually want to tune; the experimental plan is the research protocol the researcher writes before any experiment begins.</p>
 
       <div class="pattern-cards stagger-children" style="grid-template-columns: 1fr;">
 
@@ -370,7 +370,7 @@
           <div class="pattern-icon" style="background: var(--color-success-light);">🔒</div>
           <div class="pattern-title" style="font-family: var(--font-mono); font-size: var(--text-lg);">prepare.py</div>
           <p class="pattern-desc">
-            <strong style="color: var(--color-actor-5);">固定基础设施</strong> — 数据下载、<span class="term" data-definition="Byte-Pair Encoding（字节对编码）：一种把文字拆分成子词单元的分词算法。BPE 先从单个字符开始，反复合并最高频的相邻对，直到达到目标词表大小（此处 VOCAB_SIZE=8192）。">BPE</span> 分词器训练、数据加载器、<code style="font-family: var(--font-mono); font-size: var(--text-xs); background: var(--color-bg-code); color: #A6E3A1; padding: 1px 5px; border-radius: 4px;">evaluate_bpb</code> 评估函数。<strong>AI 代理不能修改这里的任何内容。</strong> 固定不变是这里的核心设计意图——它保证了实验之间的可比性，也是系统诚信的根基。
+            <strong style="color: var(--color-actor-5);">Fixed infrastructure</strong> — data download, <span class="term" data-definition="Byte-Pair Encoding: A subword tokenization algorithm that splits text into subword units. BPE starts from individual characters and repeatedly merges the most frequent adjacent pair until reaching the target vocabulary size (here VOCAB_SIZE=8192).">BPE</span> tokenizer training, data loader, the <code style="font-family: var(--font-mono); font-size: var(--text-xs); background: var(--color-bg-code); color: #A6E3A1; padding: 1px 5px; border-radius: 4px;">evaluate_bpb</code> evaluation function. <strong>The AI agent cannot modify anything in here.</strong> "Fixed" is the whole point — it guarantees that experiments are comparable, and it's the foundation of the system's integrity.
           </p>
         </div>
 
@@ -379,7 +379,7 @@
           <div class="pattern-icon" style="background: var(--color-accent-light);">⚗️</div>
           <div class="pattern-title" style="font-family: var(--font-mono); font-size: var(--text-lg);">train.py</div>
           <p class="pattern-desc">
-            <strong style="color: var(--color-actor-1);">实验目标</strong> — GPT 模型架构、MuonAdamW 优化器、训练循环。<strong>这是唯一被 AI 代理编辑的文件。</strong> 一切超参数、架构选择都是公平的实验变量。每次实验，AI 代理从这里出发，改动，运行，记录结果。
+            <strong style="color: var(--color-actor-1);">The experiment target</strong> — GPT model architecture, MuonAdamW optimizer, training loop. <strong>This is the only file the AI agent edits.</strong> All hyperparameters and architectural choices are fair experimental variables. Every experiment starts here: the AI agent makes changes, runs them, records the result.
           </p>
         </div>
 
@@ -388,7 +388,7 @@
           <div class="pattern-icon" style="background: #FEF9E7;">📋</div>
           <div class="pattern-title" style="font-family: var(--font-mono); font-size: var(--text-lg);">program.md</div>
           <p class="pattern-desc">
-            <strong style="color: var(--color-actor-4);">研究组织代码</strong> — 人类定义实验目标、边界、循环规则。这是<strong>人类的杠杆</strong>：通过迭代 program.md 来改进 AI 的研究能力。它不是代码，而是"指令集"——告诉 AI 代理这场研究游戏的规则是什么。
+            <strong style="color: var(--color-actor-4);">Research-organization code</strong> — humans define experiment goals, boundaries, and loop rules here. This is <strong>the human's leverage</strong>: iterate on program.md to improve the AI's research ability. It's not code, it's an "instruction set" — telling the AI agent the rules of this research game.
           </p>
         </div>
 
@@ -396,42 +396,42 @@
     </div>
 
     <!-- ══════════════════════════════════════════════════════════
-         Screen 2 · prepare.py — 为什么不能动？
+         Screen 2 · prepare.py — why is it off-limits?
     ═══════════════════════════════════════════════════════════ -->
     <div class="screen">
-      <h3 class="screen-heading animate-in">prepare.py — 为什么不能动？</h3>
+      <h3 class="screen-heading animate-in">prepare.py — why is it off-limits?</h3>
       <p class="animate-in">
-        固定 <code style="font-family: var(--font-mono); font-size: var(--text-sm); background: var(--color-bg-code); color: #CBA6F7; padding: 1px 6px; border-radius: 4px;">evaluate_bpb</code> 的评估逻辑是整个系统诚信的根基——如果 AI 能修改评估函数，它可以轻松"作弊"让数字变好看，但模型并没有真正改善。
+        Fixing the <code style="font-family: var(--font-mono); font-size: var(--text-sm); background: var(--color-bg-code); color: #CBA6F7; padding: 1px 6px; border-radius: 4px;">evaluate_bpb</code> evaluation logic is the foundation of the system's integrity — if the AI could modify the eval function, it could easily "cheat" by making the numbers look better without actually improving the model.
       </p>
 
       <div class="translation-block animate-in">
-        <!-- 左侧：代码 -->
+        <!-- Left: code -->
         <div class="translation-code">
           <span class="translation-label">prepare.py</span>
-<span class="code-line"><span class="code-comment"># 固定常量 — 不可修改</span></span>
-<span class="code-line"><span class="code-property">MAX_SEQ_LEN</span> <span class="code-operator">=</span> <span class="code-number">2048</span>    <span class="code-comment"># 上下文长度</span></span>
-<span class="code-line"><span class="code-property">TIME_BUDGET</span> <span class="code-operator">=</span> <span class="code-number">300</span>     <span class="code-comment"># 训练时间预算（秒）</span></span>
-<span class="code-line"><span class="code-property">EVAL_TOKENS</span> <span class="code-operator">=</span> <span class="code-number">40</span> <span class="code-operator">*</span> <span class="code-number">524288</span>  <span class="code-comment"># 验证集 token 数</span></span>
-<span class="code-line"><span class="code-property">VOCAB_SIZE</span>  <span class="code-operator">=</span> <span class="code-number">8192</span>    <span class="code-comment"># BPE 词表大小</span></span>
+<span class="code-line"><span class="code-comment"># Fixed constants — do not modify</span></span>
+<span class="code-line"><span class="code-property">MAX_SEQ_LEN</span> <span class="code-operator">=</span> <span class="code-number">2048</span>    <span class="code-comment"># context length</span></span>
+<span class="code-line"><span class="code-property">TIME_BUDGET</span> <span class="code-operator">=</span> <span class="code-number">300</span>     <span class="code-comment"># training time budget (seconds)</span></span>
+<span class="code-line"><span class="code-property">EVAL_TOKENS</span> <span class="code-operator">=</span> <span class="code-number">40</span> <span class="code-operator">*</span> <span class="code-number">524288</span>  <span class="code-comment"># validation tokens</span></span>
+<span class="code-line"><span class="code-property">VOCAB_SIZE</span>  <span class="code-operator">=</span> <span class="code-number">8192</span>    <span class="code-comment"># BPE vocab size</span></span>
 <span class="code-line"></span>
-<span class="code-line"><span class="code-comment"># 数据集：climbmix-400b-shuffle</span></span>
+<span class="code-line"><span class="code-comment"># Dataset: climbmix-400b-shuffle</span></span>
 <span class="code-line"><span class="code-property">BASE_URL</span> <span class="code-operator">=</span> <span class="code-string">"https://huggingface.co/..."</span></span>
-<span class="code-line"><span class="code-property">VAL_SHARD</span> <span class="code-operator">=</span> <span class="code-number">6542</span>  <span class="code-comment"># 固定验证分片</span></span>
+<span class="code-line"><span class="code-property">VAL_SHARD</span> <span class="code-operator">=</span> <span class="code-number">6542</span>  <span class="code-comment"># fixed validation shard</span></span>
 <span class="code-line"></span>
 <span class="code-line"><span class="code-keyword">def</span> <span class="code-function">evaluate_bpb</span>(model, dataloader):</span>
-<span class="code-line">    <span class="code-comment"># ← AI 代理永远不能改这里</span></span>
+<span class="code-line">    <span class="code-comment"># ← AI agent can never touch this</span></span>
 <span class="code-line">    ...</span>
         </div>
 
-        <!-- 右侧：中文解释 -->
+        <!-- Right: explanation -->
         <div class="translation-english">
-          <span class="translation-label">逐行解读</span>
+          <span class="translation-label">Line-by-line</span>
           <div class="translation-lines">
-            <div class="tl"><strong>MAX_SEQ_LEN = 2048</strong><br>每个训练样本的最大 <span class="term" data-definition="Token（词元）：文本被分词后的基本单位。可以是一个词、一个子词或一个字符。现代 LLM 以 token 为单位处理文本，而不是以字符或单词。">token</span> 长度，决定模型能"看到"多长的上下文。</div>
-            <div class="tl"><strong>TIME_BUDGET = 300</strong><br>固定 5 分钟时间预算。每个实验都跑同样长的时间，结果才有可比性。</div>
-            <div class="tl"><strong>EVAL_TOKENS = 40 × 524288</strong><br>验证集大小固定在约 2100 万 token，确保每次评估结果一致，不会因为样本数不同而偏差。</div>
-            <div class="tl"><strong>VAL_SHARD = 6542</strong><br>始终用同一个验证分片，彻底杜绝"数据泄露"：训练集和验证集严格分离。</div>
-            <div class="tl"><strong>evaluate_bpb 函数</strong><br>这是"地面真相"（ground truth）。AI 改不了它——这一条保证了整个系统的诚信性。</div>
+            <div class="tl"><strong>MAX_SEQ_LEN = 2048</strong><br>Max <span class="term" data-definition="Token: The basic unit of text after tokenization. Can be a word, subword, or character. Modern LLMs operate on tokens, not characters or words.">token</span> length per training sample; sets how much context the model can "see".</div>
+            <div class="tl"><strong>TIME_BUDGET = 300</strong><br>Fixed 5-minute time budget. Every experiment runs for the same amount of time, so results are comparable.</div>
+            <div class="tl"><strong>EVAL_TOKENS = 40 × 524288</strong><br>Validation set fixed at about 21M tokens, so every evaluation is consistent and not skewed by differing sample counts.</div>
+            <div class="tl"><strong>VAL_SHARD = 6542</strong><br>Always uses the same validation shard, eliminating "data leakage": training and validation sets are strictly separate.</div>
+            <div class="tl"><strong>evaluate_bpb function</strong><br>This is the "ground truth". The AI can't change it — and that's what guarantees the integrity of the whole system.</div>
           </div>
         </div>
       </div>
@@ -439,65 +439,65 @@
       <div class="callout callout-accent animate-in">
         <span class="callout-icon">🔏</span>
         <div class="callout-content">
-          <span class="callout-title">为什么这条规则如此关键？</span>
-          <p>如果 AI 代理能修改 <span class="term" data-definition="val_bpb（验证集 Bits-Per-Byte）：衡量语言模型压缩能力的指标。值越低表示模型预测文本的效率越高，即模型越好。这是 autoresearch 的核心评估指标。">val_bpb</span> 的计算方式，它可以让任何糟糕的模型看起来"更好"。固定评估函数的意义就在于：实验结果是真实的，不是被"优化"出来的幻觉。</p>
+          <span class="callout-title">Why is this rule so critical?</span>
+          <p>If the AI agent could modify how <span class="term" data-definition="val_bpb (Validation Bits-Per-Byte): Measures a language model's compression ability. Lower means the model predicts text more efficiently — i.e., a better model. The core evaluation metric in autoresearch.">val_bpb</span> is computed, it could make any bad model look "better". Pinning the eval function down means experiment results are real, not hallucinated through "optimization".</p>
         </div>
       </div>
     </div>
 
     <!-- ══════════════════════════════════════════════════════════
-         Screen 3 · train.py — 超参数直接写死在代码里
+         Screen 3 · train.py — hyperparameters hard-coded
     ═══════════════════════════════════════════════════════════ -->
     <div class="screen">
-      <h3 class="screen-heading animate-in">train.py — 超参数直接写死在代码里</h3>
+      <h3 class="screen-heading animate-in">train.py — hyperparameters hard-coded right into the source</h3>
       <p class="animate-in">
-        没有 CLI 参数，没有 YAML 配置文件。超参数就是 Python 变量，AI 代理直接改代码——简单、直接、易于 diff 追踪。
+        No CLI flags, no YAML config files. Hyperparameters are just Python variables, and the AI agent edits the code directly — simple, direct, easy to diff.
       </p>
 
       <div class="translation-block animate-in">
-        <!-- 左侧：代码 -->
+        <!-- Left: code -->
         <div class="translation-code">
           <span class="translation-label">train.py</span>
-<span class="code-line"><span class="code-comment"># 模型架构</span></span>
-<span class="code-line"><span class="code-property">DEPTH</span>         <span class="code-operator">=</span> <span class="code-number">8</span>       <span class="code-comment"># Transformer 层数</span></span>
+<span class="code-line"><span class="code-comment"># Model architecture</span></span>
+<span class="code-line"><span class="code-property">DEPTH</span>         <span class="code-operator">=</span> <span class="code-number">8</span>       <span class="code-comment"># number of Transformer layers</span></span>
 <span class="code-line"><span class="code-property">ASPECT_RATIO</span>  <span class="code-operator">=</span> <span class="code-number">64</span>      <span class="code-comment"># model_dim = depth × this</span></span>
-<span class="code-line"><span class="code-property">HEAD_DIM</span>      <span class="code-operator">=</span> <span class="code-number">128</span>     <span class="code-comment"># attention head 维度</span></span>
-<span class="code-line"><span class="code-property">WINDOW_PATTERN</span> <span class="code-operator">=</span> <span class="code-string">"SSSL"</span> <span class="code-comment"># 注意力窗口模式</span></span>
+<span class="code-line"><span class="code-property">HEAD_DIM</span>      <span class="code-operator">=</span> <span class="code-number">128</span>     <span class="code-comment"># attention head dim</span></span>
+<span class="code-line"><span class="code-property">WINDOW_PATTERN</span> <span class="code-operator">=</span> <span class="code-string">"SSSL"</span> <span class="code-comment"># attention window pattern</span></span>
 <span class="code-line"></span>
-<span class="code-line"><span class="code-comment"># 优化</span></span>
+<span class="code-line"><span class="code-comment"># Optimization</span></span>
 <span class="code-line"><span class="code-property">TOTAL_BATCH_SIZE</span> <span class="code-operator">=</span> <span class="code-number">2</span><span class="code-operator">**</span><span class="code-number">19</span>  <span class="code-comment"># ~524K tokens/step</span></span>
-<span class="code-line"><span class="code-property">EMBEDDING_LR</span>    <span class="code-operator">=</span> <span class="code-number">0.6</span>    <span class="code-comment"># 词嵌入学习率</span></span>
-<span class="code-line"><span class="code-property">MATRIX_LR</span>       <span class="code-operator">=</span> <span class="code-number">0.04</span>   <span class="code-comment"># 矩阵参数学习率（Muon）</span></span>
+<span class="code-line"><span class="code-property">EMBEDDING_LR</span>    <span class="code-operator">=</span> <span class="code-number">0.6</span>    <span class="code-comment"># embedding LR</span></span>
+<span class="code-line"><span class="code-property">MATRIX_LR</span>       <span class="code-operator">=</span> <span class="code-number">0.04</span>   <span class="code-comment"># matrix-param LR (Muon)</span></span>
 <span class="code-line"><span class="code-property">WEIGHT_DECAY</span>    <span class="code-operator">=</span> <span class="code-number">0.2</span></span>
-<span class="code-line"><span class="code-property">WARMDOWN_RATIO</span>  <span class="code-operator">=</span> <span class="code-number">0.5</span>    <span class="code-comment"># 学习率衰减时长比例</span></span>
+<span class="code-line"><span class="code-property">WARMDOWN_RATIO</span>  <span class="code-operator">=</span> <span class="code-number">0.5</span>    <span class="code-comment"># LR warmdown duration ratio</span></span>
 <span class="code-line"></span>
-<span class="code-line"><span class="code-comment"># 硬件</span></span>
+<span class="code-line"><span class="code-comment"># Hardware</span></span>
 <span class="code-line"><span class="code-property">DEVICE_BATCH_SIZE</span> <span class="code-operator">=</span> <span class="code-number">128</span></span>
         </div>
 
-        <!-- 右侧：中文解释 -->
+        <!-- Right: explanation -->
         <div class="translation-english">
-          <span class="translation-label">逐行解读</span>
+          <span class="translation-label">Line-by-line</span>
           <div class="translation-lines">
             <div class="tl">
               <strong>DEPTH=8 + ASPECT_RATIO=64</strong><br>
-              → <span class="term" data-definition="Transformer：Google 2017 年提出的神经网络架构，是现代所有大语言模型（GPT、BERT、LLaMA）的基础。核心机制是「注意力」（Attention），让模型能关注输入序列中任意位置的信息。">Transformer</span> 的隐藏维度 model_dim = 8 × 64 = 512。改成 DEPTH=12 则 model_dim = 768，模型容量大幅提升。
+              → The <span class="term" data-definition="Transformer: The neural-network architecture introduced by Google in 2017 — the foundation of every modern LLM (GPT, BERT, LLaMA). Its core mechanism, attention, lets the model attend to information at any position in the input.">Transformer</span> hidden dim is model_dim = 8 × 64 = 512. Change to DEPTH=12 and model_dim becomes 768 — a big jump in capacity.
             </div>
             <div class="tl">
               <strong>WINDOW_PATTERN = "SSSL"</strong><br>
-              大部分层（S）用短窗口注意力，节省算力；最后一层（L）强制用全上下文，捕捉长距离依赖。
+              Most layers (S) use short-window attention to save compute; the last layer (L) is forced to use the full context to capture long-range dependencies.
             </div>
             <div class="tl">
               <strong>TOTAL_BATCH_SIZE = 2<sup>19</sup></strong><br>
-              约 52.4 万 <span class="term" data-definition="Token（词元）：文本被分词后的基本单位。可以是一个词、一个子词或一个字符。现代 LLM 以 token 为单位处理文本，而不是以字符或单词。">token</span> 每步。若 <span class="term" data-definition="Batch size（批大小）：一次前向传播中处理的样本数量。更大的 batch 通常让训练更稳定，但占用更多显存。Gradient accumulation（梯度累积）可以在不超显存的情况下模拟更大的 batch。">batch size</span> 超出显存，通过 <span class="term" data-definition="Gradient accumulation（梯度累积）：将多个小 batch 的梯度累加后再做一次参数更新，从而在有限显存下模拟大 batch 训练。train.py 自动计算所需的累积步数。">gradient accumulation</span> 自动拆分，train.py 内部处理，无需手动调整。
+              About 524K <span class="term" data-definition="Token: The basic unit of text after tokenization. Modern LLMs operate on tokens, not characters or words.">tokens</span> per step. If the <span class="term" data-definition="Batch size: The number of samples processed in one forward pass. Bigger batches typically train more stably but use more memory. Gradient accumulation simulates bigger batches without running out of memory.">batch size</span> exceeds GPU memory, <span class="term" data-definition="Gradient accumulation: Accumulating gradients from several small batches before performing one parameter update, so you can simulate a bigger batch under tight memory. train.py computes the required accumulation steps automatically.">gradient accumulation</span> splits it automatically inside train.py — no manual tweaking needed.
             </div>
             <div class="tl">
               <strong>EMBEDDING_LR=0.6 / MATRIX_LR=0.04</strong><br>
-              两套 <span class="term" data-definition="Learning Rate（LR，学习率）：控制每次参数更新步长的超参数。太大会让训练发散，太小会收敛太慢。MuonAdamW 为矩阵参数和嵌入分别设置了不同学习率。">LR</span>：词嵌入用 AdamW（LR=0.6），矩阵权重用 Muon 优化器（LR=0.04）。
+              Two <span class="term" data-definition="Learning rate (LR): Controls the step size of each parameter update. Too large and training diverges; too small and convergence is slow. MuonAdamW uses different LRs for embeddings and matrix parameters.">LRs</span>: embeddings use AdamW (LR=0.6), matrix weights use the Muon optimizer (LR=0.04).
             </div>
             <div class="tl">
               <strong>WARMDOWN_RATIO = 0.5</strong><br>
-              <span class="term" data-definition="Warmdown（学习率衰减阶段）：训练后期将学习率从峰值线性降到 0 的过程。WARMDOWN_RATIO=0.5 表示后半段时间都在做 warmdown。这是现代 LLM 训练的标准做法，有助于最终收敛。">Warmdown</span> 占训练总时长的 50%。后半段学习率线性衰减到 0，现代 LLM 训练的标准做法。
+              <span class="term" data-definition="Warmdown: The phase late in training where the learning rate decays linearly from its peak to 0. WARMDOWN_RATIO=0.5 means the second half of training is the warmdown. Standard practice in modern LLM training; helps final convergence.">Warmdown</span> takes 50% of total training time. The LR linearly decays to 0 in the second half — standard modern LLM training practice.
             </div>
           </div>
         </div>
@@ -506,48 +506,48 @@
       <div class="callout callout-info animate-in">
         <span class="callout-icon">💡</span>
         <div class="callout-content">
-          <span class="callout-title">为什么不用 CLI 参数或配置文件？</span>
-          <p>让超参数直接活在代码里，意味着每次 git diff 都能清晰地看到"这次实验改了什么"。这个设计选择本身就是一种简洁性准则的体现——少一层抽象，少一个出错的地方。</p>
+          <span class="callout-title">Why no CLI flags or config file?</span>
+          <p>Keeping hyperparameters live in the code means every `git diff` clearly shows "what changed in this experiment". The design choice itself reflects a simplicity principle — one less abstraction layer, one less place for things to go wrong.</p>
         </div>
       </div>
     </div>
 
     <!-- ══════════════════════════════════════════════════════════
-         Screen 4 · program.md — 人类的杠杆
+         Screen 4 · program.md — the human's leverage
     ═══════════════════════════════════════════════════════════ -->
     <div class="screen">
-      <h3 class="screen-heading animate-in">program.md — 人类的杠杆</h3>
+      <h3 class="screen-heading animate-in">program.md — the human's leverage</h3>
       <p class="animate-in">
-        AI 代理在开始每轮实验前，会先通读 program.md。这份 Markdown 文件定义了实验的节奏、边界和循环规则。下面模拟一次完整的实验启动流程：
+        Before every experiment, the AI agent reads through program.md. This Markdown file defines the rhythm, boundaries, and loop rules of the experiments. Below is a simulated end-to-end launch sequence:
       </p>
 
       <div class="chat-window animate-in" id="chat-module2">
         <div class="chat-messages" id="chat-module2-messages">
 
-          <!-- 1. 人类 -->
+          <!-- 1. Human -->
           <div class="chat-message" data-sender="human" style="display:none;">
-            <div class="chat-avatar" style="background: var(--color-actor-4);">人</div>
+            <div class="chat-avatar" style="background: var(--color-actor-4);">H</div>
             <div class="chat-bubble">
-              <span class="chat-sender" style="color: var(--color-actor-4);">人类研究员</span>
-              <p>看一下 program.md，开始新实验！先做 setup。</p>
+              <span class="chat-sender" style="color: var(--color-actor-4);">Human researcher</span>
+              <p>Take a look at program.md, start a new experiment! Do the setup first.</p>
             </div>
           </div>
 
-          <!-- 2. AI 代理 -->
+          <!-- 2. AI agent -->
           <div class="chat-message" data-sender="ai" style="display:none;">
             <div class="chat-avatar" style="background: var(--color-actor-1);">AI</div>
             <div class="chat-bubble">
-              <span class="chat-sender" style="color: var(--color-actor-1);">AI 代理</span>
-              <p>好的，我来读 program.md……今天日期是 may19，建议 run tag：<code style="font-family:var(--font-mono);font-size:var(--text-xs);background:var(--color-bg-code);color:#A6E3A1;padding:1px 5px;border-radius:3px;">may19</code>。正在创建分支 <code style="font-family:var(--font-mono);font-size:var(--text-xs);background:var(--color-bg-code);color:#89B4FA;padding:1px 5px;border-radius:3px;">autoresearch/may19</code>……</p>
+              <span class="chat-sender" style="color: var(--color-actor-1);">AI agent</span>
+              <p>OK, let me read program.md… Today's date is may19, suggested run tag: <code style="font-family:var(--font-mono);font-size:var(--text-xs);background:var(--color-bg-code);color:#A6E3A1;padding:1px 5px;border-radius:3px;">may19</code>. Creating branch <code style="font-family:var(--font-mono);font-size:var(--text-xs);background:var(--color-bg-code);color:#89B4FA;padding:1px 5px;border-radius:3px;">autoresearch/may19</code>…</p>
             </div>
           </div>
 
-          <!-- 3. AI 代理 -->
+          <!-- 3. AI agent -->
           <div class="chat-message" data-sender="ai" style="display:none;">
             <div class="chat-avatar" style="background: var(--color-actor-1);">AI</div>
             <div class="chat-bubble">
-              <span class="chat-sender" style="color: var(--color-actor-1);">AI 代理</span>
-              <p>读取 prepare.py 和 train.py……baseline 配置：DEPTH=8，WINDOW_PATTERN=SSSL，MATRIX_LR=0.04。初始化 results.tsv，准备跑 baseline。</p>
+              <span class="chat-sender" style="color: var(--color-actor-1);">AI agent</span>
+              <p>Reading prepare.py and train.py… baseline config: DEPTH=8, WINDOW_PATTERN=SSSL, MATRIX_LR=0.04. Initializing results.tsv, getting ready to run baseline.</p>
             </div>
           </div>
 
@@ -555,8 +555,8 @@
           <div class="chat-message" data-sender="gpu" style="display:none;">
             <div class="chat-avatar" style="background: var(--color-actor-5);">GPU</div>
             <div class="chat-bubble">
-              <span class="chat-sender" style="color: var(--color-actor-5);">GPU 服务器</span>
-              <p><code style="font-family:var(--font-mono);font-size:var(--text-xs);background:var(--color-bg-code);color:#CDD6F4;padding:1px 5px;border-radius:3px;">uv run train.py &gt; run.log 2&gt;&amp;1</code>  ……训练中（5 分钟）……</p>
+              <span class="chat-sender" style="color: var(--color-actor-5);">GPU server</span>
+              <p><code style="font-family:var(--font-mono);font-size:var(--text-xs);background:var(--color-bg-code);color:#CDD6F4;padding:1px 5px;border-radius:3px;">uv run train.py &gt; run.log 2&gt;&amp;1</code> … training (5 minutes) …</p>
             </div>
           </div>
 
@@ -564,32 +564,32 @@
           <div class="chat-message" data-sender="gpu" style="display:none;">
             <div class="chat-avatar" style="background: var(--color-actor-5);">GPU</div>
             <div class="chat-bubble">
-              <span class="chat-sender" style="color: var(--color-actor-5);">GPU 服务器</span>
+              <span class="chat-sender" style="color: var(--color-actor-5);">GPU server</span>
               <p><code style="font-family:var(--font-mono);font-size:var(--text-xs);background:var(--color-bg-code);color:#A6E3A1;padding:1px 5px;border-radius:3px;">val_bpb: 0.997900 | peak_vram_mb: 45060.2 | num_params_M: 50.3</code></p>
             </div>
           </div>
 
-          <!-- 6. AI 代理 -->
+          <!-- 6. AI agent -->
           <div class="chat-message" data-sender="ai" style="display:none;">
             <div class="chat-avatar" style="background: var(--color-actor-1);">AI</div>
             <div class="chat-bubble">
-              <span class="chat-sender" style="color: var(--color-actor-1);">AI 代理</span>
-              <p>Baseline 记录完毕：commit=baseline，val_bpb=0.9979，status=keep。下一个实验想法：提高 DEPTH 到 12，看看更深的模型是否能降低 val_bpb……</p>
+              <span class="chat-sender" style="color: var(--color-actor-1);">AI agent</span>
+              <p>Baseline recorded: commit=baseline, val_bpb=0.9979, status=keep. Next experiment idea: bump DEPTH to 12, see if a deeper model lowers val_bpb…</p>
             </div>
           </div>
 
-          <!-- 7. AI 代理 -->
+          <!-- 7. AI agent -->
           <div class="chat-message" data-sender="ai" style="display:none;">
             <div class="chat-avatar" style="background: var(--color-actor-1);">AI</div>
             <div class="chat-bubble" style="border-left: 3px solid var(--color-accent); background: var(--color-accent-light);">
-              <span class="chat-sender" style="color: var(--color-actor-1);">AI 代理</span>
-              <p>【program.md 规则：永不停止，直到人类中断。继续实验循环。】</p>
+              <span class="chat-sender" style="color: var(--color-actor-1);">AI agent</span>
+              <p>[program.md rule: never stop until the human interrupts. Continuing the experiment loop.]</p>
             </div>
           </div>
 
         </div>
 
-        <!-- 打字指示器 -->
+        <!-- Typing indicator -->
         <div class="chat-typing" style="display:none;">
           <div class="chat-avatar" style="background: var(--color-text-muted);">…</div>
           <div class="chat-typing-dots">
@@ -599,11 +599,11 @@
           </div>
         </div>
 
-        <!-- 控制栏 -->
+        <!-- Controls -->
         <div class="chat-controls">
-          <button class="quiz-check-btn chat-next-btn" style="margin-top:0;">下一条 ▶</button>
-          <button class="quiz-check-btn chat-all-btn" style="margin-top:0;background:var(--color-actor-5);">全部显示</button>
-          <button class="quiz-reset-btn chat-reset-btn" style="margin-top:0;">重置</button>
+          <button class="quiz-check-btn chat-next-btn" style="margin-top:0;">Next ▶</button>
+          <button class="quiz-check-btn chat-all-btn" style="margin-top:0;background:var(--color-actor-5);">Show all</button>
+          <button class="quiz-reset-btn chat-reset-btn" style="margin-top:0;">Reset</button>
           <span class="chat-progress">0 / 7 messages</span>
         </div>
       </div>
@@ -611,38 +611,38 @@
       <div class="callout callout-accent animate-in">
         <span class="callout-icon">⚖️</span>
         <div class="callout-content">
-          <span class="callout-title">简洁性准则</span>
-          <p>program.md 中有明确规定："所有条件相同时，更简单的方案更好。+0.001 val_bpb 改进但增加了 20 行难看的代码？可能不值得。删了代码却得到相同效果？绝对保留。"</p>
+          <span class="callout-title">The simplicity principle</span>
+          <p>program.md states it explicitly: "All else equal, simpler is better. A +0.001 val_bpb improvement that adds 20 lines of ugly code? Probably not worth it. Deleting code and getting the same effect? Absolutely keep."</p>
         </div>
       </div>
     </div>
 
     <!-- ══════════════════════════════════════════════════════════
-         Screen 5 · 测验
+         Screen 5 · Quiz
     ═══════════════════════════════════════════════════════════ -->
     <div class="screen">
-      <h3 class="screen-heading animate-in">测验：三文件边界</h3>
+      <h3 class="screen-heading animate-in">Quiz: three-file boundaries</h3>
 
       <div class="quiz-container animate-in" id="quiz-module2">
 
         <!-- Q1 -->
         <div class="quiz-question-block"
              data-correct="B"
-             data-explanation-right="正确！固定评估逻辑是系统诚信的基石。如果 AI 能修改 evaluate_bpb，它可以轻松让任何糟糕的模型看起来"优秀"——数字好看，但没有真实意义。"
-             data-explanation-wrong="再想想：prepare.py 里有非常重要的内容（evaluate_bpb、数据集定义），而且它的复杂度并不是限制 AI 修改的原因。">
-          <p class="quiz-question">Q1：为什么 AI 代理不能修改 prepare.py？</p>
+             data-explanation-right="Correct! A fixed eval logic is the cornerstone of the system's integrity. If the AI could modify evaluate_bpb, it could easily make any bad model look 'great' — pretty numbers, no real meaning."
+             data-explanation-wrong="Think again: prepare.py contains very important things (evaluate_bpb, dataset definitions), and the reason for forbidding AI edits has nothing to do with complexity.">
+          <p class="quiz-question">Q1. Why can't the AI agent modify prepare.py?</p>
           <div class="quiz-options">
             <button class="quiz-option" data-value="A" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              A：prepare.py 代码太复杂，AI 改不了
+              A. prepare.py is too complex for the AI to change
             </button>
             <button class="quiz-option" data-value="B" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              B：固定评估逻辑是系统诚信的保证——如果 AI 能改 evaluate_bpb，它可以轻松让数字变好看，但模型并没有真正改善
+              B. A fixed eval logic guarantees the system's integrity — if the AI could change evaluate_bpb, it could easily make the numbers look better without the model actually improving
             </button>
             <button class="quiz-option" data-value="C" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              C：prepare.py 里没有重要内容
+              C. prepare.py has nothing important in it
             </button>
           </div>
           <div class="quiz-feedback"></div>
@@ -651,69 +651,69 @@
         <!-- Q2 -->
         <div class="quiz-question-block"
              data-correct="B"
-             data-explanation-right="正确！"永不停止"的核心假设是：用户已经开始了实验循环后可能去睡觉了，不在电脑旁。AI 需要自主完成尽可能多的实验，最大化无人监督时间的产出。"
-             data-explanation-wrong="再想想："永不停止"不是为了限制资源消耗（那会是相反的效果），也不是为了避免重复（重复实验有时是必要的验证手段）。">
-          <p class="quiz-question">Q2：program.md 中"永不停止"规则的设计意图是什么？</p>
+             data-explanation-right="Correct! The core assumption behind 'never stop' is that once you've kicked off the experiment loop, you've probably gone to sleep and left the keyboard. The AI needs to autonomously run as many experiments as possible, maximizing throughput while unsupervised."
+             data-explanation-wrong="Think again: 'never stop' is not about limiting compute (that would have the opposite effect), nor about avoiding repetition (repeating experiments is sometimes a necessary validation step).">
+          <p class="quiz-question">Q2. What's the design intent of the "never stop" rule in program.md?</p>
           <div class="quiz-options">
             <button class="quiz-option" data-value="A" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              A：防止 AI 代理消耗太多算力
+              A. Prevent the AI agent from burning too much compute
             </button>
             <button class="quiz-option" data-value="B" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              B：假设用户在睡觉，确保 AI 在无人监督下持续工作，最大化夜间实验数量
+              B. Assume the user is asleep — make sure the AI keeps working unsupervised to maximize the number of overnight experiments
             </button>
             <button class="quiz-option" data-value="C" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              C：避免 AI 代理重复实验
+              C. Stop the AI agent from repeating the same experiments
             </button>
           </div>
           <div class="quiz-feedback"></div>
         </div>
 
-        <!-- Q3 (场景题) -->
+        <!-- Q3 (scenario) -->
         <div class="quiz-question-block"
              data-correct="B"
-             data-explanation-right="正确！peak_vram_mb > 80GB 意味着在 H100（80GB 显存）上会 OOM（显存溢出），实验实际上崩溃了。记录为 crash 并丢弃，然后尝试 DEPTH=12 或 DEPTH=14——这才是正确的实验循环姿势。"
-             data-explanation-wrong="注意：A 选项中 82GB 超出 H100 显存（80GB），实验会 OOM 崩溃，val_bpb 数字是无效的。C 选项则违反了"不得修改 prepare.py"的核心规则。">
+             data-explanation-right="Correct! peak_vram_mb > 80GB means the H100 (80GB VRAM) will OOM — the experiment actually crashed. Log it as crash, discard, and try DEPTH=12 or DEPTH=14 instead. That's the right experiment-loop instinct."
+             data-explanation-wrong="Note: in option A, 82GB exceeds the H100's 80GB VRAM — the experiment will OOM and the val_bpb number is invalid. Option C violates the core 'do not modify prepare.py' rule.">
           <div class="scenario-block">
             <div class="scenario-context">
-              <span class="scenario-label">场景</span>
-              <p>AI 代理将 DEPTH 从 8 改到 16，得到 <span class="term" data-definition="val_bpb（验证集 Bits-Per-Byte）：衡量语言模型压缩能力的指标。值越低表示模型预测文本的效率越高，即模型越好。这是 autoresearch 的核心评估指标。">val_bpb</span> 0.991（低于 baseline 的 0.998），但 peak_vram_mb 从 45GB 升到 82GB，超出 H100 的 80GB 显存上限。</p>
+              <span class="scenario-label">Scenario</span>
+              <p>The AI agent bumps DEPTH from 8 to 16 and gets <span class="term" data-definition="val_bpb (Validation Bits-Per-Byte): Measures a language model's compression ability. Lower means better. The core evaluation metric in autoresearch.">val_bpb</span> 0.991 (below the baseline of 0.998), but peak_vram_mb climbs from 45GB to 82GB — past the H100's 80GB VRAM limit.</p>
             </div>
           </div>
-          <p class="quiz-question">Q3：AI 代理应该怎么处理这个结果？</p>
+          <p class="quiz-question">Q3. How should the AI agent handle this result?</p>
           <div class="quiz-options">
             <button class="quiz-option" data-value="A" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              A：保留，因为 val_bpb 更低
+              A. Keep it, because val_bpb is lower
             </button>
             <button class="quiz-option" data-value="B" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              B：记录为 crash，丢弃，换个方向尝试（如 DEPTH=12 或 DEPTH=14）
+              B. Log as crash, discard, try a different direction (e.g. DEPTH=12 or DEPTH=14)
             </button>
             <button class="quiz-option" data-value="C" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              C：修改 prepare.py 减少 EVAL_TOKENS 来腾出显存
+              C. Modify prepare.py to reduce EVAL_TOKENS and free up VRAM
             </button>
           </div>
           <div class="quiz-feedback"></div>
         </div>
 
-        <!-- 按钮 -->
+        <!-- Buttons -->
         <div style="margin-top: var(--space-6);">
-          <button class="quiz-check-btn" onclick="checkQuiz('quiz-module2')">提交答案</button>
-          <button class="quiz-reset-btn" onclick="resetQuiz('quiz-module2')">重新作答</button>
+          <button class="quiz-check-btn" onclick="checkQuiz('quiz-module2')">Submit answers</button>
+          <button class="quiz-reset-btn" onclick="resetQuiz('quiz-module2')">Try again</button>
         </div>
 
       </div>
 
-      <!-- 模块结尾提示 -->
+      <!-- Module-end callout -->
       <div class="callout callout-info animate-in" style="margin-top: var(--space-8);">
         <span class="callout-icon">→</span>
         <div class="callout-content">
-          <span class="callout-title">下一章预告</span>
-          <p>我们已经理解了三文件的边界划分。接下来，Module 3 将深入 train.py 的核心——解剖现代 GPT 架构：滑动窗口注意力、MuonAdamW 优化器，以及 model_dim 如何从 DEPTH 和 ASPECT_RATIO 推导出来。</p>
+          <span class="callout-title">Up next</span>
+          <p>We've now understood the boundary lines between the three files. Module 3 dives into the heart of train.py — dissecting the modern GPT: sliding-window attention, the MuonAdamW optimizer, and how model_dim is derived from DEPTH and ASPECT_RATIO.</p>
         </div>
       </div>
 
@@ -728,24 +728,24 @@
     <!-- ── MODULE HEADER ─────────────────────────────────────── -->
     <header class="module-header animate-in">
       <span class="module-number">03</span>
-      <h2 class="module-title">现代 GPT 解剖</h2>
+      <h2 class="module-title">Anatomy of a Modern GPT</h2>
       <p class="module-subtitle">
-        train.py 里塞了什么？——拆开一辆赛车引擎，每个零件都有存在的理由，每个改进都有论文支撑
+        What's actually packed into train.py? — Cracking open a race-car engine: every part has a reason to be there, every improvement is backed by a paper.
       </p>
     </header>
 
     <!-- ═══════════════════════════════════════════════════════ -->
-    <!-- SCREEN 1: 8 项现代改进总览                              -->
+    <!-- SCREEN 1: Overview of 8 modern improvements             -->
     <!-- ═══════════════════════════════════════════════════════ -->
     <div class="screen">
-      <h3 class="screen-heading animate-in">8 项现代改进总览</h3>
+      <h3 class="screen-heading animate-in">Eight modern improvements at a glance</h3>
 
       <p class="animate-in">
-        train.py 里的 <term class="term" data-definition="GPT-2 是 OpenAI 于 2019 年发布的语言模型，参数量约 15 亿。它奠定了自回归语言建模的标准架构，但受限于当时的研究水平，许多现代改进尚不存在。">GPT</term>
-        不是 2019 年的 GPT-2。它是 Karpathy 从 2024–2025 年最前沿的研究中精心挑选的 <strong>8 项改进的集合体</strong>。
-        每一项改进都可以被 AI 代理单独实验——关掉 Value Embedding，换掉 SSSL 模式，改变
-        <span class="term" data-definition="softcap：对 logits（原始分类分数）做软性截断，防止数值过大导致训练不稳定。来自 Google Gemma 2 论文，公式为 softcap × tanh(logits / softcap)。">softcap</span>
-        值，全都可以测试。
+        The <term class="term" data-definition="GPT-2 is OpenAI's 2019 language model with ~1.5B parameters. It established the standard architecture for autoregressive language modeling, but many of today's modern improvements did not yet exist.">GPT</term>
+        in train.py is not 2019's GPT-2. It's a careful mix of <strong>8 improvements</strong> that Karpathy hand-picked from 2024–2025 frontier research.
+        Each improvement is an independent experimental knob — turn off Value Embedding, switch the SSSL pattern, change the
+        <span class="term" data-definition="softcap: A soft cap on logits (raw classification scores) to prevent numerical blowup that destabilizes training. From Google's Gemma 2 paper; formula: softcap × tanh(logits / softcap).">softcap</span>
+        value, all are fair game.
       </p>
 
       <!-- Row 1: 4 cards -->
@@ -754,31 +754,31 @@
         <div class="pattern-card animate-in">
           <div class="pattern-icon" style="background: var(--color-accent-light);">⚡</div>
           <div class="pattern-title">
-            <span class="term" data-definition="RMSNorm（Root Mean Square Normalization）：只用均方根做归一化，省去了 LayerNorm 的均值减法步骤，更简单更快，数值稳定性相当。LLaMA、Mistral 等现代大模型均采用此方案。">RMSNorm</span>
+            <span class="term" data-definition="RMSNorm (Root Mean Square Normalization): Normalizes using only the root mean square, skipping LayerNorm's mean-subtraction step. Simpler, faster, equally stable numerically. Standard in LLaMA, Mistral, and other modern LLMs.">RMSNorm</span>
           </div>
-          <p class="pattern-desc">替代 LayerNorm，更简单更快，无需计算均值。现代 LLM 的标准选择，LLaMA / Mistral 均采用。</p>
+          <p class="pattern-desc">Replaces LayerNorm — simpler and faster, no mean computation needed. The standard choice for modern LLMs; used in LLaMA and Mistral.</p>
         </div>
 
         <div class="pattern-card animate-in">
           <div class="pattern-icon" style="background: var(--color-accent-light);">🔄</div>
           <div class="pattern-title">
-            <span class="term" data-definition="RoPE（Rotary Positional Embedding）：旋转位置编码，通过将 Q/K 向量在复数空间旋转来注入位置信息，而非传统的加法式位置嵌入。优点：相对位置的点积天然保留，且可外推到训练时未见过的序列长度。">RoPE</span>
+            <span class="term" data-definition="RoPE (Rotary Positional Embedding): Injects position information by rotating Q/K vectors in complex space, rather than adding a positional embedding. Benefits: the dot product naturally encodes relative position, and it extrapolates to sequence lengths unseen during training.">RoPE</span>
           </div>
-          <p class="pattern-desc">旋转位置编码，通过旋转 Q/K 向量而非加法注入位置信息，可外推到训练时未见过的长度。</p>
+          <p class="pattern-desc">Rotary positional embeddings — encodes position by rotating Q/K vectors instead of adding to them. Extrapolates to lengths unseen during training.</p>
         </div>
 
         <div class="pattern-card animate-in">
           <div class="pattern-icon" style="background: var(--color-accent-light);">🗂️</div>
           <div class="pattern-title">
-            <span class="term" data-definition="GQA（Grouped Query Attention，分组查询注意力）：K/V 头数可以少于 Q 头数，多个 Q 头共享同一组 K/V 头。这大幅减少 KV cache 的显存占用，同等显存下可以跑更大 batch 或更长序列。">GQA</span>
+            <span class="term" data-definition="GQA (Grouped Query Attention): K/V heads can be fewer than Q heads, with multiple Q heads sharing the same K/V group. Greatly reduces KV-cache VRAM usage; on the same hardware you can run larger batches or longer sequences.">GQA</span>
           </div>
-          <p class="pattern-desc">分组查询注意力，K/V 头数可以少于 Q 头数，减少 KV 缓存，可在更大 batch 下训练。</p>
+          <p class="pattern-desc">Grouped query attention — fewer K/V heads than Q heads, shrinks KV cache, enables larger batch sizes in training.</p>
         </div>
 
         <div class="pattern-card animate-in">
           <div class="pattern-icon" style="background: var(--color-accent-light);">🔀</div>
           <div class="pattern-title">Value Embedding</div>
-          <p class="pattern-desc">ResFormer 改进：向 V 向量注入 token 嵌入信息，交替层启用，用门控调节混合比例，改善梯度流。</p>
+          <p class="pattern-desc">A ResFormer improvement: injects token embedding info into the V vector, enabled on alternating layers, with a gate controlling the mix ratio. Improves gradient flow.</p>
         </div>
 
       </div>
@@ -788,26 +788,26 @@
 
         <div class="pattern-card animate-in">
           <div class="pattern-icon" style="background: var(--color-accent-light);">🪟</div>
-          <div class="pattern-title">滑动窗口注意力</div>
-          <p class="pattern-desc">SSSL 模式：大多数层只看前半段序列（高效），最后一层强制看完整序列，平衡效率与全局感知。</p>
+          <div class="pattern-title">Sliding-window attention</div>
+          <p class="pattern-desc">SSSL pattern: most layers only see the first half of the sequence (efficient), the last layer is forced to see the full sequence — balances efficiency and global view.</p>
         </div>
 
         <div class="pattern-card animate-in">
           <div class="pattern-icon" style="background: var(--color-accent-light);">📐</div>
           <div class="pattern-title">Squared ReLU</div>
-          <p class="pattern-desc">MLP 激活函数用 relu²，比 GELU 更稀疏（更多精确零值），计算更快，实验效果相当甚至更好。</p>
+          <p class="pattern-desc">MLP activation uses relu² — sparser than GELU (more exact zeros), faster to compute, and empirically just as good or better.</p>
         </div>
 
         <div class="pattern-card animate-in">
           <div class="pattern-icon" style="background: var(--color-accent-light);">🧢</div>
           <div class="pattern-title">Softcap logits</div>
-          <p class="pattern-desc">来自 Gemma 2：用 tanh 软性截断 logits，防止数值爆炸导致训练不稳定，比硬 clip 更平滑。</p>
+          <p class="pattern-desc">From Gemma 2: tanh-based soft truncation of logits, preventing numerical blowup that destabilizes training. Smoother than a hard clip.</p>
         </div>
 
         <div class="pattern-card animate-in">
           <div class="pattern-icon" style="background: var(--color-accent-light);">🧭</div>
-          <div class="pattern-title">Muon 优化器</div>
-          <p class="pattern-desc">梯度正交化优化器，用 Newton-Schulz 迭代让每步更新"最大程度地不同"，避免重复走相同方向。</p>
+          <div class="pattern-title">Muon optimizer</div>
+          <p class="pattern-desc">Gradient-orthogonalizing optimizer — uses Newton-Schulz iteration to make every update step "maximally distinct", avoiding repeated movement in the same direction.</p>
         </div>
 
       </div>
@@ -815,107 +815,107 @@
       <div class="callout callout-info animate-in" style="margin-top: var(--space-8);">
         <span class="callout-icon">🔬</span>
         <div class="callout-content">
-          <span class="callout-title">AI 代理的实验空间</span>
-          <p>这 8 项改进每一个都有对应的超参数或开关。AI 代理可以系统性地开启/关闭每项改进，测量其对
-          <span class="term" data-definition="MFU（Model FLOP Utilization）：模型的实际算力利用率，等于实测吞吐量除以理论峰值算力。MFU 接近 100% 说明 GPU 算力被充分利用；autoresearch 会在每次实验后记录 MFU。">MFU</span>
-          和验证损失的影响，自动生成消融实验报告。</p>
+          <span class="callout-title">The AI agent's experimental space</span>
+          <p>Each of these 8 improvements maps to a hyperparameter or toggle. The AI agent can systematically enable/disable each improvement and measure its impact on
+          <span class="term" data-definition="MFU (Model FLOP Utilization): The model's actual compute utilization — measured throughput divided by theoretical peak FLOPs. Near 100% MFU means the GPU is being fully used. autoresearch logs MFU after every experiment.">MFU</span>
+          and validation loss, automatically producing ablation reports.</p>
         </div>
       </div>
     </div>
 
     <!-- ═══════════════════════════════════════════════════════ -->
-    <!-- SCREEN 2: 注意力机制三件套代码解析                       -->
+    <!-- SCREEN 2: Attention trio code walkthrough               -->
     <!-- ═══════════════════════════════════════════════════════ -->
     <div class="screen">
-      <h3 class="screen-heading animate-in">注意力机制三件套：GQA + Value Embedding + RoPE</h3>
+      <h3 class="screen-heading animate-in">Attention trio: GQA + Value Embedding + RoPE</h3>
 
-      <p class="animate-in">三项改进协同工作，共同构成 train.py 的注意力核心。左侧是简化后的实际代码，右侧是逐行中文解释。</p>
+      <p class="animate-in">Three improvements work together to form the attention core in train.py. On the left is the simplified actual code; on the right, a line-by-line explanation.</p>
 
       <div class="translation-block animate-in">
         <div class="translation-code">
           <span class="translation-label">Python</span>
-<span class="code-line"><span class="code-comment"># QKV 投影（GQA：K/V 头可以更少）</span></span>
+<span class="code-line"><span class="code-comment"># QKV projection (GQA: K/V heads can be fewer)</span></span>
 <span class="code-line"><span class="code-property">q</span> <span class="code-operator">=</span> self.c_q(x).view(B, T, n_head, head_dim)</span>
 <span class="code-line"><span class="code-property">k</span> <span class="code-operator">=</span> self.c_k(x).view(B, T, n_kv_head, head_dim)</span>
 <span class="code-line"><span class="code-property">v</span> <span class="code-operator">=</span> self.c_v(x).view(B, T, n_kv_head, head_dim)</span>
 <span class="code-line"></span>
-<span class="code-line"><span class="code-comment"># Value Embedding（交替层才有）</span></span>
+<span class="code-line"><span class="code-comment"># Value Embedding (only on alternating layers)</span></span>
 <span class="code-line"><span class="code-keyword">if</span> ve <span class="code-keyword">is not</span> <span class="code-keyword">None</span>:</span>
 <span class="code-line">    gate <span class="code-operator">=</span> <span class="code-number">2</span> <span class="code-operator">*</span> torch.sigmoid(</span>
 <span class="code-line">        self.ve_gate(x[..., :<span class="code-number">32</span>]))</span>
 <span class="code-line">    v <span class="code-operator">=</span> v <span class="code-operator">+</span> gate.unsqueeze(<span class="code-operator">-</span><span class="code-number">1</span>) <span class="code-operator">*</span> ve</span>
 <span class="code-line"></span>
-<span class="code-line"><span class="code-comment"># RoPE 旋转位置编码</span></span>
+<span class="code-line"><span class="code-comment"># RoPE rotary positional embedding</span></span>
 <span class="code-line">q <span class="code-operator">=</span> <span class="code-function">apply_rotary_emb</span>(q, cos, sin)</span>
 <span class="code-line">k <span class="code-operator">=</span> <span class="code-function">apply_rotary_emb</span>(k, cos, sin)</span>
-<span class="code-line"><span class="code-comment"># QK 归一化（防注意力权重爆炸）</span></span>
+<span class="code-line"><span class="code-comment"># QK norm (prevents attention-weight blowup)</span></span>
 <span class="code-line">q, k <span class="code-operator">=</span> <span class="code-function">norm</span>(q), <span class="code-function">norm</span>(k)</span>
 <span class="code-line"></span>
-<span class="code-line"><span class="code-comment"># Flash Attention 3（硬件加速）</span></span>
+<span class="code-line"><span class="code-comment"># Flash Attention 3 (hardware acceleration)</span></span>
 <span class="code-line">y <span class="code-operator">=</span> fa3.<span class="code-function">flash_attn_func</span>(</span>
 <span class="code-line">    q, k, v, causal<span class="code-operator">=</span><span class="code-keyword">True</span>,</span>
 <span class="code-line">    window_size<span class="code-operator">=</span>window_size)</span>
         </div>
         <div class="translation-english">
-          <span class="translation-label">逐行解读</span>
+          <span class="translation-label">Line-by-line</span>
           <div class="translation-lines">
             <div class="tl">
-              <strong>q / k / v 的形状差异</strong><br>
-              q 的形状是 <code>(B, T, n_head, head_dim)</code>；k/v 的形状是 <code>(B, T, n_kv_head, head_dim)</code>。
-              <span class="term" data-definition="GQA（Grouped Query Attention，分组查询注意力）：K/V 头数可以少于 Q 头数，多个 Q 头共享同一组 K/V 头。这大幅减少 KV cache 的显存占用，同等显存下可以跑更大 batch 或更长序列。">GQA</span>
-              的妙处：<code>n_kv_head &lt; n_head</code> 时，多个 Q 头共享同一组 K/V 头，
-              <span class="term" data-definition="KV cache：推理时为了不重复计算已生成的 token，把每层的 K、V 矩阵缓存起来。序列越长、头数越多，KV cache 越大，是 LLM 推理的主要显存瓶颈。">KV 缓存</span>
-              和计算量同步减少。
+              <strong>q / k / v shape difference</strong><br>
+              q has shape <code>(B, T, n_head, head_dim)</code>; k/v have shape <code>(B, T, n_kv_head, head_dim)</code>. The clever bit of
+              <span class="term" data-definition="GQA (Grouped Query Attention): K/V heads can be fewer than Q heads, with multiple Q heads sharing the same K/V group. Greatly reduces KV-cache VRAM usage.">GQA</span>:
+              when <code>n_kv_head &lt; n_head</code>, multiple Q heads share one K/V group, cutting down both
+              <span class="term" data-definition="KV cache: At inference time, to avoid recomputing K, V for already-generated tokens, the K and V matrices for each layer are cached. The longer the sequence and the more heads, the bigger the KV cache — and it's the main memory bottleneck in LLM inference.">KV cache</span>
+              and compute.
             </div>
             <div class="tl">
-              <strong>ve_gate：输入驱动的混合门控</strong><br>
-              用输入 x 的前 32 个维度计算一个门控值（sigmoid 输出 0–1，乘 2 使范围变为 0–2），控制有多少 Value Embedding 被混入当前的 v 向量中。门控值依赖输入内容，让模型自适应决定每个 token 需要多少"原始嵌入信息"。
+              <strong>ve_gate: input-driven mix gate</strong><br>
+              Computes a gate value from the first 32 dimensions of input x (sigmoid output 0–1, multiplied by 2 to give range 0–2), controlling how much Value Embedding to mix into the current v vector. Since the gate depends on the input, the model adaptively decides how much "raw embedding info" each token needs.
             </div>
             <div class="tl">
-              <strong>apply_rotary_emb：位置通过旋转编码</strong><br>
-              把 q/k 的向量维度两两配对，按 token 位置对应的角度旋转。两个位置相对距离固定时，它们的点积自然反映相对位置——无需额外的位置嵌入表，且可推广到训练时未见的更长序列。
+              <strong>apply_rotary_emb: position via rotation</strong><br>
+              Pairs up dimensions of q/k and rotates each pair by an angle that depends on the token's position. When two positions are at a fixed relative distance, their dot product naturally reflects that relative distance — no extra positional embedding table needed, and it generalizes to longer sequences than seen during training.
             </div>
             <div class="tl">
-              <strong>window_size：SSSL 滑动窗口</strong><br>
-              SSSL 模式下，S 层只看前半段序列（window_size = T/2），L 层看全部（window_size = T）。
-              <span class="term" data-definition="Flash Attention：Dao-AILab 开发的高效注意力计算 kernel，通过分块计算和 IO 感知调度大幅减少显存访问，速度比标准注意力快 2–4x。Flash Attention 3 进一步利用 Hopper GPU 的 Tensor Core 和 WGMMA 指令提速。">Flash Attention 3</span>
-              直接在 kernel 层处理滑动窗口，无需在 Python 层做掩码。
+              <strong>window_size: SSSL sliding window</strong><br>
+              In the SSSL pattern, S layers only see the first half of the sequence (window_size = T/2), L layers see all of it (window_size = T).
+              <span class="term" data-definition="Flash Attention: An efficient attention kernel from Dao-AILab. By using IO-aware tiling, it dramatically cuts memory access and runs 2–4x faster than standard attention. Flash Attention 3 further leverages Hopper GPU Tensor Cores and WGMMA instructions.">Flash Attention 3</span>
+              handles the sliding window directly in the kernel — no Python-level masking required.
             </div>
           </div>
         </div>
       </div>
 
-      <!-- RoPE 可视化说明 -->
+      <!-- RoPE intuition -->
       <div class="callout callout-accent animate-in">
         <span class="callout-icon">🔄</span>
         <div class="callout-content">
-          <span class="callout-title">RoPE 直觉：旋转 = 相对位置</span>
+          <span class="callout-title">RoPE intuition: rotation = relative position</span>
           <p>
-            设 token A 在位置 3，token B 在位置 7，相对距离是 4。RoPE 把 q<sub>A</sub> 旋转 3θ，k<sub>B</sub> 旋转 7θ，
-            它们的点积里包含的是 (7−3)θ = 4θ，只依赖相对位置。传统可学习位置嵌入做不到这一点，
-            而且训练时没见过的位置 index 可以继续旋转——这就是 RoPE 可以"外推"的原因。
+            Say token A is at position 3 and token B is at position 7 — relative distance is 4. RoPE rotates q<sub>A</sub> by 3θ and k<sub>B</sub> by 7θ;
+            their dot product contains (7−3)θ = 4θ, which depends only on relative position. Traditional learned positional embeddings can't do this,
+            and positions never seen during training can still be rotated — that's why RoPE "extrapolates".
           </p>
         </div>
       </div>
     </div>
 
     <!-- ═══════════════════════════════════════════════════════ -->
-    <!-- SCREEN 3: MLP + 高级技巧                                -->
+    <!-- SCREEN 3: MLP + advanced tricks                         -->
     <!-- ═══════════════════════════════════════════════════════ -->
     <div class="screen">
-      <h3 class="screen-heading animate-in">MLP + 高级稳定技巧：Squared ReLU、Softcap、ResFormer 残差</h3>
+      <h3 class="screen-heading animate-in">MLP + advanced stability tricks: Squared ReLU, Softcap, ResFormer residuals</h3>
 
       <p class="animate-in">
-        注意力层之外，train.py 在 MLP 激活函数、输出归一化、残差连接三处都做了现代化升级。
-        这三处改进看似小，合在一起让训练更稳定、
-        <span class="term" data-definition="gradient（梯度）：损失函数对每个参数的偏导数，指示参数应该朝哪个方向调整以减小损失。深层网络中梯度容易在反向传播中消失（接近零）或爆炸（无穷大）。">梯度</span>
-        流向更深。
+        Beyond the attention layer, train.py modernizes the MLP activation, output normalization, and residual connections.
+        These three changes each look small, but together they make training more stable and help
+        <span class="term" data-definition="gradient: The partial derivative of the loss with respect to each parameter, indicating which direction the parameter should be nudged to reduce the loss. In deep networks, gradients can easily vanish (approach zero) or explode (toward infinity) during backpropagation.">gradients</span>
+        flow deeper.
       </p>
 
       <div class="translation-block animate-in">
         <div class="translation-code">
           <span class="translation-label">Python</span>
-<span class="code-line"><span class="code-comment"># MLP：Squared ReLU</span></span>
+<span class="code-line"><span class="code-comment"># MLP: Squared ReLU</span></span>
 <span class="code-line"><span class="code-keyword">class</span> <span class="code-function">MLP</span>(nn.Module):</span>
 <span class="code-line">    <span class="code-keyword">def</span> <span class="code-function">forward</span>(self, x):</span>
 <span class="code-line">        x <span class="code-operator">=</span> self.c_fc(x)</span>
@@ -923,39 +923,39 @@
 <span class="code-line">        x <span class="code-operator">=</span> self.c_proj(x)</span>
 <span class="code-line">        <span class="code-keyword">return</span> x</span>
 <span class="code-line"></span>
-<span class="code-line"><span class="code-comment"># Softcap（来自 Gemma 2）</span></span>
+<span class="code-line"><span class="code-comment"># Softcap (from Gemma 2)</span></span>
 <span class="code-line">softcap <span class="code-operator">=</span> <span class="code-number">15</span></span>
 <span class="code-line">logits <span class="code-operator">=</span> softcap <span class="code-operator">*</span> \</span>
 <span class="code-line">    torch.tanh(logits <span class="code-operator">/</span> softcap)</span>
 <span class="code-line"></span>
-<span class="code-line"><span class="code-comment"># ResFormer 残差混合</span></span>
+<span class="code-line"><span class="code-comment"># ResFormer residual mix</span></span>
 <span class="code-line">x <span class="code-operator">=</span> self.resid_lambdas[i] <span class="code-operator">*</span> x <span class="code-operator">+</span> \</span>
 <span class="code-line">    self.x0_lambdas[i] <span class="code-operator">*</span> x0</span>
         </div>
         <div class="translation-english">
-          <span class="translation-label">逐行解读</span>
+          <span class="translation-label">Line-by-line</span>
           <div class="translation-lines">
             <div class="tl">
-              <strong>relu²（Squared ReLU）</strong><br>
-              比 GELU 更稀疏：大量激活值精确为 0（只有正值被保留，且正值被平方放大），计算更快。
-              实验表明效果相当甚至更好，且没有 GELU 的近似误差。
+              <strong>relu² (Squared ReLU)</strong><br>
+              Sparser than GELU — many activations are exactly 0 (only positive values are kept, and they're squared). Faster to compute.
+              Experimentally, it's as good or better than GELU, with no GELU approximation error.
             </div>
             <div class="tl">
-              <strong>softcap：把 logits 软性锁在 [−15, 15]</strong><br>
-              原始
-              <span class="term" data-definition="backpropagation（反向传播）：计算损失函数对网络每个参数的梯度的算法，通过链式法则从输出层反向逐层计算。logits 过大时，softmax 的梯度接近零，反向传播无法有效传递信号。">backpropagation</span>
-              过程中，logits 无界增长会让 softmax 饱和、梯度消失。softcap 用 tanh 软性截断
-              而非硬 clip，导数处处存在，不破坏梯度流，训练稳定性显著提升。
+              <strong>softcap: softly pins logits to [−15, 15]</strong><br>
+              In raw
+              <span class="term" data-definition="backpropagation: The algorithm that computes the gradient of the loss with respect to each network parameter, working backward layer by layer via the chain rule. When logits get too big, softmax saturates and gradients approach zero, so backprop can't propagate signal.">backpropagation</span>,
+              unbounded logit growth saturates softmax and kills gradients. softcap softly caps with tanh
+              rather than hard-clipping — derivatives exist everywhere, gradient flow stays intact, and training stability improves significantly.
             </div>
             <div class="tl">
-              <strong>resid_lambdas：残差缩放</strong><br>
-              每层独立学习一个缩放因子，初始化为 1.0（等同于标准残差连接）。
-              训练中模型可以自适应调整每层残差强度。
+              <strong>resid_lambdas: residual scaling</strong><br>
+              Each layer independently learns a scaling factor, initialized to 1.0 (equivalent to standard residual connections).
+              During training the model can adapt the residual strength per layer.
             </div>
             <div class="tl">
-              <strong>x0_lambdas：原始嵌入注入</strong><br>
-              x0 是第 0 层的输入（原始 token 嵌入）。每层都有少量 x0 混入（初始 0.1），
-              确保深层仍能直接访问原始语义信息，改善深层梯度流。
+              <strong>x0_lambdas: original-embedding injection</strong><br>
+              x0 is the layer-0 input (raw token embedding). Every layer mixes in a small amount of x0 (initially 0.1),
+              ensuring deep layers can still access the original semantic info — improving deep gradient flow.
             </div>
           </div>
         </div>
@@ -963,72 +963,72 @@
 
       <!-- Sliding window visual -->
       <h4 class="screen-heading animate-in" style="font-size: var(--text-xl); margin-top: var(--space-8);">
-        SSSL 滑动窗口模式可视化
+        SSSL sliding-window pattern visualized
       </h4>
 
       <div class="animate-in" style="background: var(--color-surface); border-radius: var(--radius-md); padding: var(--space-6); box-shadow: var(--shadow-sm); margin: var(--space-4) 0;">
         <p style="font-size: var(--text-sm); color: var(--color-text-secondary); margin-bottom: var(--space-4);">
           <code style="font-family: var(--font-mono); background: var(--color-bg-code); color: #CBA6F7; padding: 2px 6px; border-radius: 4px;">WINDOW_PATTERN = "SSSL"</code>
-          — 每 4 层重复一次，最后一层（L）始终强制为全上下文
+          — repeats every 4 layers; the last layer (L) is always forced to use full context
         </p>
         <!-- Visual grid of layers -->
         <div style="display: flex; gap: var(--space-2); flex-wrap: wrap;">
           <div style="display: flex; flex-direction: column; align-items: center; gap: var(--space-1);">
             <div style="width: 56px; height: 56px; border-radius: var(--radius-sm); background: var(--color-accent-light); border: 2px solid var(--color-accent-muted); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-weight: 700; font-size: var(--text-sm); color: var(--color-accent);">L0<br><span style="font-size: 0.6rem; color: var(--color-text-muted);">S</span></div>
-            <span style="font-size: var(--text-xs); color: var(--color-text-muted);">半窗</span>
+            <span style="font-size: var(--text-xs); color: var(--color-text-muted);">half-window</span>
           </div>
           <div style="display: flex; flex-direction: column; align-items: center; gap: var(--space-1);">
             <div style="width: 56px; height: 56px; border-radius: var(--radius-sm); background: var(--color-accent-light); border: 2px solid var(--color-accent-muted); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-weight: 700; font-size: var(--text-sm); color: var(--color-accent);">L1<br><span style="font-size: 0.6rem; color: var(--color-text-muted);">S</span></div>
-            <span style="font-size: var(--text-xs); color: var(--color-text-muted);">半窗</span>
+            <span style="font-size: var(--text-xs); color: var(--color-text-muted);">half-window</span>
           </div>
           <div style="display: flex; flex-direction: column; align-items: center; gap: var(--space-1);">
             <div style="width: 56px; height: 56px; border-radius: var(--radius-sm); background: var(--color-accent-light); border: 2px solid var(--color-accent-muted); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-weight: 700; font-size: var(--text-sm); color: var(--color-accent);">L2<br><span style="font-size: 0.6rem; color: var(--color-text-muted);">S</span></div>
-            <span style="font-size: var(--text-xs); color: var(--color-text-muted);">半窗</span>
+            <span style="font-size: var(--text-xs); color: var(--color-text-muted);">half-window</span>
           </div>
           <div style="display: flex; flex-direction: column; align-items: center; gap: var(--space-1);">
             <div style="width: 56px; height: 56px; border-radius: var(--radius-sm); background: var(--color-success-light); border: 2px solid var(--color-success); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-weight: 700; font-size: var(--text-sm); color: var(--color-success);">L3<br><span style="font-size: 0.6rem;">L</span></div>
-            <span style="font-size: var(--text-xs); color: var(--color-success);">全上下文</span>
+            <span style="font-size: var(--text-xs); color: var(--color-success);">full context</span>
           </div>
           <div style="display: flex; align-items: center; padding: 0 var(--space-2); color: var(--color-text-muted);">···</div>
           <div style="display: flex; flex-direction: column; align-items: center; gap: var(--space-1);">
             <div style="width: 56px; height: 56px; border-radius: var(--radius-sm); background: var(--color-accent-light); border: 2px solid var(--color-accent-muted); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-weight: 700; font-size: var(--text-sm); color: var(--color-accent);">Ln-3<br><span style="font-size: 0.6rem; color: var(--color-text-muted);">S</span></div>
-            <span style="font-size: var(--text-xs); color: var(--color-text-muted);">半窗</span>
+            <span style="font-size: var(--text-xs); color: var(--color-text-muted);">half-window</span>
           </div>
           <div style="display: flex; flex-direction: column; align-items: center; gap: var(--space-1);">
             <div style="width: 56px; height: 56px; border-radius: var(--radius-sm); background: var(--color-accent-light); border: 2px solid var(--color-accent-muted); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-weight: 700; font-size: var(--text-sm); color: var(--color-accent);">Ln-2<br><span style="font-size: 0.6rem; color: var(--color-text-muted);">S</span></div>
-            <span style="font-size: var(--text-xs); color: var(--color-text-muted);">半窗</span>
+            <span style="font-size: var(--text-xs); color: var(--color-text-muted);">half-window</span>
           </div>
           <div style="display: flex; flex-direction: column; align-items: center; gap: var(--space-1);">
             <div style="width: 56px; height: 56px; border-radius: var(--radius-sm); background: var(--color-accent-light); border: 2px solid var(--color-accent-muted); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-weight: 700; font-size: var(--text-sm); color: var(--color-accent);">Ln-1<br><span style="font-size: 0.6rem; color: var(--color-text-muted);">S</span></div>
-            <span style="font-size: var(--text-xs); color: var(--color-text-muted);">半窗</span>
+            <span style="font-size: var(--text-xs); color: var(--color-text-muted);">half-window</span>
           </div>
           <div style="display: flex; flex-direction: column; align-items: center; gap: var(--space-1);">
             <div style="width: 64px; height: 56px; border-radius: var(--radius-sm); background: var(--color-success-light); border: 2px solid var(--color-success); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-weight: 700; font-size: var(--text-sm); color: var(--color-success);">Ln<br><span style="font-size: 0.6rem;">L★</span></div>
-            <span style="font-size: var(--text-xs); color: var(--color-success); font-weight: 600;">强制全窗</span>
+            <span style="font-size: var(--text-xs); color: var(--color-success); font-weight: 600;">forced full</span>
           </div>
         </div>
         <p style="font-size: var(--text-xs); color: var(--color-text-muted); margin-top: var(--space-3);">
-          代码保证 <code style="font-family: var(--font-mono); background: var(--color-bg-code); color: #A6E3A1; padding: 1px 5px; border-radius: 3px;">window_sizes[-1]</code> 始终等于完整上下文长度，不受 SSSL 模式影响。
+          The code ensures <code style="font-family: var(--font-mono); background: var(--color-bg-code); color: #A6E3A1; padding: 1px 5px; border-radius: 3px;">window_sizes[-1]</code> always equals the full context length, regardless of the SSSL pattern.
         </p>
       </div>
     </div>
 
     <!-- ═══════════════════════════════════════════════════════ -->
-    <!-- SCREEN 4: MuonAdamW 优化器                              -->
+    <!-- SCREEN 4: MuonAdamW optimizer                           -->
     <!-- ═══════════════════════════════════════════════════════ -->
     <div class="screen">
-      <h3 class="screen-heading animate-in">MuonAdamW 优化器：让梯度正交</h3>
+      <h3 class="screen-heading animate-in">MuonAdamW optimizer: make gradients orthogonal</h3>
 
       <div class="callout callout-accent animate-in">
         <span class="callout-icon">🧭</span>
         <div class="callout-content">
-          <span class="callout-title">Muon：让梯度正交</span>
+          <span class="callout-title">Muon: orthogonalize the gradient</span>
           <p>
-            标准 SGD/Adam 直接用
-            <span class="term" data-definition="gradient（梯度）：损失函数对每个参数的偏导数，指示参数应该朝哪个方向调整以减小损失。梯度方向不一定是最优更新方向——Muon 通过正交化找到"最大程度不同"的更新方向。">梯度</span>
-            更新权重。Muon 先把梯度矩阵投影到正交方向——用
-            <strong>Polar Express Newton-Schulz 迭代</strong>计算正交化矩阵，然后再更新。
-            这让每步更新都"最大程度地不同"，避免重复走相同方向，等效于在权重更新空间做 steepest descent。
+            Standard SGD/Adam use the
+            <span class="term" data-definition="gradient: Partial derivative of the loss with respect to each parameter — points in the direction that increases the loss most steeply. But that direction isn't necessarily the optimal update direction; Muon finds 'maximally distinct' directions via orthogonalization.">gradient</span>
+            directly to update weights. Muon first projects the gradient matrix onto orthogonal directions — using
+            <strong>Polar Express Newton-Schulz iteration</strong> to compute the orthogonalized matrix — then updates.
+            This makes every update "maximally distinct" from previous ones, avoiding repeated motion in the same direction, equivalent to a steepest-descent step in weight-update space.
           </p>
         </div>
       </div>
@@ -1037,41 +1037,41 @@
         <div class="translation-code">
           <span class="translation-label">Python</span>
 <span class="code-line">param_groups <span class="code-operator">=</span> [</span>
-<span class="code-line">    <span class="code-comment"># AdamW 管嵌入层和标量</span></span>
+<span class="code-line">    <span class="code-comment"># AdamW handles embeddings and scalars</span></span>
 <span class="code-line">    <span class="code-function">dict</span>(kind<span class="code-operator">=</span><span class="code-string">'adamw'</span>,</span>
 <span class="code-line">         params<span class="code-operator">=</span>embedding_params,</span>
 <span class="code-line">         lr<span class="code-operator">=</span>EMBEDDING_LR <span class="code-operator">*</span> dmodel_lr_scale,</span>
 <span class="code-line">         betas<span class="code-operator">=</span>ADAM_BETAS),</span>
-<span class="code-line">    <span class="code-comment"># Muon 管矩阵参数</span></span>
+<span class="code-line">    <span class="code-comment"># Muon handles matrix params</span></span>
 <span class="code-line">    <span class="code-function">dict</span>(kind<span class="code-operator">=</span><span class="code-string">'muon'</span>,</span>
 <span class="code-line">         params<span class="code-operator">=</span>matrix_params,</span>
 <span class="code-line">         lr<span class="code-operator">=</span>MATRIX_LR,</span>
 <span class="code-line">         momentum<span class="code-operator">=</span><span class="code-number">0.95</span>,</span>
-<span class="code-line">         ns_steps<span class="code-operator">=</span><span class="code-number">5</span>),  <span class="code-comment"># N-S 迭代次数</span></span>
+<span class="code-line">         ns_steps<span class="code-operator">=</span><span class="code-number">5</span>),  <span class="code-comment"># N-S iteration count</span></span>
 <span class="code-line">]</span>
         </div>
         <div class="translation-english">
-          <span class="translation-label">逐行解读</span>
+          <span class="translation-label">Line-by-line</span>
           <div class="translation-lines">
             <div class="tl">
-              <strong>AdamW 负责"非矩阵"参数</strong><br>
-              token 嵌入（wte）、lm_head、resid_lambdas、x0_lambdas 这些参数是向量或标量，
-              无法做矩阵正交化，因此继续用 AdamW 更新。
+              <strong>AdamW handles "non-matrix" params</strong><br>
+              token embeddings (wte), lm_head, resid_lambdas, x0_lambdas — these are vectors or scalars,
+              can't be matrix-orthogonalized, so they keep using AdamW.
             </div>
             <div class="tl">
-              <strong>Muon 负责所有 2D 矩阵</strong><br>
-              注意力层的 c_q / c_k / c_v / c_proj，以及 MLP 的 c_fc / c_proj——
-              这些都是二维权重矩阵，正交化后每步更新方向"最大化互不重复"。
+              <strong>Muon handles all 2D matrices</strong><br>
+              Attention layers' c_q / c_k / c_v / c_proj, and the MLP's c_fc / c_proj —
+              all 2D weight matrices. After orthogonalization, every update direction is "maximally distinct" from prior steps.
             </div>
             <div class="tl">
               <strong>dmodel_lr_scale = (dim / 768)<sup>−0.5</sup></strong><br>
-              按照 μP（maximal update parametrization）理论，模型维度越大，学习率应越小。
-              这个缩放因子让不同规模的模型都能在同一个合理 LR 范围内训练。
+              Following μP (maximal update parametrization) theory, as model dim grows, the LR should shrink.
+              This scaling factor lets models of different sizes train in the same reasonable LR range.
             </div>
             <div class="tl">
-              <strong>ns_steps=5：Newton-Schulz 精度</strong><br>
-              Polar Express 迭代 5 次，即可达到足够精确的正交近似。
-              每步迭代计算一个矩阵多项式，收敛速度是超线性的（5 步足以让误差降至可忽略）。
+              <strong>ns_steps=5: Newton-Schulz precision</strong><br>
+              5 Polar Express iterations are enough to give a sufficiently accurate orthogonalization.
+              Each iteration computes a matrix polynomial; convergence is superlinear (5 steps brings error to negligible).
             </div>
           </div>
         </div>
@@ -1082,22 +1082,22 @@
         <div class="step-card">
           <div class="step-num">1</div>
           <div class="step-body">
-            <strong>Adam：动量 + 自适应 LR</strong>
-            <p>累积一阶/二阶梯度矩估计，对每个参数独立调整步长。方向由原始梯度决定，可能在相关维度上重复振荡。</p>
+            <strong>Adam: momentum + adaptive LR</strong>
+            <p>Maintains first/second moment estimates of the gradient and adjusts per-parameter step size. Direction is decided by the raw gradient — may oscillate across correlated dimensions.</p>
           </div>
         </div>
         <div class="step-card">
           <div class="step-num">2</div>
           <div class="step-body">
-            <strong>Muon：正交梯度 → 更新</strong>
-            <p>先对梯度矩阵 G 计算正交化版本 G_orth（Newton-Schulz 迭代），再用 G_orth 做动量更新。每步更新在权重空间"走一条新路"。</p>
+            <strong>Muon: orthogonal gradient → update</strong>
+            <p>First compute an orthogonalized version G_orth of the gradient matrix G (Newton-Schulz iteration), then apply momentum on G_orth. Every step walks "a new path" through weight space.</p>
           </div>
         </div>
         <div class="step-card">
           <div class="step-num">3</div>
           <div class="step-body">
-            <strong>两者并用：各司其职</strong>
-            <p>矩阵参数用 Muon（受益于正交方向），非矩阵参数用 AdamW（不可正交化，走传统路线）。这就是 MuonAdamW 名字的由来。</p>
+            <strong>Use both, each for its job</strong>
+            <p>Matrix params use Muon (benefit from orthogonal directions); non-matrix params use AdamW (not orthogonalizable, traditional route). Hence the name MuonAdamW.</p>
           </div>
         </div>
       </div>
@@ -1107,27 +1107,27 @@
     <!-- SCREEN 5: Quiz                                          -->
     <!-- ═══════════════════════════════════════════════════════ -->
     <div class="screen">
-      <h3 class="screen-heading animate-in">测验：你真的理解这台赛车引擎了吗？</h3>
+      <h3 class="screen-heading animate-in">Quiz: do you really understand this race-car engine?</h3>
 
       <div class="quiz-container animate-in" id="quiz-module3">
 
         <!-- Q1 -->
         <div class="quiz-question-block" data-correct="B"
-             data-explanation-right="GQA 让 K/V 头数少于 Q 头数，多个 Q 头共享同组 K/V，KV cache 显存显著减少，在同等硬件上可支持更大 batch 或更长序列。"
-             data-explanation-wrong="请回忆 c_k 和 c_v 的输出维度：它们用的是 n_kv_head，而 c_q 用的是 n_head。这两个数可以不相等——这正是 GQA 的定义。">
-          <p class="quiz-question">Q1. 什么是 GQA，它解决了什么问题？</p>
+             data-explanation-right="GQA gives K/V fewer heads than Q. Multiple Q heads share one K/V group, so KV-cache memory shrinks significantly and the same hardware can support larger batches or longer sequences."
+             data-explanation-wrong="Recall the output dims of c_k and c_v: they use n_kv_head, while c_q uses n_head. These two counts can differ — that's precisely the definition of GQA.">
+          <p class="quiz-question">Q1. What is GQA, and what problem does it solve?</p>
           <div class="quiz-options">
             <button class="quiz-option" data-value="A" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              A. 一种新的激活函数，解决梯度消失问题
+              A. A new activation function that fixes the vanishing-gradient problem
             </button>
             <button class="quiz-option" data-value="B" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              B. K/V 头数少于 Q 头数，多个 Q 头共享 K/V，减少显存占用和计算量 ✓
+              B. Fewer K/V heads than Q heads; multiple Q heads share K/V, reducing memory and compute ✓
             </button>
             <button class="quiz-option" data-value="C" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              C. 把注意力分组并行化，解决长序列计算慢的问题（这更像滑动窗口注意力）
+              C. Parallelizing attention via grouping to solve long-sequence latency (that's closer to sliding-window attention)
             </button>
           </div>
           <div class="quiz-feedback"></div>
@@ -1135,21 +1135,21 @@
 
         <!-- Q2 -->
         <div class="quiz-question-block" style="margin-top: var(--space-8);" data-correct="B"
-             data-explanation-right="代码在构建 window_sizes 列表后，强制把 window_sizes[-1] 设为完整上下文长度。无论 SSSL 模式如何，最后一层始终是全局注意力，确保模型能整合完整序列信息。"
-             data-explanation-wrong="L 和 S 的区别只在于 window_size（注意力窗口大小），MLP 大小和 Value Embedding 的使用与 SSSL 模式无关。">
-          <p class="quiz-question">Q2. <code style="font-family: var(--font-mono); background: var(--color-bg-code); color: #A6E3A1; padding: 2px 5px; border-radius: 3px;">WINDOW_PATTERN="SSSL"</code> 中，最后一个 L 有什么特殊意义？</p>
+             data-explanation-right="After building window_sizes, the code forcibly sets window_sizes[-1] to the full context length. No matter the SSSL pattern, the last layer is always full attention, ensuring the model can integrate the entire sequence."
+             data-explanation-wrong="The difference between L and S is only window_size (attention window length). MLP size and Value Embedding usage are unrelated to the SSSL pattern.">
+          <p class="quiz-question">Q2. In <code style="font-family: var(--font-mono); background: var(--color-bg-code); color: #A6E3A1; padding: 2px 5px; border-radius: 3px;">WINDOW_PATTERN="SSSL"</code>, what's special about the final L?</p>
           <div class="quiz-options">
             <button class="quiz-option" data-value="A" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              A. L 层使用更大的 MLP，用于处理复杂特征
+              A. L layers use a bigger MLP to handle complex features
             </button>
             <button class="quiz-option" data-value="B" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              B. 代码强制让最后一层始终使用全上下文注意力，确保模型能看到整个序列 ✓
+              B. The code forces the final layer to always use full-context attention, ensuring the model sees the whole sequence ✓
             </button>
             <button class="quiz-option" data-value="C" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              C. L 层跳过 Value Embedding，加快推理速度
+              C. L layers skip Value Embedding to speed up inference
             </button>
           </div>
           <div class="quiz-feedback"></div>
@@ -1157,21 +1157,21 @@
 
         <!-- Q3 -->
         <div class="quiz-question-block" style="margin-top: var(--space-8);" data-correct="B"
-             data-explanation-right="去掉 softcap 后 logits 理论上无界增长，softmax 饱和，梯度接近零，训练可能很快 NaN。这种实验值得一试（可能发现 softcap 其实不必要），但 AI 代理应当预期 crash 风险并提前做好 git reset 准备。"
-             data-explanation-wrong="softcap 的作用是数值稳定，不是随机性控制。去掉它更可能导致训练崩溃（loss=NaN），而不是输出变随机。">
-          <p class="quiz-question">Q3. AI 代理想测试"去掉 softcap 看效果"。从架构上，这意味着什么风险？</p>
+             data-explanation-right="With softcap removed, logits can theoretically grow unbounded, softmax saturates, gradients approach zero, and training may NaN quickly. The experiment is worth trying (maybe softcap is unnecessary), but the AI agent should expect crash risk and stand ready to git reset."
+             data-explanation-wrong="softcap is about numerical stability, not randomness. Removing it is more likely to crash training (loss=NaN) than to make outputs more random.">
+          <p class="quiz-question">Q3. The AI agent wants to test "what happens if we remove softcap?" Architecturally, what's the risk?</p>
           <div class="quiz-options">
             <button class="quiz-option" data-value="A" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              A. 没有风险，softcap 只是一个调参技巧，去掉不影响训练稳定性
+              A. No risk — softcap is just a tuning trick, removing it doesn't affect training stability
             </button>
             <button class="quiz-option" data-value="B" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              B. logits 可能无界增长，训练不稳定甚至 loss 变 NaN，实验可能 crash ✓
+              B. logits may grow unbounded, training becomes unstable or even loss=NaN, the experiment may crash ✓
             </button>
             <button class="quiz-option" data-value="C" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              C. 去掉 softcap 会让模型输出更随机，无法收敛到有意义的解
+              C. Removing softcap makes outputs more random, preventing convergence to a meaningful solution
             </button>
           </div>
           <div class="quiz-feedback"></div>
@@ -1179,8 +1179,8 @@
 
         <!-- Buttons -->
         <div style="margin-top: var(--space-8);">
-          <button class="quiz-check-btn" onclick="checkQuiz('quiz-module3')">检验答案</button>
-          <button class="quiz-reset-btn" onclick="resetQuiz('quiz-module3')">重置</button>
+          <button class="quiz-check-btn" onclick="checkQuiz('quiz-module3')">Check answers</button>
+          <button class="quiz-reset-btn" onclick="resetQuiz('quiz-module3')">Reset</button>
         </div>
 
       </div>
@@ -1189,8 +1189,8 @@
       <div class="callout callout-info animate-in" style="margin-top: var(--space-8);">
         <span class="callout-icon">🚀</span>
         <div class="callout-content">
-          <span class="callout-title">下一章：实验循环与扩展</span>
-          <p>你已经理解了 train.py 里的 8 项现代改进。Module 4 将展示 autoresearch 是如何把这些组件变成一个自动化实验平台的——AI 代理如何生成假设、修改代码、跑训练、分析结果，并决定下一步探索方向。</p>
+          <span class="callout-title">Up next: experiment loop and scaling out</span>
+          <p>You now understand the 8 modern improvements inside train.py. Module 4 shows how autoresearch turns these components into an automated experimentation platform — how the AI agent generates hypotheses, modifies code, runs training, analyzes results, and decides the next direction to explore.</p>
         </div>
       </div>
     </div>
@@ -1203,25 +1203,25 @@
     <!-- ── MODULE HEADER ─────────────────────────────────────── -->
     <header class="module-header animate-in">
       <span class="module-number">04</span>
-      <h1 class="module-title">实验循环与扩展：从零跑起来</h1>
-      <p class="module-subtitle">你的工作不再是跑实验。你的工作是写好实验指令，然后去睡觉。</p>
+      <h1 class="module-title">Experiment Loop and Scaling Out: From Zero to Running</h1>
+      <p class="module-subtitle">Your job is no longer to run experiments. Your job is to write good experiment instructions — and then go to sleep.</p>
     </header>
 
     <!-- ══════════════════════════════════════════════════════════
-         SCREEN 1 · 快速上手 — 从安装到第一次实验
+         SCREEN 1 · Quickstart — from install to first experiment
          ══════════════════════════════════════════════════════ -->
     <div class="screen animate-in">
-      <h2 class="screen-heading">快速上手：五步从零到第一次实验</h2>
+      <h2 class="screen-heading">Quickstart: five steps from zero to your first experiment</h2>
 
       <div class="callout callout-accent">
         <span class="callout-icon">🚀</span>
         <div class="callout-content">
-          <span class="callout-title">部署一个无人值守的研究团队</span>
+          <span class="callout-title">Deploy an unattended research team</span>
           <p>
-            把 autoresearch 想象成你雇了一支研究团队。你是
-            <strong>PI（首席研究员）</strong>，
-            <span class="term" data-definition="program.md：人类编写的研究指令文件，定义 AI 代理的目标、约束和循环规则。相当于 PI 给研究团队写的研究方案，AI 代理严格遵照执行。">program.md</span>
-            是你写给团队的研究方案。安排好一切后，你下班回家——团队彻夜工作，早上汇报结果。
+            Think of autoresearch as a research team you've hired. You are the
+            <strong>PI (principal investigator)</strong>, and
+            <span class="term" data-definition="program.md: The human-authored research instruction file that defines the AI agent's goals, constraints, and loop rules. Like the research protocol a PI writes for the team — the AI agent follows it strictly.">program.md</span>
+            is the research protocol you've written for the team. Once everything's set up, you go home — the team works through the night and reports results in the morning.
           </p>
         </div>
       </div>
@@ -1231,13 +1231,13 @@
         <div class="step-card animate-in">
           <div class="step-number">1</div>
           <div class="step-content">
-            <div class="step-title">安装 uv</div>
+            <div class="step-title">Install uv</div>
             <div class="step-desc">
-              <span class="term" data-definition="uv：Astral 开发的 Python 包管理器，用 Rust 编写，比 pip 快 10–100 倍。autoresearch 使用 uv 管理依赖环境，确保可复现性。">uv</span>
-              是比 pip 快 10–100x 的 Python 包管理器。先安装它，再同步依赖：
+              <span class="term" data-definition="uv: A Python package manager from Astral, written in Rust — 10–100x faster than pip. autoresearch uses uv to manage its dependencies and ensure reproducibility.">uv</span>
+              is a Python package manager 10–100x faster than pip. Install it first, then sync deps:
               <pre class="code-block">curl -LsSf https://astral.sh/uv/install.sh | sh
 uv sync</pre>
-              这一步只需做一次。
+              Only needs to be done once.
             </div>
           </div>
         </div>
@@ -1245,13 +1245,13 @@ uv sync</pre>
         <div class="step-card animate-in">
           <div class="step-number">2</div>
           <div class="step-content">
-            <div class="step-title">准备数据</div>
+            <div class="step-title">Prepare data</div>
             <div class="step-desc">
-              下载 climbmix 数据集分片，训练
-              <span class="term" data-definition="BPE（Byte Pair Encoding）：字节对编码，一种子词分词算法。把高频字符组合合并为单个 token，平衡词表大小与序列长度。autoresearch 在 prepare.py 中用 BPE 训练专用分词器。">BPE</span>
-              分词器——约 2 分钟，只需做一次：
+              Download the climbmix dataset shards and train the
+              <span class="term" data-definition="BPE (Byte Pair Encoding): A subword tokenization algorithm. Merges high-frequency character combinations into single tokens, balancing vocabulary size against sequence length. autoresearch trains its own BPE tokenizer in prepare.py.">BPE</span>
+              tokenizer — about 2 minutes, only once:
               <pre class="code-block">uv run prepare.py</pre>
-              完成后本地会有数据分片文件和分词器。
+              When it finishes you'll have local data shards and a tokenizer.
             </div>
           </div>
         </div>
@@ -1259,13 +1259,13 @@ uv sync</pre>
         <div class="step-card animate-in">
           <div class="step-number">3</div>
           <div class="step-content">
-            <div class="step-title">手动跑一次</div>
+            <div class="step-title">Run training manually once</div>
             <div class="step-desc">
-              跑一次完整训练，验证环境正常。大约 5 分钟后你会看到
-              <span class="term" data-definition="val_bpb（Validation Bits Per Byte）：验证集每字节比特数，衡量语言模型质量，越低越好。与词表大小无关，可跨架构直接比较，是 autoresearch 判断实验成功的唯一指标。">val_bpb</span>
-              输出：
+              Run one full training pass to verify the environment works. After about 5 minutes you'll see
+              <span class="term" data-definition="val_bpb (Validation Bits Per Byte): Validation-set bits per byte — measures language-model quality, lower is better. Independent of vocabulary size, so it can be compared across architectures. The single metric autoresearch uses to judge experimental success.">val_bpb</span>
+              output:
               <pre class="code-block">uv run train.py</pre>
-              这个数值就是你的 baseline，后续所有改进都以它为参照。
+              That number is your baseline; every subsequent improvement is measured against it.
             </div>
           </div>
         </div>
@@ -1273,13 +1273,13 @@ uv sync</pre>
         <div class="step-card animate-in">
           <div class="step-number">4</div>
           <div class="step-content">
-            <div class="step-title">启动 AI 代理</div>
+            <div class="step-title">Start the AI agent</div>
             <div class="step-desc">
-              在这个 repo 里打开 Claude 或 Codex CLI，发送启动提示词：
-              <pre class="code-block">"看一下 program.md，开始新实验！先做 setup。"</pre>
-              代理会读取
-              <span class="term" data-definition="program.md：人类编写的研究指令文件，定义 AI 代理的目标、约束和循环规则，不由 AI 修改。">program.md</span>，
-              查看 git 状态，然后开始第一轮实验循环。
+              Open Claude or Codex CLI inside this repo and send the launch prompt:
+              <pre class="code-block">"Take a look at program.md, start a new experiment! Do the setup first."</pre>
+              The agent reads
+              <span class="term" data-definition="program.md: The human-authored research instruction file that defines the AI agent's goals, constraints, and loop rules; not modified by the AI.">program.md</span>,
+              checks git state, then starts its first experiment loop.
             </div>
           </div>
         </div>
@@ -1287,11 +1287,11 @@ uv sync</pre>
         <div class="step-card animate-in">
           <div class="step-number">5</div>
           <div class="step-content">
-            <div class="step-title">去睡觉</div>
+            <div class="step-title">Go to sleep</div>
             <div class="step-desc">
-              AI 代理会自主循环，彻夜运行。早上检查
-              <code>results.tsv</code>，你会看到完整的实验日志——哪些 keep、哪些 discard、哪些 crash。
-              每次实验约 5 分钟，8 小时 ≈ 96 次实验。
+              The AI agent runs the loop autonomously, all night. In the morning, check
+              <code>results.tsv</code> — you'll find a complete experiment log of keeps, discards, and crashes.
+              Each experiment is ~5 minutes, so 8 hours ≈ 96 experiments.
             </div>
           </div>
         </div>
@@ -1300,29 +1300,29 @@ uv sync</pre>
     </div><!-- /screen 1 -->
 
     <!-- ══════════════════════════════════════════════════════════
-         SCREEN 2 · 实验循环的 9 个步骤（Group Chat）
+         SCREEN 2 · Nine steps of one experiment cycle (group chat)
          ══════════════════════════════════════════════════════ -->
     <div class="screen animate-in">
-      <h2 class="screen-heading">一次完整实验循环：逐步拆解</h2>
-      <p>点击"下一条"观察 AI 代理完成一次完整实验的每一个动作。</p>
+      <h2 class="screen-heading">One full experiment cycle: step by step</h2>
+      <p>Click "Next" to follow every action the AI agent takes in one full experiment.</p>
 
       <div class="chat-container" id="chat-module4">
 
         <div class="chat-bubble" data-actor="actor-1" data-index="0">
-          <span class="chat-actor">AI 代理</span>
+          <span class="chat-actor">AI agent</span>
           <div class="chat-text">
-            第 7 次实验。想法：把
-            <span class="term" data-definition="warmdown（学习率衰减阶段）：训练后期将学习率逐步降至接近零的阶段。WARMDOWN_RATIO 控制衰减阶段占总训练时间的比例。更长的衰减期让模型在后期更稳定收敛。">WARMDOWN_RATIO</span>
-            从 0.5 改为 0.3，让模型在后期有更长的稳定期。理论：缩短衰减阶段，模型有更多步数在中等学习率下学习，而不是过早进入低学习率区间。
+            Experiment 7. Idea: change
+            <span class="term" data-definition="warmdown: The phase late in training where the learning rate decays gradually toward zero. WARMDOWN_RATIO controls the fraction of total training time spent decaying. A longer warmdown lets the model converge more stably at the end.">WARMDOWN_RATIO</span>
+            from 0.5 to 0.3, giving the model a longer stable phase at the end. Theory: shorter warmdown means more steps spent at mid-range LRs, instead of dropping into the low-LR zone too early.
           </div>
         </div>
 
         <div class="chat-bubble" data-actor="actor-1" data-index="1">
-          <span class="chat-actor">AI 代理</span>
+          <span class="chat-actor">AI agent</span>
           <div class="chat-text">
-            修改 <code>train.py</code> 第 462 行：<code>WARMDOWN_RATIO = 0.3</code>（原为 0.5）。
+            Edited <code>train.py</code> line 462: <code>WARMDOWN_RATIO = 0.3</code> (was 0.5).
             <pre class="code-block">git commit -m "exp7: shorter warmdown ratio 0.5->0.3"</pre>
-            提交成功。SHA: <code>a3f9c1e</code>
+            Commit success. SHA: <code>a3f9c1e</code>
           </div>
         </div>
 
@@ -1330,16 +1330,16 @@ uv sync</pre>
           <span class="chat-actor">GPU</span>
           <div class="chat-text">
             <pre class="code-block">uv run train.py > run.log 2>&amp;1</pre>
-            训练中… 已训练 150 秒 / 300 秒，当前 step 458。
-            <span class="term" data-definition="gradient accumulation（梯度累积）：将多个小 batch 的梯度累加后再更新参数，等效于大 batch 训练但不需要额外显存。">梯度累积</span>
-            正常，显存峰值 45.1 GB。
+            Training… 150s / 300s elapsed, current step 458.
+            <span class="term" data-definition="gradient accumulation: Accumulating gradients from several small batches before updating parameters — equivalent to a bigger batch but without the extra memory cost.">Gradient accumulation</span>
+            is healthy, peak VRAM 45.1 GB.
           </div>
         </div>
 
         <div class="chat-bubble" data-actor="actor-5" data-index="3">
           <span class="chat-actor">GPU</span>
           <div class="chat-text">
-            训练完成！5 分钟时间到，自动停止。
+            Training done! 5-minute time hit, auto-stopped.
             <pre class="code-block">grep "^val_bpb:\|^peak_vram_mb:" run.log
 val_bpb:      0.994812
 peak_vram_mb: 45060.2</pre>
@@ -1347,106 +1347,106 @@ peak_vram_mb: 45060.2</pre>
         </div>
 
         <div class="chat-bubble" data-actor="actor-2" data-index="4">
-          <span class="chat-actor">结果分析</span>
+          <span class="chat-actor">Result analysis</span>
           <div class="chat-text">
-            对比当前 baseline（上次 keep 的结果）：
+            Comparing to current baseline (last keep result):
             <br><strong>0.997900 → 0.994812</strong>
-            <br>改善：0.003088（↓ 0.31%）。<strong>改善！判断：keep ✓</strong>
+            <br>Improvement: 0.003088 (↓ 0.31%). <strong>Improved! Verdict: keep ✓</strong>
           </div>
         </div>
 
         <div class="chat-bubble" data-actor="actor-1" data-index="5">
-          <span class="chat-actor">AI 代理</span>
+          <span class="chat-actor">AI agent</span>
           <div class="chat-text">
-            保留这次提交（不执行 git reset）。记录到 <code>results.tsv</code>：
+            Keeping this commit (no git reset). Logged to <code>results.tsv</code>:
             <pre class="code-block">a3f9c1e	0.994812	44.0	keep	shorter warmdown ratio 0.5->0.3</pre>
-            注：results.tsv 用 <strong>Tab</strong> 分隔，不是逗号，不 commit 到 git。
+            Note: results.tsv is <strong>Tab</strong>-separated, not comma — and is not committed to git.
           </div>
         </div>
 
         <div class="chat-bubble" data-actor="actor-1" data-index="6">
-          <span class="chat-actor">AI 代理</span>
+          <span class="chat-actor">AI agent</span>
           <div class="chat-text">
-            第 8 次实验。基于这个改进，继续深入。新想法：尝试 <code>WARMDOWN_RATIO = 0.2</code>——如果 0.3 比 0.5 更好，也许更短的衰减期会继续改善。开始修改…
+            Experiment 8. Building on this improvement, going further. New idea: try <code>WARMDOWN_RATIO = 0.2</code> — if 0.3 is better than 0.5, maybe a shorter warmdown keeps improving. Making the change…
           </div>
         </div>
 
       </div>
 
       <div class="chat-controls">
-        <button class="btn btn-primary" onclick="chatStep('chat-module4')">下一条</button>
-        <button class="btn" onclick="chatPlay('chat-module4')">自动播放</button>
-        <button class="btn" onclick="chatReset('chat-module4')">重置</button>
+        <button class="btn btn-primary" onclick="chatStep('chat-module4')">Next</button>
+        <button class="btn" onclick="chatPlay('chat-module4')">Auto-play</button>
+        <button class="btn" onclick="chatReset('chat-module4')">Reset</button>
       </div>
 
       <div class="callout callout-info" style="margin-top: 1.5rem;">
         <span class="callout-icon">🔴</span>
         <div class="callout-content">
-          <span class="callout-title">如果崩溃怎么办？</span>
+          <span class="callout-title">What if it crashes?</span>
           <p>
-            如果 <code>uv run train.py</code> 崩溃（比如 OOM 显存溢出），代理会运行：
-            <code>tail -n 50 run.log</code> 读取错误信息，然后在 results.tsv 记录
-            <code>status=crash</code>，执行 <code>git reset</code> 回到上个好状态，换一个更保守的想法重新实验。
+            If <code>uv run train.py</code> crashes (e.g. OOM), the agent runs
+            <code>tail -n 50 run.log</code> to read the error, then records
+            <code>status=crash</code> in results.tsv, runs <code>git reset</code> back to the last good state, and tries a more conservative idea.
           </p>
         </div>
       </div>
     </div><!-- /screen 2 -->
 
     <!-- ══════════════════════════════════════════════════════════
-         SCREEN 3 · 如何写出好的 program.md
+         SCREEN 3 · How to write a good program.md
          ══════════════════════════════════════════════════════ -->
     <div class="screen animate-in">
-      <h2 class="screen-heading">如何写出好的 program.md？</h2>
+      <h2 class="screen-heading">How do you write a good program.md?</h2>
 
       <div class="callout callout-info">
         <span class="callout-icon">📝</span>
         <div class="callout-content">
-          <span class="callout-title">program.md 是你作为研究 PI 最重要的产出</span>
+          <span class="callout-title">program.md is the most important thing you produce as a research PI</span>
           <p>
-            它不只是指令——它是你对 AI 研究能力的编程。写得越好，AI 代理的实验就越有方向感，越少在低价值尝试上浪费预算。
+            It's not just instructions — it's how you program the AI's research ability. The better it's written, the more direction the AI agent has, and the less budget it wastes on low-value attempts.
           </p>
         </div>
       </div>
 
       <div class="translation-block animate-in">
-        <!-- LEFT: 代码对比 -->
+        <!-- LEFT: code comparison -->
         <div class="translation-code">
-          <span class="translation-label">program.md 写法对比</span>
-<span class="code-line"><span class="code-comment">❌  差的 program.md：</span></span>
+          <span class="translation-label">program.md: bad vs good</span>
+<span class="code-line"><span class="code-comment">❌  Bad program.md:</span></span>
 <span class="code-line"></span>
-<span class="code-line"><span class="code-string">"试各种改进，找到</span></span>
-<span class="code-line"><span class="code-string"> 最好的 val_bpb"</span></span>
+<span class="code-line"><span class="code-string">"Try various improvements,</span></span>
+<span class="code-line"><span class="code-string"> find the best val_bpb"</span></span>
 <span class="code-line"></span>
 <span class="code-line"></span>
-<span class="code-line"><span class="code-comment">✓  好的 program.md：</span></span>
+<span class="code-line"><span class="code-comment">✓  Good program.md:</span></span>
 <span class="code-line"></span>
-<span class="code-line"><span class="code-string">"优先探索：</span></span>
-<span class="code-line"><span class="code-string"> 1. 优化器超参调优</span></span>
+<span class="code-line"><span class="code-string">"Priority exploration:</span></span>
+<span class="code-line"><span class="code-string"> 1. Optimizer hyperparams</span></span>
 <span class="code-line"><span class="code-string">    (LR, betas, warmdown)</span></span>
-<span class="code-line"><span class="code-string"> 2. 架构变体（GQA 比例）</span></span>
-<span class="code-line"><span class="code-string"> 3. 注意力模式（SSSL vs SSL）</span></span>
-<span class="code-line"><span class="code-string"> 如果连续 3 次 discard，</span></span>
-<span class="code-line"><span class="code-string"> 尝试方向性重置。"</span></span>
+<span class="code-line"><span class="code-string"> 2. Architecture variants (GQA ratio)</span></span>
+<span class="code-line"><span class="code-string"> 3. Attention pattern (SSSL vs SSL)</span></span>
+<span class="code-line"><span class="code-string"> If 3 discards in a row,</span></span>
+<span class="code-line"><span class="code-string"> try a directional reset."</span></span>
         </div>
 
-        <!-- RIGHT: 解释 -->
+        <!-- RIGHT: explanation -->
         <div class="translation-english">
-          <span class="translation-label">为什么这样写？</span>
+          <span class="translation-label">Why write it this way?</span>
           <div class="translation-lines">
             <div class="tl">
-              <strong>差的写法：</strong>太模糊，AI 会随机游走，浪费大量实验预算在低价值尝试上，就像告诉一个新人"去把这个项目做好"。
+              <strong>The bad version:</strong> too vague. The AI will wander randomly, burning experiment budget on low-value attempts — like telling a new hire "go make this project work".
             </div>
             <div class="tl">
-              <strong>好的写法：</strong>给出优先级和搜索空间的结构，相当于一个资深研究员告诉新人"从这里开始，按这个顺序探索"。
+              <strong>The good version:</strong> gives priorities and a structured search space — like a senior researcher telling a new hire "start here, then explore in this order".
             </div>
             <div class="tl">
-              <strong>编码领域知识：</strong>例如"Muon 对学习率敏感，先在 0.02–0.06 范围内扫描"——这是你作为人类的核心价值。
+              <strong>Encode domain knowledge:</strong> e.g. "Muon is sensitive to learning rate, sweep within 0.02–0.06 first" — this is where you add real value as a human.
             </div>
             <div class="tl">
-              <strong>简洁性准则：</strong>Karpathy 特意加入了"代码越简单越好"的要求，防止 AI 为了追求 val_bpb 而引入过于复杂的 trick。
+              <strong>Simplicity principle:</strong> Karpathy deliberately added "simpler code is better", to stop the AI from introducing overly complex tricks just to chase val_bpb.
             </div>
             <div class="tl">
-              <strong>NEVER STOP 规则：</strong>确保代理彻夜不停，就算在困难的搜索空间里也坚持迭代，不会等待人类指示。
+              <strong>NEVER STOP rule:</strong> ensures the agent keeps iterating through the night, even when the search space gets hard, and doesn't wait for human guidance.
             </div>
           </div>
         </div>
@@ -1455,74 +1455,74 @@ peak_vram_mb: 45060.2</pre>
       <div class="callout callout-accent" style="margin-top: 1.5rem;">
         <span class="callout-icon">🔄</span>
         <div class="callout-content">
-          <span class="callout-title">program.md 本身也是可迭代的</span>
+          <span class="callout-title">program.md is itself iterative</span>
           <p>
-            你观察 AI 的研究行为，发现它在走弯路——比如总是调同一个参数——然后在 program.md 里加入约束或新方向。下次重启，它就会更聪明。
-            <strong>这是人类研究能力的编码化。</strong>
+            You observe the AI's research behavior, notice it taking detours — always tuning the same parameter, for example — then add constraints or new directions to program.md. The next restart, it's smarter.
+            <strong>This is the codification of human research skill.</strong>
           </p>
         </div>
       </div>
     </div><!-- /screen 3 -->
 
     <!-- ══════════════════════════════════════════════════════════
-         SCREEN 4 · 小硬件怎么跑 + 更大图景
+         SCREEN 4 · Smaller hardware + the bigger picture
          ══════════════════════════════════════════════════════ -->
     <div class="screen animate-in">
-      <h2 class="screen-heading">小硬件怎么跑？+ 更大的图景</h2>
+      <h2 class="screen-heading">Running on smaller hardware + the bigger picture</h2>
 
       <div class="callout callout-accent">
         <span class="callout-icon">💻</span>
         <div class="callout-content">
-          <span class="callout-title">在 MacBook / 小 GPU 上跑 autoresearch</span>
+          <span class="callout-title">Running autoresearch on a MacBook / small GPU</span>
           <p>
-            官方版需要 H100（80GB 显存）。但社区已有 macOS / AMD / Windows fork。在非 H100 机器上，关键调整：
+            The official version targets H100 (80GB VRAM). But community forks for macOS / AMD / Windows exist. On non-H100 machines, the key adjustments are:
           </p>
           <ul style="margin: 0.75rem 0 0 0; padding-left: 1.5rem; line-height: 2;">
-            <li><strong>DEPTH</strong>：从 8 降到 4——更浅的模型，显存大幅减少</li>
-            <li><strong>TOTAL_BATCH_SIZE</strong>：从 2<sup>19</sup> 降到 2<sup>14</sup>（约 16K），降低每步
-              <span class="term" data-definition="gradient accumulation（梯度累积）：将多个小 batch 的梯度累加后再更新参数，等效于大 batch 训练但不需要额外显存。">梯度累积</span>
-              开销
+            <li><strong>DEPTH</strong>: drop from 8 to 4 — a shallower model massively reduces memory</li>
+            <li><strong>TOTAL_BATCH_SIZE</strong>: drop from 2<sup>19</sup> to 2<sup>14</sup> (~16K), reduces per-step
+              <span class="term" data-definition="gradient accumulation: Accumulating gradients from several small batches before updating parameters — equivalent to a bigger batch but without the extra memory cost.">gradient accumulation</span>
+              overhead
             </li>
-            <li><strong>WINDOW_PATTERN</strong>：改为 <code>'L'</code>（去掉短窗口 SSSL），在
-              <span class="term" data-definition="MPS（Metal Performance Shaders）：Apple Silicon GPU 的计算框架，等效于 CUDA 在 Nvidia GPU 上的角色，PyTorch 通过 mps 后端支持它。">MPS</span>
-              / CPU 上更高效
+            <li><strong>WINDOW_PATTERN</strong>: change to <code>'L'</code> (drop short-window SSSL), more efficient on
+              <span class="term" data-definition="MPS (Metal Performance Shaders): The compute framework for Apple Silicon GPUs — Apple's equivalent of CUDA for Nvidia. PyTorch supports it via the mps backend.">MPS</span>
+              / CPU
             </li>
-            <li><strong>替换数据集</strong>：考虑用 TinyStories 替代 climbmix，数据量小很多，小模型也能看到合理结果</li>
-            <li><strong>社区 fork</strong>：macOS 参考 <code>miolini/autoresearch-macos</code>，AMD 参考 <code>andyluo7/autoresearch</code></li>
+            <li><strong>Swap the dataset</strong>: consider using TinyStories instead of climbmix — much smaller, so small models can still produce sensible results</li>
+            <li><strong>Community forks</strong>: for macOS see <code>miolini/autoresearch-macos</code>; for AMD see <code>andyluo7/autoresearch</code></li>
           </ul>
         </div>
       </div>
 
-      <h3 class="screen-title" style="margin-top: 2rem;">更大的图景</h3>
-      <p>autoresearch 只有三个文件、一块 GPU、一晚上——但它指向的是 AI 辅助科研的根本转变。</p>
+      <h3 class="screen-title" style="margin-top: 2rem;">The bigger picture</h3>
+      <p>autoresearch is just three files, one GPU, and one overnight run — but it points to a fundamental shift in how AI-assisted research works.</p>
 
       <div class="pattern-grid stagger-children">
 
         <div class="pattern-card animate-in">
           <div class="pattern-icon" style="background: var(--color-accent-light); color: var(--color-accent);">👤</div>
-          <div class="pattern-title">人类角色的转变</div>
+          <div class="pattern-title">The human's role is shifting</div>
           <p class="pattern-desc">
-            从"手动调参者"→"研究指令的作者"。核心能力变成：读懂结果、形成假设、把领域知识编码进 program.md。
-            Karpathy 的原话："肉体计算机做前沿 AI 研究的时代，已经过去了。"
+            From "manual hyperparameter tuner" → "author of research instructions". The core skills become: reading results, forming hypotheses, encoding domain knowledge into program.md.
+            In Karpathy's own words: "The era of meat computers doing frontier AI research is long gone."
           </p>
         </div>
 
         <div class="pattern-card animate-in">
           <div class="pattern-icon" style="background: #EDE8F8; color: #6D4FC2;">🔬</div>
-          <div class="pattern-title">AI 研究的边界</div>
+          <div class="pattern-title">The limits of AI-driven research</div>
           <p class="pattern-desc">
-            autoresearch 只优化一个指标（
-            <span class="term" data-definition="val_bpb（Validation Bits Per Byte）：验证集每字节比特数，越低越好，是 autoresearch 的唯一优化目标。">val_bpb</span>
-            ）。真正的研究突破还需要人类提出正确问题、设计正确评估标准——这是目前 AI 无法替代的部分。
+            autoresearch only optimizes a single metric (
+            <span class="term" data-definition="val_bpb (Validation Bits Per Byte): Validation-set bits per byte, lower is better. The single optimization target in autoresearch.">val_bpb</span>
+            ). Real research breakthroughs still require humans to ask the right questions and design the right evaluation criteria — those parts AI can't replace yet.
           </p>
         </div>
 
         <div class="pattern-card animate-in">
           <div class="pattern-icon" style="background: var(--color-info-light); color: var(--color-info);">♻️</div>
-          <div class="pattern-title">可复制的框架</div>
+          <div class="pattern-title">A reusable framework</div>
           <p class="pattern-desc">
-            这个三文件架构可以被复制到任何领域：量化交易策略迭代、药物分子优化、程序合成。
-            <strong>固定评估 + 可改目标 + 人写指令 = 普适模式。</strong>
+            This three-file architecture transplants to any domain: quant-trading strategy iteration, drug molecule optimization, program synthesis.
+            <strong>Fixed evaluator + mutable target + human-authored instructions = a universal pattern.</strong>
           </p>
         </div>
 
@@ -1530,32 +1530,32 @@ peak_vram_mb: 45060.2</pre>
     </div><!-- /screen 4 -->
 
     <!-- ══════════════════════════════════════════════════════════
-         SCREEN 5 · 最终测验
+         SCREEN 5 · Final quiz
          ══════════════════════════════════════════════════════ -->
     <div class="screen animate-in">
-      <h2 class="screen-heading">最终测验：巩固所学</h2>
-      <p>三道题检验对整个模块的理解。每题选最佳答案后点"检查答案"。</p>
+      <h2 class="screen-heading">Final quiz: consolidate what you've learned</h2>
+      <p>Three questions to check your understanding of the whole module. Pick the best answer, then click "Check answers".</p>
 
       <div class="quiz-container" id="quiz-module4">
 
         <!-- ── Q1 ── -->
         <div class="quiz-question-block"
              data-correct="B"
-             data-explanation-right="results.tsv 记录所有实验（含 discard 的），但 git 只保留 keep 的提交。两个维度独立：tsv 是完整实验日志（每次 keep/discard/crash 都有记录），git 是干净的改进历史（只有被证明有效的修改）。两者共同构成完整的实验记账系统。"
-             data-explanation-wrong="tsv 文件很小，git 完全可以处理；也不是因为要隐藏结果。关键在于：tsv 和 git 分别追踪不同维度的信息——一个追踪所有尝试，一个追踪所有改进。">
-          <p class="quiz-question">Q1. 为什么 <code>results.tsv</code> 不被 git 追踪（不 commit）？</p>
+             data-explanation-right="results.tsv records every experiment (including discards), while git only keeps the keep commits. The two dimensions are independent: tsv is a full experiment log (keep/discard/crash all logged), git is a clean history of improvements (only validated changes). Together they form a complete experiment-accounting system."
+             data-explanation-wrong="The tsv file is tiny — git handles it easily; nor is it about hiding results. The key is that tsv and git track different dimensions — one tracks all attempts, the other tracks all improvements.">
+          <p class="quiz-question">Q1. Why isn't <code>results.tsv</code> tracked by git (not committed)?</p>
           <div class="quiz-options">
             <button class="quiz-option" data-value="A" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              A. 因为 tsv 文件太大，git 无法处理
+              A. The tsv file is too big for git
             </button>
             <button class="quiz-option" data-value="B" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              B. results.tsv 记录所有实验（含 discard 的），git 只保留 keep 的提交——两个维度独立，tsv 是完整实验日志，git 是干净的改进历史
+              B. results.tsv records all experiments (including discards), while git only keeps the keep commits — two independent dimensions, tsv is the full experiment log, git is the clean improvement history
             </button>
             <button class="quiz-option" data-value="C" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              C. 避免暴露实验结果给其他人
+              C. To avoid leaking experiment results to others
             </button>
           </div>
           <div class="quiz-feedback"></div>
@@ -1564,23 +1564,23 @@ peak_vram_mb: 45060.2</pre>
         <!-- ── Q2 ── -->
         <div class="quiz-question-block"
              data-correct="B"
-             data-explanation-right="program.md 的核心规则是 NEVER STOP——人类可能在睡觉。连续 discard 时，代理应该继续思考新方向，尝试更不同的改动（换架构、换优化器方向），只有在万不得已时才考虑 git rewind 到更早状态。"
-             data-explanation-wrong="停下来等人类指示违反了 NEVER STOP 规则；修改 prepare.py 也是被禁止的——prepare.py 只读，是系统诚信的保障，修改它相当于作弊。">
-          <p class="quiz-question">Q2. AI 代理连续 5 次实验都是 discard（
-            <span class="term" data-definition="val_bpb（Validation Bits Per Byte）：验证集每字节比特数，越低越好。discard 意味着本次实验的 val_bpb 没有改善，代理会执行 git reset 回到上个好状态。">val_bpb</span>
-            没有改善）。根据 program.md 的规则，它应该怎么做？</p>
+             data-explanation-right="The core rule in program.md is NEVER STOP — humans may be asleep. On a streak of discards, the agent should keep thinking up new directions and try more different changes (switch architecture, switch optimizer direction); git rewind to earlier states should only be a last resort."
+             data-explanation-wrong="Stopping to wait for human guidance violates the NEVER STOP rule; modifying prepare.py is also forbidden — prepare.py is read-only and guarantees system integrity. Modifying it would be cheating.">
+          <p class="quiz-question">Q2. The AI agent gets 5 discards in a row (no
+            <span class="term" data-definition="val_bpb (Validation Bits Per Byte): Validation-set bits per byte, lower is better. A discard means val_bpb did not improve in this experiment, so the agent runs git reset to revert to the last good state.">val_bpb</span>
+            improvement). According to program.md's rules, what should it do?</p>
           <div class="quiz-options">
             <button class="quiz-option" data-value="A" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              A. 停下来等待人类指示
+              A. Stop and wait for human guidance
             </button>
             <button class="quiz-option" data-value="B" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              B. 继续思考新方向，尝试更不同的改动（如换架构、换优化器方向），只有万不得已时才考虑 git rewind
+              B. Keep thinking about new directions, try more different changes (switch architecture, switch optimizer direction); only consider git rewind as a last resort
             </button>
             <button class="quiz-option" data-value="C" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              C. 修改 prepare.py 降低 EVAL_TOKENS，使指标更容易改善
+              C. Modify prepare.py to reduce EVAL_TOKENS, making the metric easier to improve
             </button>
           </div>
           <div class="quiz-feedback"></div>
@@ -1589,21 +1589,21 @@ peak_vram_mb: 45060.2</pre>
         <!-- ── Q3 ── -->
         <div class="quiz-question-block"
              data-correct="B"
-             data-explanation-right="修改 program.md 是正确做法。加入"每 5 次实验至少尝试 1 次架构改变"这样的规则，相当于把你的观察（AI 只调学习率）编码成约束，下次代理就会有更宽的探索范围。这正是 PI 的职责——迭代研究指令，不断提升代理的智能。"
-             data-explanation-wrong="重新启动代理不会改变它的探索策略，它下次还会做同样的事；把 MATRIX_LR 写死会减少实验空间，而不是拓展搜索范围——这是错误方向。">
-          <p class="quiz-question">Q3. 你发现 AI 代理总是在改 MATRIX_LR（学习率），很少探索架构改变。你应该怎么解决？</p>
+             data-explanation-right="Modifying program.md is the right move. Adding a rule like 'every 5 experiments, try at least 1 architecture change' encodes your observation (the AI only tunes LR) as a constraint — the next time, the agent will explore more broadly. This is exactly the PI's job: iterate the research instructions and keep improving the agent's intelligence."
+             data-explanation-wrong="Restarting the agent won't change its exploration strategy — it will do the same thing again. Hardcoding MATRIX_LR shrinks the experiment space, not the search space — wrong direction.">
+          <p class="quiz-question">Q3. You notice the AI agent keeps tweaking MATRIX_LR (learning rate) and rarely explores architectural changes. How do you fix this?</p>
           <div class="quiz-options">
             <button class="quiz-option" data-value="A" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              A. 重新启动代理，它下次会自动探索架构
+              A. Restart the agent — it will explore architecture next time on its own
             </button>
             <button class="quiz-option" data-value="B" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              B. 修改 program.md，明确加入"每 5 次实验至少尝试 1 次架构改变（如 DEPTH、n_kv_head、WINDOW_PATTERN）"的研究规则
+              B. Modify program.md to explicitly add the rule "every 5 experiments, try at least 1 architectural change (e.g. DEPTH, n_kv_head, WINDOW_PATTERN)"
             </button>
             <button class="quiz-option" data-value="C" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              C. 修改 train.py，把 MATRIX_LR 的值写死，防止代理继续修改
+              C. Modify train.py to hard-code MATRIX_LR, preventing the agent from changing it
             </button>
           </div>
           <div class="quiz-feedback"></div>
@@ -1611,47 +1611,47 @@ peak_vram_mb: 45060.2</pre>
 
         <!-- Buttons -->
         <div>
-          <button class="quiz-check-btn" onclick="checkQuiz('quiz-module4')">检查答案</button>
-          <button class="quiz-reset-btn" onclick="resetQuiz('quiz-module4')">重置</button>
+          <button class="quiz-check-btn" onclick="checkQuiz('quiz-module4')">Check answers</button>
+          <button class="quiz-reset-btn" onclick="resetQuiz('quiz-module4')">Reset</button>
         </div>
 
       </div>
     </div><!-- /screen 5 -->
 
     <!-- ══════════════════════════════════════════════════════════
-         CLOSING · 延伸阅读与链接
+         CLOSING · Further reading and links
          ══════════════════════════════════════════════════════ -->
     <div class="screen animate-in" style="text-align: center;">
-      <h2 class="screen-heading">你已完成全部 4 个模块 🎉</h2>
+      <h2 class="screen-heading">You've completed all 4 modules 🎉</h2>
       <p style="max-width: 600px; margin: 0 auto 2rem;">
-        autoresearch 是一个只有三个文件的项目，却展示了 AI 辅助科研的完整闭环。
-        现在，去克隆它，写你自己的 program.md，然后去睡觉。
+        autoresearch is a project of only three files, yet it demonstrates the complete loop of AI-assisted research.
+        Now — go clone it, write your own program.md, and go to sleep.
       </p>
 
       <div class="pattern-grid stagger-children" style="max-width: 700px; margin: 0 auto 2rem;">
 
         <div class="pattern-card animate-in" style="text-align: left;">
           <div class="pattern-icon" style="background: #1B1F23; color: #fff; font-size: 1.4rem;">🐙</div>
-          <div class="pattern-title">官方仓库</div>
+          <div class="pattern-title">Official repo</div>
           <p class="pattern-desc">
             <a href="https://github.com/karpathy/autoresearch"
                target="_blank" rel="noopener"
                style="color: var(--color-accent); word-break: break-all;">
               github.com/karpathy/autoresearch
             </a>
-            <br>需要 H100 GPU。包含 train.py、prepare.py、program.md。
+            <br>Requires an H100 GPU. Contains train.py, prepare.py, program.md.
           </p>
         </div>
 
         <div class="pattern-card animate-in" style="text-align: left;">
           <div class="pattern-icon" style="background: #1B1F23; color: #fff; font-size: 1.4rem;">🍎</div>
-          <div class="pattern-title">社区 Fork</div>
+          <div class="pattern-title">Community forks</div>
           <p class="pattern-desc">
-            <strong>macOS</strong>：<code>miolini/autoresearch-macos</code>（Apple Silicon，
-            <span class="term" data-definition="MPS（Metal Performance Shaders）：Apple Silicon GPU 的计算框架，PyTorch 通过 mps 后端支持它，使 M1/M2/M3/M4 芯片可以加速深度学习训练。">MPS</span>
-            后端）
-            <br><strong>AMD</strong>：<code>andyluo7/autoresearch</code>（ROCm 支持）
-            <br>均可在非 H100 机器上运行较小规模的实验。
+            <strong>macOS</strong>: <code>miolini/autoresearch-macos</code> (Apple Silicon,
+            <span class="term" data-definition="MPS (Metal Performance Shaders): The compute framework for Apple Silicon GPUs. PyTorch supports it via the mps backend, accelerating deep-learning training on M1/M2/M3/M4 chips.">MPS</span>
+            backend)
+            <br><strong>AMD</strong>: <code>andyluo7/autoresearch</code> (ROCm support)
+            <br>Both can run smaller experiments on non-H100 hardware.
           </p>
         </div>
 
@@ -1660,11 +1660,9 @@ peak_vram_mb: 45060.2</pre>
       <div class="callout callout-accent" style="max-width: 640px; margin: 0 auto; text-align: left;">
         <span class="callout-icon">💬</span>
         <div class="callout-content">
-          <span class="callout-title">Karpathy 的话</span>
+          <span class="callout-title">In Karpathy's words</span>
           <p>
             "One day, frontier AI research used to be done by meat computers… That era is long gone."
-            <br><br>
-            <em>曾经，前沿 AI 研究由肉体计算机完成……那个时代早已过去。</em>
           </p>
         </div>
       </div>

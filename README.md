@@ -1,15 +1,15 @@
-# 自主 AI 研究：autoresearch 深度解析
+# Autonomous AI Research: A Deep Dive into autoresearch
 
 An interactive single-page course on **autonomous AI research** — how an LLM-driven research loop is actually built, file by file. Self-contained HTML, no framework, no build pipeline beyond `cat`.
 
-中文教程，4 章，从大局观到实验循环：
+Four modules, from the big-picture vision down to the experiment loop:
 
 | # | Module | Topic |
 |---|---|---|
-| 01 | 大局观：AI 当研究员 | The big-picture vision of LLMs as researchers |
-| 02 | 三文件架构 | The three-file architecture |
-| 03 | 现代 GPT 解剖 | Anatomy of a modern GPT |
-| 04 | 实验循环与扩展 | Experiment loop and scaling out |
+| 01 | The Big Picture: AI as Researcher | The big-picture vision of LLMs as researchers |
+| 02 | Three-File Architecture | The three-file architecture |
+| 03 | Anatomy of a Modern GPT | Anatomy of a modern GPT |
+| 04 | Experiment Loop and Scaling Out | Experiment loop and scaling out |
 
 ## Build
 
