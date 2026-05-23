@@ -4,46 +4,46 @@
     <!-- ── MODULE HEADER ─────────────────────────────────────── -->
     <header class="module-header animate-in">
       <span class="module-number">01</span>
-      <h1 class="module-title">大局观：AI 当研究员</h1>
-      <p class="module-subtitle">了解 autoresearch 做什么、为什么能工作，以及 Karpathy 如何用最小设计实现自主科研循环。</p>
+      <h1 class="module-title">The Big Picture: AI as Researcher</h1>
+      <p class="module-subtitle">What autoresearch does, why it works, and how Karpathy implemented an autonomous research loop with a minimal design.</p>
     </header>
 
     <!-- ══════════════════════════════════════════════════════════
-         SCREEN 1 · 开场钩子 + 大局介绍
+         SCREEN 1 · Opening hook + big-picture intro
          ══════════════════════════════════════════════════════ -->
     <div class="screen animate-in">
-      <h2 class="screen-heading">一觉醒来，AI 跑完了 100 次实验</h2>
+      <h2 class="screen-heading">You wake up. The AI has run 100 experiments overnight.</h2>
 
       <div class="callout callout-accent">
         <span class="callout-icon">🌙</span>
         <div class="callout-content">
-          <span class="callout-title">开场场景</span>
+          <span class="callout-title">Opening scene</span>
           <p>
-            晚上 10 点你启动一个 <term class="term" data-definition="AI 代理（AI Agent）：一个能自主规划、执行、反馈并循环迭代的 AI 程序，不需要人类每步介入。">AI 代理</term>。
-            早上 8 点醒来，它完成了 100 次实验，模型的语言建模损失比昨晚低了 3%。
-            没有人熬夜。没有人手动调参。这就是 <strong>autoresearch</strong>。
+            10 PM, you launch an <term class="term" data-definition="AI agent: An AI program that can autonomously plan, execute, get feedback, and iterate — no human in the loop step by step.">AI agent</term>.
+            8 AM, you wake up. It has completed 100 experiments, and the model's language-modeling loss is 3% lower than the night before.
+            Nobody stayed up. Nobody hand-tuned parameters. This is <strong>autoresearch</strong>.
           </p>
         </div>
       </div>
 
       <p>
-        <strong>autoresearch</strong> 是 Karpathy 在 2026 年 3 月发布的一个实验项目。
-        它的核心想法极其简单：把一个真实的
-        <span class="term" data-definition="LLM（Large Language Model）：大语言模型，如 GPT、Claude 等，基于 Transformer 架构，在大量文本上训练而来。">LLM</span>
-        训练流程交给
-        <span class="term" data-definition="AI 代理（AI Agent）：能自主规划、执行、反馈并循环迭代的 AI 程序，不需要人类每步介入。">AI 代理</span>，
-        让它自主迭代——修改训练代码、跑实验、看结果、决定保留还是丢弃——循环往复，彻夜不停。
+        <strong>autoresearch</strong> is an experimental project Karpathy released in March 2026.
+        The core idea is extremely simple: hand a real
+        <span class="term" data-definition="LLM (Large Language Model): A large language model like GPT, Claude, etc., based on the Transformer architecture and trained on massive text corpora.">LLM</span>
+        training pipeline over to an
+        <span class="term" data-definition="AI agent: An AI program that can autonomously plan, execute, get feedback, and iterate — no human in the loop step by step.">AI agent</span>
+        and let it iterate by itself — modify the training code, run experiments, look at results, decide to keep or discard — round and round, all night.
       </p>
 
       <div class="pattern-cards stagger-children">
 
         <div class="pattern-card animate-in">
           <div class="pattern-icon" style="background: var(--color-accent-light); color: var(--color-accent);">🤖</div>
-          <div class="pattern-title">AI 代理</div>
+          <div class="pattern-title">AI agent</div>
           <p class="pattern-desc">
-            由 Claude 或 Codex 驱动。读取人类指令，提出实验想法，修改
-            <span class="term" data-definition="train.py：autoresearch 的核心训练脚本。AI 代理唯一被允许修改的文件，包含模型架构、优化器设置、超参数等。">train.py</span>，
-            评估结果，决定下一步。
+            Powered by Claude or Codex. Reads human instructions, proposes experiment ideas, modifies
+            <span class="term" data-definition="train.py: The core training script in autoresearch. The only file the AI agent is allowed to modify; contains model architecture, optimizer setup, hyperparameters, etc.">train.py</span>,
+            evaluates results, decides what to do next.
           </p>
         </div>
 
@@ -51,9 +51,9 @@
           <div class="pattern-icon" style="background: #EDE8F8; color: #6D4FC2;">📄</div>
           <div class="pattern-title">train.py</div>
           <p class="pattern-desc">
-            实验的"靶子"。它包含
-            <span class="term" data-definition="Transformer：主流深度学习架构，用于构建 GPT 等大语言模型，基于自注意力机制处理序列数据。">Transformer</span>
-            架构定义、优化器、超参数。AI 代理的每次实验都体现在对这个文件的修改上。
+            The "target" of each experiment. It contains the
+            <span class="term" data-definition="Transformer: The dominant deep-learning architecture, used to build GPT and other LLMs, based on self-attention over sequence data.">Transformer</span>
+            architecture, optimizer, and hyperparameters. Every experiment shows up as a diff on this file.
           </p>
         </div>
 
@@ -61,10 +61,10 @@
           <div class="pattern-icon" style="background: var(--color-info-light); color: var(--color-info);">📝</div>
           <div class="pattern-title">program.md</div>
           <p class="pattern-desc">
-            人类的指挥棒。你在这里写下研究目标、哪些东西不能改、实验循环的规则。
-            AI 代理会严格遵照
-            <span class="term" data-definition="program.md：人类编写的研究指令文件。定义 AI 代理的目标、约束条件和实验循环规则，不由 AI 修改。">program.md</span>
-            行事。
+            The human's baton. Here is where you write down the research goals, what cannot be changed, and the rules of the experiment loop.
+            The AI agent follows
+            <span class="term" data-definition="program.md: The human-authored research instruction file. Defines the AI agent's goals, constraints, and experiment-loop rules. Not modified by the AI.">program.md</span>
+            strictly.
           </p>
         </div>
 
@@ -72,31 +72,31 @@
     </div><!-- /screen 1 -->
 
     <!-- ══════════════════════════════════════════════════════════
-         SCREEN 2 · 数据流动画
+         SCREEN 2 · Data flow animation
          ══════════════════════════════════════════════════════ -->
     <div class="screen animate-in">
-      <h2 class="screen-heading">实验循环：六步走完一轮</h2>
-      <p>点击"下一步"逐步观察 autoresearch 的完整实验循环。</p>
+      <h2 class="screen-heading">The experiment loop: six steps per round</h2>
+      <p>Click "Next" to walk through autoresearch's full experiment loop step by step.</p>
 
       <div class="flow-animation" id="flow-module1"
            data-steps='[
-             {"highlight":"actor-1","label":"人类写好 program.md：定义研究目标、实验边界、循环规则。AI 代理会严格按照这份文件行事。"},
-             {"packet":true,"from":"actor-1","to":"actor-2","label":"AI 代理读取 program.md，结合当前 val_bpb 结果，制定下一个实验想法。"},
-             {"highlight":"actor-3","label":"AI 代理修改 train.py：可能改模型深度、注意力头数、优化器类型、学习率等超参数。"},
-             {"packet":true,"from":"actor-3","to":"actor-4","label":"执行 uv run train.py：固定跑 5 分钟，GPU 计算 val_bpb。时间到，强制停止。"},
-             {"highlight":"actor-5","label":"val_bpb 更低？用 git commit 保留这次修改（keep）。否则 git reset 丢弃，恢复上个好状态（discard）。"},
-             {"packet":true,"from":"actor-5","to":"actor-2","label":"循环继续。AI 代理永不停止，直到人类中断进程。你醒来时已有 ~100 次实验完成。"}
+             {"highlight":"actor-1","label":"Human writes program.md: defines research goals, experiment boundaries, loop rules. The AI agent follows this file strictly."},
+             {"packet":true,"from":"actor-1","to":"actor-2","label":"AI agent reads program.md, looks at the current val_bpb result, and forms the next experiment idea."},
+             {"highlight":"actor-3","label":"AI agent modifies train.py: may change model depth, number of attention heads, optimizer type, learning rate, or other hyperparameters."},
+             {"packet":true,"from":"actor-3","to":"actor-4","label":"Runs uv run train.py: trains for a fixed 5 minutes on the GPU, computes val_bpb. Time is up, training stops."},
+             {"highlight":"actor-5","label":"val_bpb lower? git commit to keep the change (keep). Otherwise git reset to discard and restore the last good state (discard)."},
+             {"packet":true,"from":"actor-5","to":"actor-2","label":"Loop continues. The AI agent never stops, until the human interrupts. You wake up to ~100 completed experiments."}
            ]'>
 
         <!-- Actors row -->
         <div class="flow-actors">
           <div class="flow-actor" id="flow-actor-1">
             <div class="flow-actor-icon">👤</div>
-            <span>人类</span>
+            <span>Human</span>
           </div>
           <div class="flow-actor" id="flow-actor-2">
             <div class="flow-actor-icon">🤖</div>
-            <span>AI 代理</span>
+            <span>AI agent</span>
           </div>
           <div class="flow-actor" id="flow-actor-3">
             <div class="flow-actor-icon">📄</div>
@@ -108,7 +108,7 @@
           </div>
           <div class="flow-actor" id="flow-actor-5">
             <div class="flow-actor-icon">⚖️</div>
-            <span>结果判断</span>
+            <span>Verdict</span>
           </div>
         </div>
 
@@ -116,12 +116,12 @@
         <div class="flow-packet"></div>
 
         <!-- Step label -->
-        <div class="flow-step-label">点击"下一步"开始</div>
+        <div class="flow-step-label">Click "Next" to begin</div>
 
         <!-- Controls -->
         <div class="flow-controls">
-          <button class="btn btn-primary flow-next-btn">下一步</button>
-          <button class="btn flow-reset-btn">重置</button>
+          <button class="btn btn-primary flow-next-btn">Next</button>
+          <button class="btn flow-reset-btn">Reset</button>
           <span class="flow-progress"></span>
         </div>
 
@@ -129,35 +129,35 @@
     </div><!-- /screen 2 -->
 
     <!-- ══════════════════════════════════════════════════════════
-         SCREEN 3 · 固定 5 分钟的天才设计
+         SCREEN 3 · Why "fixed 5 minutes" is genius
          ══════════════════════════════════════════════════════ -->
     <div class="screen animate-in">
-      <h2 class="screen-heading">为什么"固定 5 分钟"是天才设计？</h2>
+      <h2 class="screen-heading">Why is "fixed 5 minutes" a genius design choice?</h2>
 
       <div class="callout callout-accent">
         <span class="callout-icon">⏱️</span>
         <div class="callout-content">
-          <span class="callout-title">时间预算而非步数预算</span>
+          <span class="callout-title">Time budget, not step budget</span>
           <p>
-            不管你把模型改大还是改小，batch size 加倍还是减半，每次实验都精确跑 5 分钟。
-            这让不同架构的实验<strong>直接可比</strong>，不需要手动对齐训练步数。
-            大模型每步慢，但 5 分钟内它仍然和小模型站在同一起跑线上竞争。
+            Whether you make the model bigger or smaller, double the batch size or halve it, every experiment runs for exactly 5 minutes.
+            This makes experiments across different architectures <strong>directly comparable</strong>, with no need to manually align training step counts.
+            Big models train slower per step, but within 5 minutes they still compete on the same starting line as small ones.
           </p>
         </div>
       </div>
 
       <p>
-        每次实验结束后，autoresearch 输出一份结构化的指标报告。
-        关键指标是
-        <span class="term" data-definition="val_bpb（Validation Bits Per Byte）：验证集每字节比特数，衡量语言模型质量，越低越好。与词表大小无关，可跨架构直接比较。">val_bpb</span>（验证集每字节比特数），它与
-        <span class="term" data-definition="BPE（Byte Pair Encoding）：字节对编码，一种常用的分词算法，将文本切割成 token。词表大小影响其他指标，但不影响 val_bpb。">BPE</span>
-        词表大小无关，可以跨架构直接比较。
+        After every experiment, autoresearch emits a structured metrics report.
+        The key number is
+        <span class="term" data-definition="val_bpb (Validation Bits Per Byte): Bits per byte on the validation set — measures language-model quality, lower is better. Independent of vocabulary size, so it can be compared across architectures.">val_bpb</span> (validation bits per byte), which is independent of
+        <span class="term" data-definition="BPE (Byte Pair Encoding): A common subword tokenization algorithm that splits text into tokens. Vocabulary size affects other metrics but not val_bpb.">BPE</span>
+        vocabulary size and can be compared directly across architectures.
       </p>
 
       <div class="translation-block animate-in">
-        <!-- LEFT: 结果输出示例 -->
+        <!-- LEFT: example output -->
         <div class="translation-code">
-          <span class="translation-label">结果输出示例</span>
+          <span class="translation-label">Example output</span>
 <span class="code-line"><span class="code-operator">---</span></span>
 <span class="code-line"><span class="code-property">val_bpb</span><span class="code-operator">:</span>          <span class="code-number">0.997900</span></span>
 <span class="code-line"><span class="code-property">training_seconds</span><span class="code-operator">:</span> <span class="code-number">300.1</span></span>
@@ -170,28 +170,28 @@
 <span class="code-line"><span class="code-property">depth</span><span class="code-operator">:</span>            <span class="code-number">8</span></span>
         </div>
 
-        <!-- RIGHT: 中文解释 -->
+        <!-- RIGHT: line-by-line explanation -->
         <div class="translation-english">
-          <span class="translation-label">中文解释</span>
+          <span class="translation-label">Line-by-line</span>
           <div class="translation-lines">
             <div class="tl">
-              <strong>val_bpb</strong>：
-              <span class="term" data-definition="验证集每字节比特数，衡量语言模型质量，越低越好，不受词表大小影响。">验证集每字节比特数，越低越好，不受词表大小影响</span>
+              <strong>val_bpb</strong>:
+              <span class="term" data-definition="Validation bits per byte — measures language-model quality, lower is better, unaffected by vocabulary size.">validation bits per byte, lower is better, unaffected by vocabulary size</span>
             </div>
-            <div class="tl"><strong>training_seconds</strong>：实际训练时长，固定约 300 秒（5 分钟）</div>
-            <div class="tl"><strong>total_seconds</strong>：含数据加载等额外开销的总耗时</div>
+            <div class="tl"><strong>training_seconds</strong>: actual training time, fixed at ~300s (5 minutes)</div>
+            <div class="tl"><strong>total_seconds</strong>: total time including data loading and overhead</div>
             <div class="tl">
-              <strong>peak_vram_mb</strong>：
-              <span class="term" data-definition="GPU（图形处理单元）：用于并行计算的芯片，深度学习训练的主要算力来源。">GPU</span>
-              显存峰值用量，单位为 MB
+              <strong>peak_vram_mb</strong>: peak
+              <span class="term" data-definition="GPU (Graphics Processing Unit): A chip for parallel compute; the main source of compute for deep-learning training.">GPU</span>
+              memory usage in MB
             </div>
-            <div class="tl"><strong>mfu_percent</strong>：模型 FLOPs 利用率，衡量 GPU 算力的实际使用效率</div>
-            <div class="tl"><strong>total_tokens_M</strong>：本次训练消耗的 token 总量（百万）</div>
-            <div class="tl"><strong>num_params_M</strong>：模型参数量（百万）</div>
+            <div class="tl"><strong>mfu_percent</strong>: model FLOPs utilization, measures how efficiently the GPU's compute is actually used</div>
+            <div class="tl"><strong>total_tokens_M</strong>: total tokens consumed by this training run (in millions)</div>
+            <div class="tl"><strong>num_params_M</strong>: model parameter count (in millions)</div>
             <div class="tl">
-              <strong>depth</strong>：
-              <span class="term" data-definition="Transformer：主流深度学习架构，用于构建 GPT 等大语言模型，基于自注意力机制处理序列数据。">Transformer</span>
-              层数，越深模型表达能力越强，但也越慢
+              <strong>depth</strong>:
+              <span class="term" data-definition="Transformer: The dominant deep-learning architecture, used to build GPT and other LLMs, based on self-attention over sequence data.">Transformer</span>
+              layer count — deeper means more expressive power, but slower
             </div>
           </div>
         </div>
@@ -200,47 +200,47 @@
       <div class="callout callout-info">
         <span class="callout-icon">💡</span>
         <div class="callout-content">
-          <span class="callout-title">结果如何记录？</span>
+          <span class="callout-title">How are results recorded?</span>
           <p>
-            每次实验都追加一行到 <code>results.tsv</code>，列包括：
-            <strong>commit</strong>（git commit hash）、
-            <strong>val_bpb</strong>、
-            <strong>memory_gb</strong>、
-            <strong>status</strong>（keep / discard / crash）、
-            <strong>description</strong>（AI 代理对本次改动的描述）。
-            你醒来就能看到完整的实验日志。
+            Every experiment appends a row to <code>results.tsv</code>, with columns:
+            <strong>commit</strong> (git commit hash),
+            <strong>val_bpb</strong>,
+            <strong>memory_gb</strong>,
+            <strong>status</strong> (keep / discard / crash),
+            <strong>description</strong> (the AI agent's description of the change).
+            By morning you have a full experiment log.
           </p>
         </div>
       </div>
     </div><!-- /screen 3 -->
 
     <!-- ══════════════════════════════════════════════════════════
-         SCREEN 4 · 测验
+         SCREEN 4 · Quiz
          ══════════════════════════════════════════════════════ -->
     <div class="screen animate-in">
-      <h2 class="screen-heading">小测验：检验你的理解</h2>
-      <p>三道题，每题选一个最佳答案，然后点"检查答案"。</p>
+      <h2 class="screen-heading">Quick quiz: check your understanding</h2>
+      <p>Three questions. Pick the best answer for each, then click "Check answers".</p>
 
       <div class="quiz-container" id="quiz-module1">
 
         <!-- ── Q1 ── -->
         <div class="quiz-question-block"
              data-correct="B"
-             data-explanation-right="固定时间让所有架构在相同的时间窗口内竞争，大模型慢但机会均等，实验结果可以直接比较，不需要手动对齐步数。"
-             data-explanation-wrong="固定步数时，大模型每步更慢、小模型每步更快，相同步数下实际训练时长差异巨大，结果不具可比性。固定时间才能让不同架构站在同一起跑线。">
-          <p class="quiz-question">Q1. 为什么 autoresearch 用"固定时间预算"而不是"固定训练步数"？</p>
+             data-explanation-right="A fixed time budget lets every architecture compete within the same time window — big models are slower but get an equal shot, and results are directly comparable, with no need to align step counts."
+             data-explanation-wrong="With a fixed step count, big models are slower per step and small ones are faster, so equal steps means very different actual training times — results are not comparable. Only a fixed time budget puts different architectures on the same starting line.">
+          <p class="quiz-question">Q1. Why does autoresearch use a "fixed time budget" instead of a "fixed step count"?</p>
           <div class="quiz-options">
             <button class="quiz-option" data-value="A" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              A. 固定步数更公平，因为每步消耗的 token 量相同
+              A. Fixed step count is fairer because each step processes the same number of tokens
             </button>
             <button class="quiz-option" data-value="B" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              B. 固定时间让不同架构的实验在相同条件下竞争，结果可直接比较
+              B. Fixed time lets different architectures compete under the same conditions, and results can be compared directly
             </button>
             <button class="quiz-option" data-value="C" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              C. GPU 训练无法精确控制步数，只能按时间停止
+              C. GPU training cannot control step count precisely, so it can only stop on time
             </button>
           </div>
           <div class="quiz-feedback"></div>
@@ -249,21 +249,21 @@
         <!-- ── Q2 ── -->
         <div class="quiz-question-block"
              data-correct="C"
-             data-explanation-right="train.py 包含模型架构定义、优化器、超参数——这些正是实验想要改变的变量。AI 代理通过修改 train.py 来做不同的实验。"
-             data-explanation-wrong="prepare.py 是只读的，包含固定的数据加载和评估逻辑，AI 代理不会碰它；program.md 是人类写的研究指令，同样不由 AI 修改。AI 代理唯一被允许改动的文件是 train.py。">
-          <p class="quiz-question">Q2. AI 代理在 autoresearch 循环中修改哪个文件？</p>
+             data-explanation-right="train.py contains the model architecture, optimizer, and hyperparameters — exactly the variables the experiment wants to vary. The AI agent runs different experiments by modifying train.py."
+             data-explanation-wrong="prepare.py is read-only — it holds the fixed data-loading and evaluation logic, the AI agent never touches it. program.md is the human-authored research instruction file, also off-limits for the AI. The only file the AI agent is allowed to modify is train.py.">
+          <p class="quiz-question">Q2. Which file does the AI agent modify in the autoresearch loop?</p>
           <div class="quiz-options">
             <button class="quiz-option" data-value="A" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              A. <span class="term" data-definition="prepare.py：autoresearch 中固定不变的数据准备脚本，包含数据加载和固定评估逻辑，AI 代理不允许修改。">prepare.py</span>
+              A. <span class="term" data-definition="prepare.py: The fixed data-preparation script in autoresearch. Contains data loading and the fixed evaluation logic; the AI agent is not allowed to modify it.">prepare.py</span>
             </button>
             <button class="quiz-option" data-value="B" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              B. <span class="term" data-definition="program.md：人类编写的研究指令文件，定义 AI 代理的目标和约束，不由 AI 修改。">program.md</span>
+              B. <span class="term" data-definition="program.md: The human-authored research instruction file. Defines the AI agent's goals and constraints; not modified by the AI.">program.md</span>
             </button>
             <button class="quiz-option" data-value="C" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              C. <span class="term" data-definition="train.py：autoresearch 的核心训练脚本，AI 代理唯一被允许修改的文件，包含模型架构、优化器、超参数。">train.py</span>
+              C. <span class="term" data-definition="train.py: The core training script in autoresearch. The only file the AI agent is allowed to modify; contains model architecture, optimizer, and hyperparameters.">train.py</span>
             </button>
           </div>
           <div class="quiz-feedback"></div>
@@ -272,21 +272,21 @@
         <!-- ── Q3 ── -->
         <div class="quiz-question-block"
              data-correct="B"
-             data-explanation-right="val_bpb 升高意味着模型质量变差了。正确做法是 git reset 丢弃这次改动，回到上一个好的状态，然后换一个新想法继续实验。"
-             data-explanation-wrong="val_bpb 越低越好。从 0.998 升到 1.005 是变差了，不应该保留；也不应该继续等待，因为固定 5 分钟的训练已经结束，结果是确定的，继续等没有意义。">
-          <p class="quiz-question">Q3. 一个实验的 <span class="term" data-definition="val_bpb（Validation Bits Per Byte）：验证集每字节比特数，越低越好，是 autoresearch 判断实验是否成功的唯一指标。">val_bpb</span> 从 0.998 升高到 1.005。AI 代理应该怎么做？</p>
+             data-explanation-right="A higher val_bpb means the model got worse. The right move is to git reset the change, return to the last good state, and try a new idea."
+             data-explanation-wrong="Lower val_bpb is better. Going from 0.998 to 1.005 is a regression and should not be kept. Waiting longer also doesn't help, because the fixed-5-minute training run has already ended — the result is final and won't change.">
+          <p class="quiz-question">Q3. An experiment's <span class="term" data-definition="val_bpb (Validation Bits Per Byte): Bits per byte on the validation set; lower is better. The single metric autoresearch uses to decide whether an experiment succeeded.">val_bpb</span> goes up from 0.998 to 1.005. What should the AI agent do?</p>
           <div class="quiz-options">
             <button class="quiz-option" data-value="A" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              A. 保留这次修改，继续下一个实验
+              A. Keep the change and move on to the next experiment
             </button>
             <button class="quiz-option" data-value="B" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              B. 丢弃（git reset），回到上个好的状态，换个想法继续
+              B. Discard (git reset), return to the last good state, and try a different idea
             </button>
             <button class="quiz-option" data-value="C" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              C. 继续跑更多实验，等待结果稳定后再判断
+              C. Run more experiments and wait for results to stabilize before deciding
             </button>
           </div>
           <div class="quiz-feedback"></div>
@@ -294,8 +294,8 @@
 
         <!-- Buttons -->
         <div>
-          <button class="quiz-check-btn" onclick="checkQuiz('quiz-module1')">检查答案</button>
-          <button class="quiz-reset-btn" onclick="resetQuiz('quiz-module1')">重置</button>
+          <button class="quiz-check-btn" onclick="checkQuiz('quiz-module1')">Check answers</button>
+          <button class="quiz-reset-btn" onclick="resetQuiz('quiz-module1')">Reset</button>
         </div>
 
       </div>

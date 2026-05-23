@@ -4,24 +4,24 @@
     <!-- ── MODULE HEADER ─────────────────────────────────────── -->
     <header class="module-header animate-in">
       <span class="module-number">03</span>
-      <h2 class="module-title">现代 GPT 解剖</h2>
+      <h2 class="module-title">Anatomy of a Modern GPT</h2>
       <p class="module-subtitle">
-        train.py 里塞了什么？——拆开一辆赛车引擎，每个零件都有存在的理由，每个改进都有论文支撑
+        What's actually packed into train.py? — Cracking open a race-car engine: every part has a reason to be there, every improvement is backed by a paper.
       </p>
     </header>
 
     <!-- ═══════════════════════════════════════════════════════ -->
-    <!-- SCREEN 1: 8 项现代改进总览                              -->
+    <!-- SCREEN 1: Overview of 8 modern improvements             -->
     <!-- ═══════════════════════════════════════════════════════ -->
     <div class="screen">
-      <h3 class="screen-heading animate-in">8 项现代改进总览</h3>
+      <h3 class="screen-heading animate-in">Eight modern improvements at a glance</h3>
 
       <p class="animate-in">
-        train.py 里的 <term class="term" data-definition="GPT-2 是 OpenAI 于 2019 年发布的语言模型，参数量约 15 亿。它奠定了自回归语言建模的标准架构，但受限于当时的研究水平，许多现代改进尚不存在。">GPT</term>
-        不是 2019 年的 GPT-2。它是 Karpathy 从 2024–2025 年最前沿的研究中精心挑选的 <strong>8 项改进的集合体</strong>。
-        每一项改进都可以被 AI 代理单独实验——关掉 Value Embedding，换掉 SSSL 模式，改变
-        <span class="term" data-definition="softcap：对 logits（原始分类分数）做软性截断，防止数值过大导致训练不稳定。来自 Google Gemma 2 论文，公式为 softcap × tanh(logits / softcap)。">softcap</span>
-        值，全都可以测试。
+        The <term class="term" data-definition="GPT-2 is OpenAI's 2019 language model with ~1.5B parameters. It established the standard architecture for autoregressive language modeling, but many of today's modern improvements did not yet exist.">GPT</term>
+        in train.py is not 2019's GPT-2. It's a careful mix of <strong>8 improvements</strong> that Karpathy hand-picked from 2024–2025 frontier research.
+        Each improvement is an independent experimental knob — turn off Value Embedding, switch the SSSL pattern, change the
+        <span class="term" data-definition="softcap: A soft cap on logits (raw classification scores) to prevent numerical blowup that destabilizes training. From Google's Gemma 2 paper; formula: softcap × tanh(logits / softcap).">softcap</span>
+        value, all are fair game.
       </p>
 
       <!-- Row 1: 4 cards -->
@@ -30,31 +30,31 @@
         <div class="pattern-card animate-in">
           <div class="pattern-icon" style="background: var(--color-accent-light);">⚡</div>
           <div class="pattern-title">
-            <span class="term" data-definition="RMSNorm（Root Mean Square Normalization）：只用均方根做归一化，省去了 LayerNorm 的均值减法步骤，更简单更快，数值稳定性相当。LLaMA、Mistral 等现代大模型均采用此方案。">RMSNorm</span>
+            <span class="term" data-definition="RMSNorm (Root Mean Square Normalization): Normalizes using only the root mean square, skipping LayerNorm's mean-subtraction step. Simpler, faster, equally stable numerically. Standard in LLaMA, Mistral, and other modern LLMs.">RMSNorm</span>
           </div>
-          <p class="pattern-desc">替代 LayerNorm，更简单更快，无需计算均值。现代 LLM 的标准选择，LLaMA / Mistral 均采用。</p>
+          <p class="pattern-desc">Replaces LayerNorm — simpler and faster, no mean computation needed. The standard choice for modern LLMs; used in LLaMA and Mistral.</p>
         </div>
 
         <div class="pattern-card animate-in">
           <div class="pattern-icon" style="background: var(--color-accent-light);">🔄</div>
           <div class="pattern-title">
-            <span class="term" data-definition="RoPE（Rotary Positional Embedding）：旋转位置编码，通过将 Q/K 向量在复数空间旋转来注入位置信息，而非传统的加法式位置嵌入。优点：相对位置的点积天然保留，且可外推到训练时未见过的序列长度。">RoPE</span>
+            <span class="term" data-definition="RoPE (Rotary Positional Embedding): Injects position information by rotating Q/K vectors in complex space, rather than adding a positional embedding. Benefits: the dot product naturally encodes relative position, and it extrapolates to sequence lengths unseen during training.">RoPE</span>
           </div>
-          <p class="pattern-desc">旋转位置编码，通过旋转 Q/K 向量而非加法注入位置信息，可外推到训练时未见过的长度。</p>
+          <p class="pattern-desc">Rotary positional embeddings — encodes position by rotating Q/K vectors instead of adding to them. Extrapolates to lengths unseen during training.</p>
         </div>
 
         <div class="pattern-card animate-in">
           <div class="pattern-icon" style="background: var(--color-accent-light);">🗂️</div>
           <div class="pattern-title">
-            <span class="term" data-definition="GQA（Grouped Query Attention，分组查询注意力）：K/V 头数可以少于 Q 头数，多个 Q 头共享同一组 K/V 头。这大幅减少 KV cache 的显存占用，同等显存下可以跑更大 batch 或更长序列。">GQA</span>
+            <span class="term" data-definition="GQA (Grouped Query Attention): K/V heads can be fewer than Q heads, with multiple Q heads sharing the same K/V group. Greatly reduces KV-cache VRAM usage; on the same hardware you can run larger batches or longer sequences.">GQA</span>
           </div>
-          <p class="pattern-desc">分组查询注意力，K/V 头数可以少于 Q 头数，减少 KV 缓存，可在更大 batch 下训练。</p>
+          <p class="pattern-desc">Grouped query attention — fewer K/V heads than Q heads, shrinks KV cache, enables larger batch sizes in training.</p>
         </div>
 
         <div class="pattern-card animate-in">
           <div class="pattern-icon" style="background: var(--color-accent-light);">🔀</div>
           <div class="pattern-title">Value Embedding</div>
-          <p class="pattern-desc">ResFormer 改进：向 V 向量注入 token 嵌入信息，交替层启用，用门控调节混合比例，改善梯度流。</p>
+          <p class="pattern-desc">A ResFormer improvement: injects token embedding info into the V vector, enabled on alternating layers, with a gate controlling the mix ratio. Improves gradient flow.</p>
         </div>
 
       </div>
@@ -64,26 +64,26 @@
 
         <div class="pattern-card animate-in">
           <div class="pattern-icon" style="background: var(--color-accent-light);">🪟</div>
-          <div class="pattern-title">滑动窗口注意力</div>
-          <p class="pattern-desc">SSSL 模式：大多数层只看前半段序列（高效），最后一层强制看完整序列，平衡效率与全局感知。</p>
+          <div class="pattern-title">Sliding-window attention</div>
+          <p class="pattern-desc">SSSL pattern: most layers only see the first half of the sequence (efficient), the last layer is forced to see the full sequence — balances efficiency and global view.</p>
         </div>
 
         <div class="pattern-card animate-in">
           <div class="pattern-icon" style="background: var(--color-accent-light);">📐</div>
           <div class="pattern-title">Squared ReLU</div>
-          <p class="pattern-desc">MLP 激活函数用 relu²，比 GELU 更稀疏（更多精确零值），计算更快，实验效果相当甚至更好。</p>
+          <p class="pattern-desc">MLP activation uses relu² — sparser than GELU (more exact zeros), faster to compute, and empirically just as good or better.</p>
         </div>
 
         <div class="pattern-card animate-in">
           <div class="pattern-icon" style="background: var(--color-accent-light);">🧢</div>
           <div class="pattern-title">Softcap logits</div>
-          <p class="pattern-desc">来自 Gemma 2：用 tanh 软性截断 logits，防止数值爆炸导致训练不稳定，比硬 clip 更平滑。</p>
+          <p class="pattern-desc">From Gemma 2: tanh-based soft truncation of logits, preventing numerical blowup that destabilizes training. Smoother than a hard clip.</p>
         </div>
 
         <div class="pattern-card animate-in">
           <div class="pattern-icon" style="background: var(--color-accent-light);">🧭</div>
-          <div class="pattern-title">Muon 优化器</div>
-          <p class="pattern-desc">梯度正交化优化器，用 Newton-Schulz 迭代让每步更新"最大程度地不同"，避免重复走相同方向。</p>
+          <div class="pattern-title">Muon optimizer</div>
+          <p class="pattern-desc">Gradient-orthogonalizing optimizer — uses Newton-Schulz iteration to make every update step "maximally distinct", avoiding repeated movement in the same direction.</p>
         </div>
 
       </div>
@@ -91,107 +91,107 @@
       <div class="callout callout-info animate-in" style="margin-top: var(--space-8);">
         <span class="callout-icon">🔬</span>
         <div class="callout-content">
-          <span class="callout-title">AI 代理的实验空间</span>
-          <p>这 8 项改进每一个都有对应的超参数或开关。AI 代理可以系统性地开启/关闭每项改进，测量其对
-          <span class="term" data-definition="MFU（Model FLOP Utilization）：模型的实际算力利用率，等于实测吞吐量除以理论峰值算力。MFU 接近 100% 说明 GPU 算力被充分利用；autoresearch 会在每次实验后记录 MFU。">MFU</span>
-          和验证损失的影响，自动生成消融实验报告。</p>
+          <span class="callout-title">The AI agent's experimental space</span>
+          <p>Each of these 8 improvements maps to a hyperparameter or toggle. The AI agent can systematically enable/disable each improvement and measure its impact on
+          <span class="term" data-definition="MFU (Model FLOP Utilization): The model's actual compute utilization — measured throughput divided by theoretical peak FLOPs. Near 100% MFU means the GPU is being fully used. autoresearch logs MFU after every experiment.">MFU</span>
+          and validation loss, automatically producing ablation reports.</p>
         </div>
       </div>
     </div>
 
     <!-- ═══════════════════════════════════════════════════════ -->
-    <!-- SCREEN 2: 注意力机制三件套代码解析                       -->
+    <!-- SCREEN 2: Attention trio code walkthrough               -->
     <!-- ═══════════════════════════════════════════════════════ -->
     <div class="screen">
-      <h3 class="screen-heading animate-in">注意力机制三件套：GQA + Value Embedding + RoPE</h3>
+      <h3 class="screen-heading animate-in">Attention trio: GQA + Value Embedding + RoPE</h3>
 
-      <p class="animate-in">三项改进协同工作，共同构成 train.py 的注意力核心。左侧是简化后的实际代码，右侧是逐行中文解释。</p>
+      <p class="animate-in">Three improvements work together to form the attention core in train.py. On the left is the simplified actual code; on the right, a line-by-line explanation.</p>
 
       <div class="translation-block animate-in">
         <div class="translation-code">
           <span class="translation-label">Python</span>
-<span class="code-line"><span class="code-comment"># QKV 投影（GQA：K/V 头可以更少）</span></span>
+<span class="code-line"><span class="code-comment"># QKV projection (GQA: K/V heads can be fewer)</span></span>
 <span class="code-line"><span class="code-property">q</span> <span class="code-operator">=</span> self.c_q(x).view(B, T, n_head, head_dim)</span>
 <span class="code-line"><span class="code-property">k</span> <span class="code-operator">=</span> self.c_k(x).view(B, T, n_kv_head, head_dim)</span>
 <span class="code-line"><span class="code-property">v</span> <span class="code-operator">=</span> self.c_v(x).view(B, T, n_kv_head, head_dim)</span>
 <span class="code-line"></span>
-<span class="code-line"><span class="code-comment"># Value Embedding（交替层才有）</span></span>
+<span class="code-line"><span class="code-comment"># Value Embedding (only on alternating layers)</span></span>
 <span class="code-line"><span class="code-keyword">if</span> ve <span class="code-keyword">is not</span> <span class="code-keyword">None</span>:</span>
 <span class="code-line">    gate <span class="code-operator">=</span> <span class="code-number">2</span> <span class="code-operator">*</span> torch.sigmoid(</span>
 <span class="code-line">        self.ve_gate(x[..., :<span class="code-number">32</span>]))</span>
 <span class="code-line">    v <span class="code-operator">=</span> v <span class="code-operator">+</span> gate.unsqueeze(<span class="code-operator">-</span><span class="code-number">1</span>) <span class="code-operator">*</span> ve</span>
 <span class="code-line"></span>
-<span class="code-line"><span class="code-comment"># RoPE 旋转位置编码</span></span>
+<span class="code-line"><span class="code-comment"># RoPE rotary positional embedding</span></span>
 <span class="code-line">q <span class="code-operator">=</span> <span class="code-function">apply_rotary_emb</span>(q, cos, sin)</span>
 <span class="code-line">k <span class="code-operator">=</span> <span class="code-function">apply_rotary_emb</span>(k, cos, sin)</span>
-<span class="code-line"><span class="code-comment"># QK 归一化（防注意力权重爆炸）</span></span>
+<span class="code-line"><span class="code-comment"># QK norm (prevents attention-weight blowup)</span></span>
 <span class="code-line">q, k <span class="code-operator">=</span> <span class="code-function">norm</span>(q), <span class="code-function">norm</span>(k)</span>
 <span class="code-line"></span>
-<span class="code-line"><span class="code-comment"># Flash Attention 3（硬件加速）</span></span>
+<span class="code-line"><span class="code-comment"># Flash Attention 3 (hardware acceleration)</span></span>
 <span class="code-line">y <span class="code-operator">=</span> fa3.<span class="code-function">flash_attn_func</span>(</span>
 <span class="code-line">    q, k, v, causal<span class="code-operator">=</span><span class="code-keyword">True</span>,</span>
 <span class="code-line">    window_size<span class="code-operator">=</span>window_size)</span>
         </div>
         <div class="translation-english">
-          <span class="translation-label">逐行解读</span>
+          <span class="translation-label">Line-by-line</span>
           <div class="translation-lines">
             <div class="tl">
-              <strong>q / k / v 的形状差异</strong><br>
-              q 的形状是 <code>(B, T, n_head, head_dim)</code>；k/v 的形状是 <code>(B, T, n_kv_head, head_dim)</code>。
-              <span class="term" data-definition="GQA（Grouped Query Attention，分组查询注意力）：K/V 头数可以少于 Q 头数，多个 Q 头共享同一组 K/V 头。这大幅减少 KV cache 的显存占用，同等显存下可以跑更大 batch 或更长序列。">GQA</span>
-              的妙处：<code>n_kv_head &lt; n_head</code> 时，多个 Q 头共享同一组 K/V 头，
-              <span class="term" data-definition="KV cache：推理时为了不重复计算已生成的 token，把每层的 K、V 矩阵缓存起来。序列越长、头数越多，KV cache 越大，是 LLM 推理的主要显存瓶颈。">KV 缓存</span>
-              和计算量同步减少。
+              <strong>q / k / v shape difference</strong><br>
+              q has shape <code>(B, T, n_head, head_dim)</code>; k/v have shape <code>(B, T, n_kv_head, head_dim)</code>. The clever bit of
+              <span class="term" data-definition="GQA (Grouped Query Attention): K/V heads can be fewer than Q heads, with multiple Q heads sharing the same K/V group. Greatly reduces KV-cache VRAM usage.">GQA</span>:
+              when <code>n_kv_head &lt; n_head</code>, multiple Q heads share one K/V group, cutting down both
+              <span class="term" data-definition="KV cache: At inference time, to avoid recomputing K, V for already-generated tokens, the K and V matrices for each layer are cached. The longer the sequence and the more heads, the bigger the KV cache — and it's the main memory bottleneck in LLM inference.">KV cache</span>
+              and compute.
             </div>
             <div class="tl">
-              <strong>ve_gate：输入驱动的混合门控</strong><br>
-              用输入 x 的前 32 个维度计算一个门控值（sigmoid 输出 0–1，乘 2 使范围变为 0–2），控制有多少 Value Embedding 被混入当前的 v 向量中。门控值依赖输入内容，让模型自适应决定每个 token 需要多少"原始嵌入信息"。
+              <strong>ve_gate: input-driven mix gate</strong><br>
+              Computes a gate value from the first 32 dimensions of input x (sigmoid output 0–1, multiplied by 2 to give range 0–2), controlling how much Value Embedding to mix into the current v vector. Since the gate depends on the input, the model adaptively decides how much "raw embedding info" each token needs.
             </div>
             <div class="tl">
-              <strong>apply_rotary_emb：位置通过旋转编码</strong><br>
-              把 q/k 的向量维度两两配对，按 token 位置对应的角度旋转。两个位置相对距离固定时，它们的点积自然反映相对位置——无需额外的位置嵌入表，且可推广到训练时未见的更长序列。
+              <strong>apply_rotary_emb: position via rotation</strong><br>
+              Pairs up dimensions of q/k and rotates each pair by an angle that depends on the token's position. When two positions are at a fixed relative distance, their dot product naturally reflects that relative distance — no extra positional embedding table needed, and it generalizes to longer sequences than seen during training.
             </div>
             <div class="tl">
-              <strong>window_size：SSSL 滑动窗口</strong><br>
-              SSSL 模式下，S 层只看前半段序列（window_size = T/2），L 层看全部（window_size = T）。
-              <span class="term" data-definition="Flash Attention：Dao-AILab 开发的高效注意力计算 kernel，通过分块计算和 IO 感知调度大幅减少显存访问，速度比标准注意力快 2–4x。Flash Attention 3 进一步利用 Hopper GPU 的 Tensor Core 和 WGMMA 指令提速。">Flash Attention 3</span>
-              直接在 kernel 层处理滑动窗口，无需在 Python 层做掩码。
+              <strong>window_size: SSSL sliding window</strong><br>
+              In the SSSL pattern, S layers only see the first half of the sequence (window_size = T/2), L layers see all of it (window_size = T).
+              <span class="term" data-definition="Flash Attention: An efficient attention kernel from Dao-AILab. By using IO-aware tiling, it dramatically cuts memory access and runs 2–4x faster than standard attention. Flash Attention 3 further leverages Hopper GPU Tensor Cores and WGMMA instructions.">Flash Attention 3</span>
+              handles the sliding window directly in the kernel — no Python-level masking required.
             </div>
           </div>
         </div>
       </div>
 
-      <!-- RoPE 可视化说明 -->
+      <!-- RoPE intuition -->
       <div class="callout callout-accent animate-in">
         <span class="callout-icon">🔄</span>
         <div class="callout-content">
-          <span class="callout-title">RoPE 直觉：旋转 = 相对位置</span>
+          <span class="callout-title">RoPE intuition: rotation = relative position</span>
           <p>
-            设 token A 在位置 3，token B 在位置 7，相对距离是 4。RoPE 把 q<sub>A</sub> 旋转 3θ，k<sub>B</sub> 旋转 7θ，
-            它们的点积里包含的是 (7−3)θ = 4θ，只依赖相对位置。传统可学习位置嵌入做不到这一点，
-            而且训练时没见过的位置 index 可以继续旋转——这就是 RoPE 可以"外推"的原因。
+            Say token A is at position 3 and token B is at position 7 — relative distance is 4. RoPE rotates q<sub>A</sub> by 3θ and k<sub>B</sub> by 7θ;
+            their dot product contains (7−3)θ = 4θ, which depends only on relative position. Traditional learned positional embeddings can't do this,
+            and positions never seen during training can still be rotated — that's why RoPE "extrapolates".
           </p>
         </div>
       </div>
     </div>
 
     <!-- ═══════════════════════════════════════════════════════ -->
-    <!-- SCREEN 3: MLP + 高级技巧                                -->
+    <!-- SCREEN 3: MLP + advanced tricks                         -->
     <!-- ═══════════════════════════════════════════════════════ -->
     <div class="screen">
-      <h3 class="screen-heading animate-in">MLP + 高级稳定技巧：Squared ReLU、Softcap、ResFormer 残差</h3>
+      <h3 class="screen-heading animate-in">MLP + advanced stability tricks: Squared ReLU, Softcap, ResFormer residuals</h3>
 
       <p class="animate-in">
-        注意力层之外，train.py 在 MLP 激活函数、输出归一化、残差连接三处都做了现代化升级。
-        这三处改进看似小，合在一起让训练更稳定、
-        <span class="term" data-definition="gradient（梯度）：损失函数对每个参数的偏导数，指示参数应该朝哪个方向调整以减小损失。深层网络中梯度容易在反向传播中消失（接近零）或爆炸（无穷大）。">梯度</span>
-        流向更深。
+        Beyond the attention layer, train.py modernizes the MLP activation, output normalization, and residual connections.
+        These three changes each look small, but together they make training more stable and help
+        <span class="term" data-definition="gradient: The partial derivative of the loss with respect to each parameter, indicating which direction the parameter should be nudged to reduce the loss. In deep networks, gradients can easily vanish (approach zero) or explode (toward infinity) during backpropagation.">gradients</span>
+        flow deeper.
       </p>
 
       <div class="translation-block animate-in">
         <div class="translation-code">
           <span class="translation-label">Python</span>
-<span class="code-line"><span class="code-comment"># MLP：Squared ReLU</span></span>
+<span class="code-line"><span class="code-comment"># MLP: Squared ReLU</span></span>
 <span class="code-line"><span class="code-keyword">class</span> <span class="code-function">MLP</span>(nn.Module):</span>
 <span class="code-line">    <span class="code-keyword">def</span> <span class="code-function">forward</span>(self, x):</span>
 <span class="code-line">        x <span class="code-operator">=</span> self.c_fc(x)</span>
@@ -199,39 +199,39 @@
 <span class="code-line">        x <span class="code-operator">=</span> self.c_proj(x)</span>
 <span class="code-line">        <span class="code-keyword">return</span> x</span>
 <span class="code-line"></span>
-<span class="code-line"><span class="code-comment"># Softcap（来自 Gemma 2）</span></span>
+<span class="code-line"><span class="code-comment"># Softcap (from Gemma 2)</span></span>
 <span class="code-line">softcap <span class="code-operator">=</span> <span class="code-number">15</span></span>
 <span class="code-line">logits <span class="code-operator">=</span> softcap <span class="code-operator">*</span> \</span>
 <span class="code-line">    torch.tanh(logits <span class="code-operator">/</span> softcap)</span>
 <span class="code-line"></span>
-<span class="code-line"><span class="code-comment"># ResFormer 残差混合</span></span>
+<span class="code-line"><span class="code-comment"># ResFormer residual mix</span></span>
 <span class="code-line">x <span class="code-operator">=</span> self.resid_lambdas[i] <span class="code-operator">*</span> x <span class="code-operator">+</span> \</span>
 <span class="code-line">    self.x0_lambdas[i] <span class="code-operator">*</span> x0</span>
         </div>
         <div class="translation-english">
-          <span class="translation-label">逐行解读</span>
+          <span class="translation-label">Line-by-line</span>
           <div class="translation-lines">
             <div class="tl">
-              <strong>relu²（Squared ReLU）</strong><br>
-              比 GELU 更稀疏：大量激活值精确为 0（只有正值被保留，且正值被平方放大），计算更快。
-              实验表明效果相当甚至更好，且没有 GELU 的近似误差。
+              <strong>relu² (Squared ReLU)</strong><br>
+              Sparser than GELU — many activations are exactly 0 (only positive values are kept, and they're squared). Faster to compute.
+              Experimentally, it's as good or better than GELU, with no GELU approximation error.
             </div>
             <div class="tl">
-              <strong>softcap：把 logits 软性锁在 [−15, 15]</strong><br>
-              原始
-              <span class="term" data-definition="backpropagation（反向传播）：计算损失函数对网络每个参数的梯度的算法，通过链式法则从输出层反向逐层计算。logits 过大时，softmax 的梯度接近零，反向传播无法有效传递信号。">backpropagation</span>
-              过程中，logits 无界增长会让 softmax 饱和、梯度消失。softcap 用 tanh 软性截断
-              而非硬 clip，导数处处存在，不破坏梯度流，训练稳定性显著提升。
+              <strong>softcap: softly pins logits to [−15, 15]</strong><br>
+              In raw
+              <span class="term" data-definition="backpropagation: The algorithm that computes the gradient of the loss with respect to each network parameter, working backward layer by layer via the chain rule. When logits get too big, softmax saturates and gradients approach zero, so backprop can't propagate signal.">backpropagation</span>,
+              unbounded logit growth saturates softmax and kills gradients. softcap softly caps with tanh
+              rather than hard-clipping — derivatives exist everywhere, gradient flow stays intact, and training stability improves significantly.
             </div>
             <div class="tl">
-              <strong>resid_lambdas：残差缩放</strong><br>
-              每层独立学习一个缩放因子，初始化为 1.0（等同于标准残差连接）。
-              训练中模型可以自适应调整每层残差强度。
+              <strong>resid_lambdas: residual scaling</strong><br>
+              Each layer independently learns a scaling factor, initialized to 1.0 (equivalent to standard residual connections).
+              During training the model can adapt the residual strength per layer.
             </div>
             <div class="tl">
-              <strong>x0_lambdas：原始嵌入注入</strong><br>
-              x0 是第 0 层的输入（原始 token 嵌入）。每层都有少量 x0 混入（初始 0.1），
-              确保深层仍能直接访问原始语义信息，改善深层梯度流。
+              <strong>x0_lambdas: original-embedding injection</strong><br>
+              x0 is the layer-0 input (raw token embedding). Every layer mixes in a small amount of x0 (initially 0.1),
+              ensuring deep layers can still access the original semantic info — improving deep gradient flow.
             </div>
           </div>
         </div>
@@ -239,72 +239,72 @@
 
       <!-- Sliding window visual -->
       <h4 class="screen-heading animate-in" style="font-size: var(--text-xl); margin-top: var(--space-8);">
-        SSSL 滑动窗口模式可视化
+        SSSL sliding-window pattern visualized
       </h4>
 
       <div class="animate-in" style="background: var(--color-surface); border-radius: var(--radius-md); padding: var(--space-6); box-shadow: var(--shadow-sm); margin: var(--space-4) 0;">
         <p style="font-size: var(--text-sm); color: var(--color-text-secondary); margin-bottom: var(--space-4);">
           <code style="font-family: var(--font-mono); background: var(--color-bg-code); color: #CBA6F7; padding: 2px 6px; border-radius: 4px;">WINDOW_PATTERN = "SSSL"</code>
-          — 每 4 层重复一次，最后一层（L）始终强制为全上下文
+          — repeats every 4 layers; the last layer (L) is always forced to use full context
         </p>
         <!-- Visual grid of layers -->
         <div style="display: flex; gap: var(--space-2); flex-wrap: wrap;">
           <div style="display: flex; flex-direction: column; align-items: center; gap: var(--space-1);">
             <div style="width: 56px; height: 56px; border-radius: var(--radius-sm); background: var(--color-accent-light); border: 2px solid var(--color-accent-muted); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-weight: 700; font-size: var(--text-sm); color: var(--color-accent);">L0<br><span style="font-size: 0.6rem; color: var(--color-text-muted);">S</span></div>
-            <span style="font-size: var(--text-xs); color: var(--color-text-muted);">半窗</span>
+            <span style="font-size: var(--text-xs); color: var(--color-text-muted);">half-window</span>
           </div>
           <div style="display: flex; flex-direction: column; align-items: center; gap: var(--space-1);">
             <div style="width: 56px; height: 56px; border-radius: var(--radius-sm); background: var(--color-accent-light); border: 2px solid var(--color-accent-muted); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-weight: 700; font-size: var(--text-sm); color: var(--color-accent);">L1<br><span style="font-size: 0.6rem; color: var(--color-text-muted);">S</span></div>
-            <span style="font-size: var(--text-xs); color: var(--color-text-muted);">半窗</span>
+            <span style="font-size: var(--text-xs); color: var(--color-text-muted);">half-window</span>
           </div>
           <div style="display: flex; flex-direction: column; align-items: center; gap: var(--space-1);">
             <div style="width: 56px; height: 56px; border-radius: var(--radius-sm); background: var(--color-accent-light); border: 2px solid var(--color-accent-muted); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-weight: 700; font-size: var(--text-sm); color: var(--color-accent);">L2<br><span style="font-size: 0.6rem; color: var(--color-text-muted);">S</span></div>
-            <span style="font-size: var(--text-xs); color: var(--color-text-muted);">半窗</span>
+            <span style="font-size: var(--text-xs); color: var(--color-text-muted);">half-window</span>
           </div>
           <div style="display: flex; flex-direction: column; align-items: center; gap: var(--space-1);">
             <div style="width: 56px; height: 56px; border-radius: var(--radius-sm); background: var(--color-success-light); border: 2px solid var(--color-success); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-weight: 700; font-size: var(--text-sm); color: var(--color-success);">L3<br><span style="font-size: 0.6rem;">L</span></div>
-            <span style="font-size: var(--text-xs); color: var(--color-success);">全上下文</span>
+            <span style="font-size: var(--text-xs); color: var(--color-success);">full context</span>
           </div>
           <div style="display: flex; align-items: center; padding: 0 var(--space-2); color: var(--color-text-muted);">···</div>
           <div style="display: flex; flex-direction: column; align-items: center; gap: var(--space-1);">
             <div style="width: 56px; height: 56px; border-radius: var(--radius-sm); background: var(--color-accent-light); border: 2px solid var(--color-accent-muted); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-weight: 700; font-size: var(--text-sm); color: var(--color-accent);">Ln-3<br><span style="font-size: 0.6rem; color: var(--color-text-muted);">S</span></div>
-            <span style="font-size: var(--text-xs); color: var(--color-text-muted);">半窗</span>
+            <span style="font-size: var(--text-xs); color: var(--color-text-muted);">half-window</span>
           </div>
           <div style="display: flex; flex-direction: column; align-items: center; gap: var(--space-1);">
             <div style="width: 56px; height: 56px; border-radius: var(--radius-sm); background: var(--color-accent-light); border: 2px solid var(--color-accent-muted); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-weight: 700; font-size: var(--text-sm); color: var(--color-accent);">Ln-2<br><span style="font-size: 0.6rem; color: var(--color-text-muted);">S</span></div>
-            <span style="font-size: var(--text-xs); color: var(--color-text-muted);">半窗</span>
+            <span style="font-size: var(--text-xs); color: var(--color-text-muted);">half-window</span>
           </div>
           <div style="display: flex; flex-direction: column; align-items: center; gap: var(--space-1);">
             <div style="width: 56px; height: 56px; border-radius: var(--radius-sm); background: var(--color-accent-light); border: 2px solid var(--color-accent-muted); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-weight: 700; font-size: var(--text-sm); color: var(--color-accent);">Ln-1<br><span style="font-size: 0.6rem; color: var(--color-text-muted);">S</span></div>
-            <span style="font-size: var(--text-xs); color: var(--color-text-muted);">半窗</span>
+            <span style="font-size: var(--text-xs); color: var(--color-text-muted);">half-window</span>
           </div>
           <div style="display: flex; flex-direction: column; align-items: center; gap: var(--space-1);">
             <div style="width: 64px; height: 56px; border-radius: var(--radius-sm); background: var(--color-success-light); border: 2px solid var(--color-success); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-weight: 700; font-size: var(--text-sm); color: var(--color-success);">Ln<br><span style="font-size: 0.6rem;">L★</span></div>
-            <span style="font-size: var(--text-xs); color: var(--color-success); font-weight: 600;">强制全窗</span>
+            <span style="font-size: var(--text-xs); color: var(--color-success); font-weight: 600;">forced full</span>
           </div>
         </div>
         <p style="font-size: var(--text-xs); color: var(--color-text-muted); margin-top: var(--space-3);">
-          代码保证 <code style="font-family: var(--font-mono); background: var(--color-bg-code); color: #A6E3A1; padding: 1px 5px; border-radius: 3px;">window_sizes[-1]</code> 始终等于完整上下文长度，不受 SSSL 模式影响。
+          The code ensures <code style="font-family: var(--font-mono); background: var(--color-bg-code); color: #A6E3A1; padding: 1px 5px; border-radius: 3px;">window_sizes[-1]</code> always equals the full context length, regardless of the SSSL pattern.
         </p>
       </div>
     </div>
 
     <!-- ═══════════════════════════════════════════════════════ -->
-    <!-- SCREEN 4: MuonAdamW 优化器                              -->
+    <!-- SCREEN 4: MuonAdamW optimizer                           -->
     <!-- ═══════════════════════════════════════════════════════ -->
     <div class="screen">
-      <h3 class="screen-heading animate-in">MuonAdamW 优化器：让梯度正交</h3>
+      <h3 class="screen-heading animate-in">MuonAdamW optimizer: make gradients orthogonal</h3>
 
       <div class="callout callout-accent animate-in">
         <span class="callout-icon">🧭</span>
         <div class="callout-content">
-          <span class="callout-title">Muon：让梯度正交</span>
+          <span class="callout-title">Muon: orthogonalize the gradient</span>
           <p>
-            标准 SGD/Adam 直接用
-            <span class="term" data-definition="gradient（梯度）：损失函数对每个参数的偏导数，指示参数应该朝哪个方向调整以减小损失。梯度方向不一定是最优更新方向——Muon 通过正交化找到"最大程度不同"的更新方向。">梯度</span>
-            更新权重。Muon 先把梯度矩阵投影到正交方向——用
-            <strong>Polar Express Newton-Schulz 迭代</strong>计算正交化矩阵，然后再更新。
-            这让每步更新都"最大程度地不同"，避免重复走相同方向，等效于在权重更新空间做 steepest descent。
+            Standard SGD/Adam use the
+            <span class="term" data-definition="gradient: Partial derivative of the loss with respect to each parameter — points in the direction that increases the loss most steeply. But that direction isn't necessarily the optimal update direction; Muon finds 'maximally distinct' directions via orthogonalization.">gradient</span>
+            directly to update weights. Muon first projects the gradient matrix onto orthogonal directions — using
+            <strong>Polar Express Newton-Schulz iteration</strong> to compute the orthogonalized matrix — then updates.
+            This makes every update "maximally distinct" from previous ones, avoiding repeated motion in the same direction, equivalent to a steepest-descent step in weight-update space.
           </p>
         </div>
       </div>
@@ -313,41 +313,41 @@
         <div class="translation-code">
           <span class="translation-label">Python</span>
 <span class="code-line">param_groups <span class="code-operator">=</span> [</span>
-<span class="code-line">    <span class="code-comment"># AdamW 管嵌入层和标量</span></span>
+<span class="code-line">    <span class="code-comment"># AdamW handles embeddings and scalars</span></span>
 <span class="code-line">    <span class="code-function">dict</span>(kind<span class="code-operator">=</span><span class="code-string">'adamw'</span>,</span>
 <span class="code-line">         params<span class="code-operator">=</span>embedding_params,</span>
 <span class="code-line">         lr<span class="code-operator">=</span>EMBEDDING_LR <span class="code-operator">*</span> dmodel_lr_scale,</span>
 <span class="code-line">         betas<span class="code-operator">=</span>ADAM_BETAS),</span>
-<span class="code-line">    <span class="code-comment"># Muon 管矩阵参数</span></span>
+<span class="code-line">    <span class="code-comment"># Muon handles matrix params</span></span>
 <span class="code-line">    <span class="code-function">dict</span>(kind<span class="code-operator">=</span><span class="code-string">'muon'</span>,</span>
 <span class="code-line">         params<span class="code-operator">=</span>matrix_params,</span>
 <span class="code-line">         lr<span class="code-operator">=</span>MATRIX_LR,</span>
 <span class="code-line">         momentum<span class="code-operator">=</span><span class="code-number">0.95</span>,</span>
-<span class="code-line">         ns_steps<span class="code-operator">=</span><span class="code-number">5</span>),  <span class="code-comment"># N-S 迭代次数</span></span>
+<span class="code-line">         ns_steps<span class="code-operator">=</span><span class="code-number">5</span>),  <span class="code-comment"># N-S iteration count</span></span>
 <span class="code-line">]</span>
         </div>
         <div class="translation-english">
-          <span class="translation-label">逐行解读</span>
+          <span class="translation-label">Line-by-line</span>
           <div class="translation-lines">
             <div class="tl">
-              <strong>AdamW 负责"非矩阵"参数</strong><br>
-              token 嵌入（wte）、lm_head、resid_lambdas、x0_lambdas 这些参数是向量或标量，
-              无法做矩阵正交化，因此继续用 AdamW 更新。
+              <strong>AdamW handles "non-matrix" params</strong><br>
+              token embeddings (wte), lm_head, resid_lambdas, x0_lambdas — these are vectors or scalars,
+              can't be matrix-orthogonalized, so they keep using AdamW.
             </div>
             <div class="tl">
-              <strong>Muon 负责所有 2D 矩阵</strong><br>
-              注意力层的 c_q / c_k / c_v / c_proj，以及 MLP 的 c_fc / c_proj——
-              这些都是二维权重矩阵，正交化后每步更新方向"最大化互不重复"。
+              <strong>Muon handles all 2D matrices</strong><br>
+              Attention layers' c_q / c_k / c_v / c_proj, and the MLP's c_fc / c_proj —
+              all 2D weight matrices. After orthogonalization, every update direction is "maximally distinct" from prior steps.
             </div>
             <div class="tl">
               <strong>dmodel_lr_scale = (dim / 768)<sup>−0.5</sup></strong><br>
-              按照 μP（maximal update parametrization）理论，模型维度越大，学习率应越小。
-              这个缩放因子让不同规模的模型都能在同一个合理 LR 范围内训练。
+              Following μP (maximal update parametrization) theory, as model dim grows, the LR should shrink.
+              This scaling factor lets models of different sizes train in the same reasonable LR range.
             </div>
             <div class="tl">
-              <strong>ns_steps=5：Newton-Schulz 精度</strong><br>
-              Polar Express 迭代 5 次，即可达到足够精确的正交近似。
-              每步迭代计算一个矩阵多项式，收敛速度是超线性的（5 步足以让误差降至可忽略）。
+              <strong>ns_steps=5: Newton-Schulz precision</strong><br>
+              5 Polar Express iterations are enough to give a sufficiently accurate orthogonalization.
+              Each iteration computes a matrix polynomial; convergence is superlinear (5 steps brings error to negligible).
             </div>
           </div>
         </div>
@@ -358,22 +358,22 @@
         <div class="step-card">
           <div class="step-num">1</div>
           <div class="step-body">
-            <strong>Adam：动量 + 自适应 LR</strong>
-            <p>累积一阶/二阶梯度矩估计，对每个参数独立调整步长。方向由原始梯度决定，可能在相关维度上重复振荡。</p>
+            <strong>Adam: momentum + adaptive LR</strong>
+            <p>Maintains first/second moment estimates of the gradient and adjusts per-parameter step size. Direction is decided by the raw gradient — may oscillate across correlated dimensions.</p>
           </div>
         </div>
         <div class="step-card">
           <div class="step-num">2</div>
           <div class="step-body">
-            <strong>Muon：正交梯度 → 更新</strong>
-            <p>先对梯度矩阵 G 计算正交化版本 G_orth（Newton-Schulz 迭代），再用 G_orth 做动量更新。每步更新在权重空间"走一条新路"。</p>
+            <strong>Muon: orthogonal gradient → update</strong>
+            <p>First compute an orthogonalized version G_orth of the gradient matrix G (Newton-Schulz iteration), then apply momentum on G_orth. Every step walks "a new path" through weight space.</p>
           </div>
         </div>
         <div class="step-card">
           <div class="step-num">3</div>
           <div class="step-body">
-            <strong>两者并用：各司其职</strong>
-            <p>矩阵参数用 Muon（受益于正交方向），非矩阵参数用 AdamW（不可正交化，走传统路线）。这就是 MuonAdamW 名字的由来。</p>
+            <strong>Use both, each for its job</strong>
+            <p>Matrix params use Muon (benefit from orthogonal directions); non-matrix params use AdamW (not orthogonalizable, traditional route). Hence the name MuonAdamW.</p>
           </div>
         </div>
       </div>
@@ -383,27 +383,27 @@
     <!-- SCREEN 5: Quiz                                          -->
     <!-- ═══════════════════════════════════════════════════════ -->
     <div class="screen">
-      <h3 class="screen-heading animate-in">测验：你真的理解这台赛车引擎了吗？</h3>
+      <h3 class="screen-heading animate-in">Quiz: do you really understand this race-car engine?</h3>
 
       <div class="quiz-container animate-in" id="quiz-module3">
 
         <!-- Q1 -->
         <div class="quiz-question-block" data-correct="B"
-             data-explanation-right="GQA 让 K/V 头数少于 Q 头数，多个 Q 头共享同组 K/V，KV cache 显存显著减少，在同等硬件上可支持更大 batch 或更长序列。"
-             data-explanation-wrong="请回忆 c_k 和 c_v 的输出维度：它们用的是 n_kv_head，而 c_q 用的是 n_head。这两个数可以不相等——这正是 GQA 的定义。">
-          <p class="quiz-question">Q1. 什么是 GQA，它解决了什么问题？</p>
+             data-explanation-right="GQA gives K/V fewer heads than Q. Multiple Q heads share one K/V group, so KV-cache memory shrinks significantly and the same hardware can support larger batches or longer sequences."
+             data-explanation-wrong="Recall the output dims of c_k and c_v: they use n_kv_head, while c_q uses n_head. These two counts can differ — that's precisely the definition of GQA.">
+          <p class="quiz-question">Q1. What is GQA, and what problem does it solve?</p>
           <div class="quiz-options">
             <button class="quiz-option" data-value="A" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              A. 一种新的激活函数，解决梯度消失问题
+              A. A new activation function that fixes the vanishing-gradient problem
             </button>
             <button class="quiz-option" data-value="B" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              B. K/V 头数少于 Q 头数，多个 Q 头共享 K/V，减少显存占用和计算量 ✓
+              B. Fewer K/V heads than Q heads; multiple Q heads share K/V, reducing memory and compute ✓
             </button>
             <button class="quiz-option" data-value="C" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              C. 把注意力分组并行化，解决长序列计算慢的问题（这更像滑动窗口注意力）
+              C. Parallelizing attention via grouping to solve long-sequence latency (that's closer to sliding-window attention)
             </button>
           </div>
           <div class="quiz-feedback"></div>
@@ -411,21 +411,21 @@
 
         <!-- Q2 -->
         <div class="quiz-question-block" style="margin-top: var(--space-8);" data-correct="B"
-             data-explanation-right="代码在构建 window_sizes 列表后，强制把 window_sizes[-1] 设为完整上下文长度。无论 SSSL 模式如何，最后一层始终是全局注意力，确保模型能整合完整序列信息。"
-             data-explanation-wrong="L 和 S 的区别只在于 window_size（注意力窗口大小），MLP 大小和 Value Embedding 的使用与 SSSL 模式无关。">
-          <p class="quiz-question">Q2. <code style="font-family: var(--font-mono); background: var(--color-bg-code); color: #A6E3A1; padding: 2px 5px; border-radius: 3px;">WINDOW_PATTERN="SSSL"</code> 中，最后一个 L 有什么特殊意义？</p>
+             data-explanation-right="After building window_sizes, the code forcibly sets window_sizes[-1] to the full context length. No matter the SSSL pattern, the last layer is always full attention, ensuring the model can integrate the entire sequence."
+             data-explanation-wrong="The difference between L and S is only window_size (attention window length). MLP size and Value Embedding usage are unrelated to the SSSL pattern.">
+          <p class="quiz-question">Q2. In <code style="font-family: var(--font-mono); background: var(--color-bg-code); color: #A6E3A1; padding: 2px 5px; border-radius: 3px;">WINDOW_PATTERN="SSSL"</code>, what's special about the final L?</p>
           <div class="quiz-options">
             <button class="quiz-option" data-value="A" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              A. L 层使用更大的 MLP，用于处理复杂特征
+              A. L layers use a bigger MLP to handle complex features
             </button>
             <button class="quiz-option" data-value="B" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              B. 代码强制让最后一层始终使用全上下文注意力，确保模型能看到整个序列 ✓
+              B. The code forces the final layer to always use full-context attention, ensuring the model sees the whole sequence ✓
             </button>
             <button class="quiz-option" data-value="C" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              C. L 层跳过 Value Embedding，加快推理速度
+              C. L layers skip Value Embedding to speed up inference
             </button>
           </div>
           <div class="quiz-feedback"></div>
@@ -433,21 +433,21 @@
 
         <!-- Q3 -->
         <div class="quiz-question-block" style="margin-top: var(--space-8);" data-correct="B"
-             data-explanation-right="去掉 softcap 后 logits 理论上无界增长，softmax 饱和，梯度接近零，训练可能很快 NaN。这种实验值得一试（可能发现 softcap 其实不必要），但 AI 代理应当预期 crash 风险并提前做好 git reset 准备。"
-             data-explanation-wrong="softcap 的作用是数值稳定，不是随机性控制。去掉它更可能导致训练崩溃（loss=NaN），而不是输出变随机。">
-          <p class="quiz-question">Q3. AI 代理想测试"去掉 softcap 看效果"。从架构上，这意味着什么风险？</p>
+             data-explanation-right="With softcap removed, logits can theoretically grow unbounded, softmax saturates, gradients approach zero, and training may NaN quickly. The experiment is worth trying (maybe softcap is unnecessary), but the AI agent should expect crash risk and stand ready to git reset."
+             data-explanation-wrong="softcap is about numerical stability, not randomness. Removing it is more likely to crash training (loss=NaN) than to make outputs more random.">
+          <p class="quiz-question">Q3. The AI agent wants to test "what happens if we remove softcap?" Architecturally, what's the risk?</p>
           <div class="quiz-options">
             <button class="quiz-option" data-value="A" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              A. 没有风险，softcap 只是一个调参技巧，去掉不影响训练稳定性
+              A. No risk — softcap is just a tuning trick, removing it doesn't affect training stability
             </button>
             <button class="quiz-option" data-value="B" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              B. logits 可能无界增长，训练不稳定甚至 loss 变 NaN，实验可能 crash ✓
+              B. logits may grow unbounded, training becomes unstable or even loss=NaN, the experiment may crash ✓
             </button>
             <button class="quiz-option" data-value="C" onclick="selectOption(this)">
               <span class="quiz-option-radio"></span>
-              C. 去掉 softcap 会让模型输出更随机，无法收敛到有意义的解
+              C. Removing softcap makes outputs more random, preventing convergence to a meaningful solution
             </button>
           </div>
           <div class="quiz-feedback"></div>
@@ -455,8 +455,8 @@
 
         <!-- Buttons -->
         <div style="margin-top: var(--space-8);">
-          <button class="quiz-check-btn" onclick="checkQuiz('quiz-module3')">检验答案</button>
-          <button class="quiz-reset-btn" onclick="resetQuiz('quiz-module3')">重置</button>
+          <button class="quiz-check-btn" onclick="checkQuiz('quiz-module3')">Check answers</button>
+          <button class="quiz-reset-btn" onclick="resetQuiz('quiz-module3')">Reset</button>
         </div>
 
       </div>
@@ -465,8 +465,8 @@
       <div class="callout callout-info animate-in" style="margin-top: var(--space-8);">
         <span class="callout-icon">🚀</span>
         <div class="callout-content">
-          <span class="callout-title">下一章：实验循环与扩展</span>
-          <p>你已经理解了 train.py 里的 8 项现代改进。Module 4 将展示 autoresearch 是如何把这些组件变成一个自动化实验平台的——AI 代理如何生成假设、修改代码、跑训练、分析结果，并决定下一步探索方向。</p>
+          <span class="callout-title">Up next: experiment loop and scaling out</span>
+          <p>You now understand the 8 modern improvements inside train.py. Module 4 shows how autoresearch turns these components into an automated experimentation platform — how the AI agent generates hypotheses, modifies code, runs training, analyzes results, and decides the next direction to explore.</p>
         </div>
       </div>
     </div>
