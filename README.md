@@ -1,5 +1,7 @@
 # Autonomous AI Research: A Deep Dive into autoresearch
 
+Status: LOCAL ONLY — static educational course, not a deployed research agent or verified production site; next human action: review the [acceptance audit](notes/acceptance-audit-2026-11-22.md) and attached mobile walkthrough before choosing a static hosting target.
+
 An interactive single-page course on **autonomous AI research** — how an LLM-driven research loop is actually built, file by file. Self-contained HTML, no framework, no build pipeline beyond `cat`.
 
 Four modules, from the big-picture vision down to the experiment loop:
